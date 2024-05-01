@@ -1,0 +1,92 @@
+.slider {
+    z-index: 1;
+    /* Đặt độ sâu của .slider để nó hiển thị phía sau các .bill-information */
+}
+
+.body {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.Call-Cart_infor {
+    position: relative;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.Call-Cart_infor:last-child {
+margin-bottom: 0;
+}
+
+.Call-Cart_infor .title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.Call-Cart_infor .header-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Call-Cart_infor .header-body .username,
+.Call-Cart_infor .header-body .librarian {
+    font-size: 16px;
+}
+
+.Call-Cart_infor .date-time {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Call-Cart_infor .date-time .start-date,
+.Call-Cart_infor .date-time .return-day {
+    font-size: 14px;
+}
+
+.Call-Cart_infor .moreInformation-Wrapper {
+    align-items: center;
+    width: 100%;
+}
+
+
+.Call-Cart_infor .call-Cart_detail {
+    display: block;
+    position: relative;
+    width: 100%;
+    left: 0;
+    top: 100%;
+    margin-top: 10px;
+    z-index: 2;
+}
+
+/* Bỏ điều kiện ẩn bảng khi class show được thêm vào */
+.Call-Cart_infor .call-Cart_detail.show {
+    display: block;
+}
+
+.Call-Cart_infor .cart-Call-detail_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.Call-Cart_infor .cart-Call-detail_table th,
+.Call-Cart_infor .cart-Call-detail_table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.Call-Cart_infor .cart-Call-detail_table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}

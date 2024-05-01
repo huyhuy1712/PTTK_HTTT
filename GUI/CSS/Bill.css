@@ -1,0 +1,90 @@
+.slider {
+    z-index: 1;
+    /* Đặt độ sâu của .slider để nó hiển thị phía sau các .bill-information */
+}
+
+.body {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.bill-information {
+    position: relative;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.bill-information:last-child {
+    margin-bottom: 0;
+}
+
+.bill-information .header-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bill-information .header-title .title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.bill-information .header-title .date {
+    font-size: 14px;
+}
+
+.bill-information .header-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bill-information .header-body .username,
+.bill-information .header-body .librarian {
+    font-size: 16px;
+}
+
+.bill-information .moreInformation-Wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.bill-information .bill_detail {
+    display: block;
+    position: relative;
+    width: 100%;
+    left: 0;
+    top: 100%;
+    margin-top: 10px;
+    z-index: 2;
+}
+
+/* Bỏ điều kiện ẩn bảng khi class show được thêm vào */
+.bill-information .bill_detail.show {
+    display: block;
+}
+
+.bill-information .bill-detail_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bill-information .bill-detail_table th,
+.bill-information .bill-detail_table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.bill-information .bill-detail_table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
