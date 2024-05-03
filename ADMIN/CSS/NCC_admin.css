@@ -1,0 +1,173 @@
+
+/*form_NCC_admin*/
+#form_NCC_admin{
+    display: flex;
+    height: 100%;
+}
+#table_NCC{
+    width: 70%;
+    border: 1px solid black;
+}
+
+#chucnang_NCC{
+    width: 30%;
+}
+#form_NCC_admin table{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+#form_NCC_admin table tr td{
+    border: 1px solid black;
+}
+#scroll-container{
+    overflow-y: scroll;
+    height: 88%;
+    
+}
+#form_NCC_admin table .thaotac {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_NCC_admin table .thaotac:hover{
+    background-color: #746d6d11;
+}
+
+#form_timkiem_NCC{
+    border: 1px solid black;
+    width: 80%;
+    margin-left: 50px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+#form_timkiem_NCC #title{
+    text-align: center;
+    margin-top: 10px;
+}
+#form_timkiem_NCC #opt_timkiem_NCC{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+}
+#form_timkiem_NCC #btn_timkiem_NCC{
+    width: 30%;
+    height: 20px;
+    margin-left: 120px;
+    margin-top: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_timkiem_NCC #btn_timkiem_NCC:hover{
+    background-color: #746d6d11;
+}
+
+
+#form_them_NCC {
+    border: 1px solid black;
+    width: 75%;
+    margin: 30px auto;
+    padding: 20px;
+    margin-left: 50px;
+}
+
+#form_them_NCC h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+#form_them_NCC input[type="text"],
+#form_them_NCC input[type="number"] {
+    width: calc(100% - 140px); /* Subtracting label width */
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    height: 10px;
+    border: 2px solid black ;
+
+}
+
+#form_them_NCC .btn_themNCC {
+    width: 40%;
+    height: 30px;
+    margin: 10px auto;
+    display: block;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#form_them_NCC .btn_themNCC:hover {
+    background-color: #45a049;
+}
+
+
+#container_suaNCC {
+    margin: 0 auto;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0%;
+    background-color: rgba(240, 204, 204, 0.7);
+    display: none;
+    
+}
+
+#form_sua_NCC {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    top: 100px;
+    left: 550px;
+    width: 400px;
+}
+
+#form_sua_NCC h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#form_sua_NCC label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#form_sua_NCC input[type="text"],
+#form_sua_NCC input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#form_sua_NCC input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#form_sua_NCC input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/*form_NCC_admin*/

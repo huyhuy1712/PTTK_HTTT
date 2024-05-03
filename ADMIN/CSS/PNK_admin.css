@@ -1,0 +1,343 @@
+
+/*form_PNK_admin*/
+#form_PNK_admin{
+    display: flex;
+    height: 100%;
+}
+#table_PNK{
+    width: 70%;
+    border: 1px solid black;
+    height: 93%;
+}
+
+#chucnang_PNK{
+    width: 30%;
+}
+#form_PNK_admin table{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+#form_PNK_admin table tr td{
+    border: 1px solid black;
+}
+#form_PNK_admin table .thaotac {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_PNK_admin table .thaotac:hover{
+    background-color: #746d6d11;
+}
+
+#form_timkiem_PNK{
+    border: 1px solid black;
+    width: 80%;
+    margin-left: 50px;
+    padding: 10px;
+}
+
+#form_timkiem_PNK #title{
+    text-align: center;
+    margin-top: 10px;
+}
+#form_timkiem_PNK #opt_timkiem_PNK{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+}
+#form_timkiem_PNK #btn_timkiem_PNK{
+    width: 30%;
+    height: 20px;
+    margin-left: 120px;
+    margin-top: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_timkiem_PNK #btn_timkiem_PNK:hover{
+    background-color: #746d6d11;
+}
+
+
+#form_them_PNK{
+    border: 1px solid black;
+    width: 80%;;
+    margin-left: 50px;
+    margin-top: 30px;
+    padding: 10px;
+    height: 100px;
+}
+#form_them_PNK #hoten{
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#form_them_PNK .btn_themCTPN{
+    width: 40%;
+    height: 20px;
+    margin-left: 100px;
+    margin-top: 10px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.change_page_PN{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+}
+.change_page_PN #btn1{
+    background-color: black;
+    color: white;
+    width: 140px; 
+    border-bottom: none;
+    height: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.change_page_PN #btn2{
+    width: 140px;
+    border-bottom: none;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#form_sapxep_PN{
+    border: 1px solid black;
+    width: 82%;
+    margin-left: 53px;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+#opt_sapxep_PN{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+    width: 100px;
+}
+
+.btn_sortAZ_CTPN, .btn_sortZA_CTPN{
+    width: 30%;
+    margin-left: 10px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+/*form_PNK_admin*/
+
+
+
+/*form_CTPN_admin*/
+#form_CTPN_admin{
+    display: flex;
+}
+#scroll-container{
+    overflow-y: scroll;
+    height: 476px;
+    
+}
+#table_CTPN{
+    width: 70%;
+    height: 100%;
+    border: 1px solid black;
+
+}
+#chucnang_CTPN{
+    width: 30%;
+}
+#form_CTPN_admin table{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+#form_CTPN_admin table tr td{
+    border: 1px solid black;
+}
+#form_CTPN_admin table #thaotac1 {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_CTPN_admin table #thaotac1:hover{
+    background-color: #746d6d11;
+}
+
+#form_CTPN_admin table #CTPN_xoa_btn {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_CTPN_admin table #CTPN_xoa_btn:hover{
+    background-color: #746d6d11;
+}
+
+#form_timkiem_CTPN{
+    border: 1px solid black;
+    width: 80%;
+    margin-left: 50px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+#form_timkiem_CTPN #title{
+    text-align: center;
+    margin-top: 10px;
+}
+#form_timkiem_CTPN #opt_timkiem_CTPN{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+}
+#form_timkiem_CTPN #btn_timkiem_CTPN{
+    width: 30%;
+    height: 20px;
+    margin-left: 120px;
+    margin-top: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_timkiem_CTPN #btn_timkiem_CTPN:hover{
+    background-color: #746d6d11;
+}
+#form_sapxep_CTPN{
+    border: 1px solid black;
+    width: 82%;
+    margin-left: 53px;
+    padding: 5px;
+}
+
+#opt_sapxep_CTPN{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+    width: 100px;
+}
+
+#btn_sortAZ_PN, #btn_sortZA_PN{
+    width: 30%;
+    margin-left: 10px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.change_page_CTPN{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+}
+.change_page_CTPN #btn1{
+    width: 140px; 
+    border-bottom: none;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+.change_page_CTPN #btn2{
+    background-color: black;
+    color: white;
+    width: 140px;
+    border-bottom: none;
+    height: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#table_CTPN table tbody tr input{
+    border: none;
+    text-align: center;
+}
+
+
+#suaCTPN_container {
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(249, 249, 249, 0.6); 
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+#form_suaCTSP {
+    text-align: center;
+    background-color: rgb(137, 135, 135);
+    position: relative;
+    border-radius: 10px;
+    top: 200px;
+    left: 550px;
+    width:300px;
+    padding: 10px;
+}
+
+#form_suaCTSP h2 {
+    margin-bottom: 20px;
+}
+
+#form_suaCTSP div {
+    margin-bottom: 10px;
+}
+
+#form_suaCTSP label {
+    flex: 1;
+    margin-right: 10px;
+}
+
+#form_suaCTSP input[type="number"] {
+    flex: 2;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#form_suaCTSP input[type="submit"] {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#form_suaCTSP input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/*form_CTPN_admin*/
+

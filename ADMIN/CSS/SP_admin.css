@@ -1,0 +1,245 @@
+
+/*form_SP_admin*/
+#form_SP_admin{
+    display: flex;
+    height: 100%;
+}
+#table_SP{
+    width: 70%;
+    border: 1px solid black;
+    height: 93%;
+}
+
+#chucnang_SP{
+    width: 30%;
+}
+#scroll-container{
+    overflow-y: scroll;
+    height: 88%;
+    
+}
+#form_SP_admin table{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+#form_SP_admin table tr td{
+    border: 1px solid black;
+}
+#form_SP_admin table .thaotac, .SP_sua_btn{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_SP_admin table .thaotac:hover{
+    background-color: #746d6d11;
+}
+
+.change_page_SP{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+}
+.change_page_SP #btn1{
+    background-color: black;
+    color: white;
+    width: 140px; 
+    border-bottom: none;
+    height: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.change_page_SP #btn2{
+    width: 140px;
+    border-bottom: none;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+.change_page_SP #btn3{
+    width: 140px;
+    border-bottom: none;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+.change_page_SP #btn4{
+    width: 140px;
+    border-bottom: none;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+.change_page_SP #btn5{
+    width: 140px;
+    border-bottom: none;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+#form_timkiem_SP{
+    border: 1px solid black;
+    width: 80%;
+    margin-left: 50px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+#form_timkiem_SP #title{
+    text-align: center;
+    margin-top: 10px;
+}
+#form_timkiem_SP #opt_timkiem_SP{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+}
+#form_timkiem_SP #btn_timkiem_SP{
+    width: 30%;
+    height: 20px;
+    margin-left: 120px;
+    margin-top: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_timkiem_SP #btn_timkiem_SP:hover{
+    background-color: #746d6d11;
+}
+
+
+#container_suaSP {
+    margin: 0 auto;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0%;
+    background-color: rgba(240, 204, 204, 0.7);
+    display: none;
+    
+}
+
+#form_sua_SP {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    top: 100px;
+    left: 550px;
+    width: 400px;
+}
+
+#form_sua_SP h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#form_sua_SP label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#form_sua_SP input[type="text"],
+#form_sua_SP input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#form_sua_SP input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#form_sua_SP input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+
+
+#form_them_SP {
+    border: 1px solid black;
+    width: 75%;
+    margin: 30px auto;
+    padding: 20px;
+    margin-left: 50px;
+}
+
+#form_them_SP h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+#form_them_SP {
+    border: 1px solid black;
+    width: 75%;
+    margin: 30px auto;
+    padding: 20px;
+    margin-left: 50px;
+}
+
+#form_them_SP h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+#form_them_SP input[type="text"],
+#form_them_SP input[type="number"]{
+    width: calc(100% - 140px); /* Subtracting label width */
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    height: 10px;
+    border: 2px solid black ;
+
+}
+
+#form_them_SP input[type="file"] {
+    width: 60%;
+    margin-bottom: 10px;
+}
+
+#form_them_SP .btn_themSP {
+    width: 40%;
+    height: 30px;
+    margin: 10px auto;
+    display: block;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#form_them_SP .btn_themSP:hover {
+    background-color: #45a049;
+}
+
+/*form_SP_admin*/
+

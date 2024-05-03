@@ -1,0 +1,340 @@
+
+/*form_TK_admin*/
+#form_TK_admin{
+    display: flex;
+    height: 100%;
+}
+#table_TK{
+    width: 70%;
+    border: 1px solid black;
+    height: 100%;
+}
+
+#chucnang_TK{
+    width: 30%;
+}
+#form_TK_admin table{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+#form_TK_admin table tr td{
+    border: 1px solid black;
+}
+#scroll-container{
+    overflow-y: scroll;
+    height: 87%;
+    
+}
+#form_TK_admin table #thaotac_TK {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_TK_admin table #thaotac_TK:hover{
+    background-color: #746d6d11;
+}
+
+#form_TK_admin table .thaotac {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_TK_admin table .thaotac:hover{
+    background-color: #746d6d11;
+}
+
+#form_TK_admin table #thaotac_LS {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_TK_admin table #thaotac_LS:hover{
+    background-color: #746d6d11;
+}
+
+#form_timkiem_TK{
+    border: 1px solid black;
+    width: 80%;
+    margin-left: 50px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+#form_timkiem_TK #title{
+    text-align: center;
+    margin-top: 10px;
+}
+#form_timkiem_TK #opt_timkiem_TK{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+}
+#form_timkiem_TK #btn_timkiem_TK{
+    width: 30%;
+    height: 20px;
+    margin-left: 120px;
+    margin-top: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_timkiem_TK #btn_timkiem_TK:hover{
+    background-color: #746d6d11;
+}
+
+
+.change_page_TK{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+}
+.change_page_TK #btn1{
+    background-color: black;
+    color: white;
+    width: 140px; 
+    border-bottom: none;
+    height: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.change_page_TK #btn2{
+    width: 140px;
+    border-bottom: none;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#form_sapxep_TK{
+    border: 1px solid black;
+    width: 82%;
+    margin-left: 53px;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+#opt_sapxep_TK{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+    width: 100px;
+}
+
+.btn_sortAZ, .btn_sortZA{
+    width: 30%;
+    margin-left: 10px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+#form_them_TK {
+    border: 1px solid black;
+    width: 75%;
+    margin: 30px auto;
+    padding: 20px;
+    margin-left: 50px;
+    height: 250px;
+}
+
+#form_them_TK h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+#form_them_TK {
+    border: 1px solid black;
+    width: 75%;
+    margin: 30px auto;
+    padding: 20px;
+    margin-left: 50px;
+}
+
+#form_them_TK h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+#form_them_TK input[type="text"], input[type="number"],input[type="password"]{
+    width: calc(100% - 140px); /* Subtracting label width */
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    height: 10px;
+    border: 2px solid black ;
+
+}
+
+#togglePassword {
+    cursor: pointer;
+  }
+
+#form_them_TK .btn_themTK {
+    width: 40%;
+    height: 30px;
+    margin: 10px auto;
+    display: block;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#form_them_TK .btn_themTK:hover {
+    background-color: #45a049;
+}
+
+
+#container_suaTK {
+    margin: 0 auto;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0%;
+    background-color: rgba(240, 204, 204, 0.7);
+    display: none;
+    
+}
+
+#form_sua_TK {
+    background-color: #f9f9f9;
+    padding: 20px;
+    height: 186px;
+    border-radius: 5px;
+    position: relative;
+    top: 100px;
+    left: 550px;
+    width: 400px;
+}
+
+#form_sua_TK h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#form_sua_TK label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#form_sua_TK input[type="text"],
+#form_sua_TK input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#form_sua_TK input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#form_sua_TK input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+#suaTK_btn{
+    width: 20%;
+    height: 30px;
+    margin: 10px auto;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    float: right;
+    margin-top: 20px;
+}
+
+
+
+#LS_container{
+    margin: 0 auto;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(240, 204, 204, 0.7);
+    display: none;
+}
+
+#LS_container form {
+    margin: 50px auto;
+    width: 500px;
+    background-color: #f9f9f9;
+    position: relative;
+    top: 100px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 60%;
+}
+#LS_container h2 {
+    color: #333;
+    text-align: center;
+}
+#LS_container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    
+}
+#LS_container section {
+    overflow-y: scroll;
+    height: 75%;
+}
+#LS_container th, #LS_container td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    cursor: pointer;
+}
+#LS_container th {
+    background-color: #f2f2f2;
+}
+#LS_container tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+#LS_container tbody tr:hover {
+    background-color: #ddd;
+}
+
+
+/*form_TK_admin*/

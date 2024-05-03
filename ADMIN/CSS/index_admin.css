@@ -1,0 +1,83 @@
+#body_admin{
+border: 1px solid black;
+}
+
+/*header*/
+#header_admin{
+    display: flex;
+    padding: 10px;
+    border: 1px solid black;
+    height: 80px;
+}
+#header_admin #title{
+    flex: 1;
+    font-weight: bold;
+    font-size: 50px;
+    margin-left: 300px;
+    margin-top: 10px;
+    
+    
+}
+
+#header_admin #user{
+display: flex;
+justify-content: space-around;
+width: 150px;
+margin-top: 10px;
+}
+
+#header_admin #username{
+    margin-top: 10%;
+}
+#header_admin #avatar{
+    height: 50px;
+    border-radius: 50%;
+}
+/*header*/
+
+/*section*/
+#section_admin{
+    height: 585px;
+    display: flex;  
+}
+#section_admin #left_content{
+    width: 10%;
+    border: 1px solid black;
+}
+
+#section_admin #left_content{
+    border: 1px solid black;
+    height: 100%;
+    font-size: 20px;
+    font-weight: bold;
+}
+#section_admin #left_content table{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+#section_admin #left_content table tr td{
+    border: 1px solid black;
+}
+
+
+/* Đảm bảo input chiếm toàn bộ không gian trong td */
+#section_admin .items {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#section_admin .items:hover{
+    background-color: #746d6d11;
+}
+
+#section_admin #right_content{
+    width: 90%;
+}
+/*section*/
