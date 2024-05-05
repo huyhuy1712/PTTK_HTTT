@@ -90,7 +90,11 @@
       let address = document.getElementById('text_address');
       let fullname = document.getElementById('text_fullname');
 
+<<<<<<< HEAD
       var regexID = /^\d{10}$/;
+=======
+      var regexID = /^\d{12}$/;
+>>>>>>> main
       var regexPhone_Number = /^09\d{8}$/;
 
       if (id.value === "") {

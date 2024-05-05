@@ -1,5 +1,9 @@
 <?php include './genaral/header.php'; ?>
 <?php include './Genaral/general.php'; ?>
+<<<<<<< HEAD
+=======
+<?php include './Genaral/login.php'; ?>
+>>>>>>> main
 <link rel="stylesheet" href="./CSS/MainCSS/body.css">
 <header class="header">
    <div class="left-section">
@@ -14,7 +18,11 @@
 
    <div class="mid-section">
       <a href="./Main.php">
+<<<<<<< HEAD
          <img src="./logo/logo-white-1_png.webp" alt="">
+=======
+         <img src="./img/logo.png" alt="">
+>>>>>>> main
       </a>
    </div>
 
@@ -34,7 +42,10 @@
                </div>
                <div class="log" style="display: none;">
                   <p>Hi, </p>
+<<<<<<< HEAD
                   <a href="">Thông tin</a>
+=======
+>>>>>>> main
                   <a href="">Đăng xuất</a>
                </div>
             </div>
@@ -46,6 +57,7 @@
    <div class="lazy-img">
       <div class="list">
          <div class="item">
+<<<<<<< HEAD
             <img src="img/pexels-iriser-1379636.jpg" alt="">
          </div>
 
@@ -59,6 +71,21 @@
 
          <div class="item">
             <img src="img/pexels-souvenirpixels-417074.jpg" alt="">
+=======
+            <img src="img/bg_thuvien.jpg" alt="">
+         </div>
+
+         <div class="item">
+            <img src="img/a2.jpeg" alt="">
+         </div>
+
+         <div class="item">
+            <img src="img/a3.jpg" alt="">
+         </div>
+
+         <div class="item">
+            <img src="img/a4.jpg" alt="">
+>>>>>>> main
          </div>
 
       </div>
@@ -208,5 +235,9 @@
 <script src="./js/LazyImg.js"></script>
 <script src="./js//Main.js"></script>
 <?php require './genaral/footer.php'; ?>
+<<<<<<< HEAD
 <?php require './Genaral/login.php'; ?>
 <?php require './Genaral/alert.php'; ?>
+=======
+<?php require './Genaral/alert.php'; ?>
+>>>>>>> main

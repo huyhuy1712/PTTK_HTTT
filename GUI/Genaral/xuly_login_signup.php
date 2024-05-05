@@ -8,10 +8,32 @@ function SignupUser($id, $sdt, $address, $fullname)
 {
     $db = new DatabaseUtil();
     $conn = $db->connect();
+<<<<<<< HEAD
     $query = "SELECT * FROM tai_khoan WHERE CCCD='$id'";
     $result = $db->executeQuery($query);
     $query_taikhoan = "INSERT INTO tai_khoan(CCCD, SDT, Dia_Chi, Ho_Ten, Diem) VALUES ('$id','$sdt', '$address', '$fullname', 0)";
     if ($result->num_rows > 0) {
+=======
+
+    // Lấy mã tài khoản lớn nhất từ cơ sở dữ liệu
+    $query_max_id = "SELECT MAX(MA_TK) AS max_id FROM tai_khoan";
+    $result_max_id = $db->executeQuery($query_max_id);
+    $row = $result_max_id->fetch_assoc();
+    $max_id = $row['max_id'];
+    // Tăng mã tài khoản lớn nhất lên 1 và gán vào biến $id_taikhoan
+    $id_taikhoan = $max_id + 1;
+
+    // Lấy ngày hiện tại và cộng thêm 10 ngày
+    $date = date('Y-m-d', strtotime('+10 days'));
+
+    // Thực hiện truy vấn để thêm tài khoản mới vào cơ sở dữ liệu
+    $query_taikhoan = "INSERT INTO tai_khoan(MA_TK, CCCD, SDT, Dia_Chi, Ho_Ten, Diem, NGAY_HET_HAN, LOAI) VALUES ('$id_taikhoan','$id','$sdt', '$address', '$fullname', 0, '$date','Khách Hàng')";
+
+    $query_check_exist_account = "SELECT * FROM tai_khoan WHERE CCCD='$id'";
+    $result_check_exist_account = $db->executeQuery($query_check_exist_account);
+
+    if ($result_check_exist_account->num_rows > 0) {
+>>>>>>> main
         echo json_encode(array("status" => 0, "message" => "exist-account_error"));
         exit();
     } else {
@@ -21,6 +43,10 @@ function SignupUser($id, $sdt, $address, $fullname)
     }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 function LoginUser($username, $password)
 {
     $db = new DatabaseUtil();

@@ -15,7 +15,11 @@
 
     <div class="mid-section">
         <a href="./Main.php">
+<<<<<<< HEAD
             <img src="./logo/logo-white-1_png.webp" alt="">
+=======
+            <img src="./img/logo.png" alt="">
+>>>>>>> main
         </a>
     </div>
 
@@ -103,4 +107,8 @@
 <?php require './genaral/footer.php'; ?>
 <?php require './Genaral/login.php'; ?>
 <?php require './Genaral/alert.php'; ?>
+<<<<<<< HEAD
 <?php require './Genaral/callcard.php' ?>
+=======
+<?php require './Genaral/callcard.php'?>
+>>>>>>> main

@@ -15,7 +15,11 @@
 
     <div class="mid-section">
         <a href="./Main.php">
+<<<<<<< HEAD
             <img src="./logo/logo-white-1_png.webp" alt="">
+=======
+            <img src="./img/logo.png" alt="">
+>>>>>>> main
         </a>
     </div>
 
