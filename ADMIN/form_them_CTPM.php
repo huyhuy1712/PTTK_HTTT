@@ -1,39 +1,37 @@
 
-<section id="container_formthemHD">
-    <div id="content_thmHD">
-        <button id="btn_an_formthemCTHD">X</button>
-    <h2>Thêm Hóa Đơn</h2>
-<label for="" style="margin-left: 20px;">Mã nhân viên xuất hóa đơn: </label>
-<input type="text" readonly id="opt_MANV_themHD" style="width: 10px; margin-right: 40px; border-radius: 10%; text-align: center; ">
+<section id="container_formthemPM">
+    <div id="content_thmPM">
+        <button id="btn_an_formthemCTPM">X</button>
+    <h2>Thêm phiếu mượn</h2>
+<label for="" style="margin-left: 20px;">Mã nhân viên xuất phiếu mượn: </label>
+<input type="text" readonly id="opt_MANV_themPM" style="width: 10px; margin-right: 40px; border-radius: 10%; text-align: center; ">
 </input>
 
-<div id="container_content_themHD">
-<div id="left_container_themHD">
+<div id="container_content_themPM">
+<div id="left_container_themPM">
 
-<div id="search_HD_them">
+<div id="search_PM_them">
         <input type="text" placeholder="Nhập mã sản phẩm cần tìm">
         <button><img src="../Img/search (1).png" alt="##"></button>
     </div>
 
-    <div id="scroll_themHD">
+    <div id="scroll_themPM">
         <table>
             <thead>
                     <td>Mã sản phẩm</td>
                     <td>Hình ảnh</td>
                     <td>Tên sản phẩm</td>
                     <td>Thể loại</td>
-                    <td>Giá bán</td>
             </thead>
             <tbody id="data_SP">
                 <?php
-               foreach($connect->read("san_pham") as $row){
+               foreach($connect->read("san_pham","TRANG_THAI = '0'") as $row){
                 ?>
     <tr>
                 <td id="MASP_them"><?php echo $row['MA_SP']; ?></td>
                 <td id="ANH_them"><img src="../Img/<?php echo $row['HINH_ANH']; ?>" alt="##" style="height: 50px; "></td>
                 <td id="TENSP_them"><?php echo $row['TEN']; ?></td>
-                <td><?php echo $row['LOAI']; ?></td>
-                <td id="GIA_them"><?php echo changePriceToString($row['GIA']); ?></td>
+                <td id="LOAI_them"><?php echo $row['LOAI']; ?></td>
     </tr>
                 <?php
                 }
@@ -43,16 +41,16 @@
     </div>
 </div>
 
-<div id="right_container_themHD">
-<h3>Chi tiết hóa đơn</h3>
-<div id="scroll_themCTHD">
+<div id="right_container_themPM">
+<h3>Chi tiết phiếu mượn</h3>
+<div id="scroll_themCTPM">
     <table>
         <thead>
             <td>Mã sản phẩm</td>
             <td>Tên sản phẩm</td>
-            <td>Đơn giá</td>
-            <td>Số lượng</td>
-            <td>Thành tiền</td>
+            <td>Thể loại</td>
+            <td>Ghi chú trước mượn</td>
+            <td>Ghi chú sau mượn</td>
             <td>Thao tác</td>
         </thead>
         <tbody id="data_CTSP">
@@ -62,14 +60,14 @@
 </div>
 </div>
 </div>
-<button id="them_CTHD" onclick="add()">Thêm</button>
+<button id="them_CTPM" onclick="add()">Thêm</button>
     </div>
 </section>
 
 
 
 <style>
-    #btn_an_formthemCTHD{
+    #btn_an_formthemCTPM{
         width: 30px;
         height: 30px;
         font-size: 30px;
@@ -82,7 +80,7 @@
         right: 20px;
     }
     /* CSS cho container chính */
-#container_formthemHD{
+#container_formthemPM{
     height: 100%;
     display: none;
     border: 1px solid black;
@@ -93,7 +91,7 @@
   
 }
 
-#content_thmHD{
+#content_thmPM{
     margin-top: 50px;
     border: 1px solid black;
     background-color: #FFFFFF;
@@ -102,7 +100,7 @@
 
 
 /* CSS cho nút Thêm */
-#container_formthemHD #them_CTHD {
+#container_formthemPM #them_CTPM {
     margin-left: 1460px;
     margin-top: 46px;
     padding: 6px;
@@ -115,19 +113,19 @@
 }
     
 /* CSS cho tiêu đề */
-#container_formthemHD h2 {
+#container_formthemPM h2 {
     text-align: center;
 }
 
 /* CSS cho các label */
-#container_formthemHD label {
+#container_formthemPM label {
     
     margin-bottom: 10px;
     font-weight: bold;
 }
 
 /* CSS cho select box */
-#container_formthemHD select {
+#container_formthemPM select {
 
     padding: 2px;
     border-radius: 5px;
@@ -137,23 +135,23 @@
 
 }
 
-#scroll_themHD{
+#scroll_themPM{
     overflow-y: scroll;
     height: 90%;
 }
-#scroll_themCTHD{
+#scroll_themCTPM{
     overflow-y: scroll;
     height: 70%;
 }
 
 /* CSS cho container content */
-#container_content_themHD {
+#container_content_themPM {
     display: flex;
     height: 70%;
 }
 
 /* CSS cho left container */
-#left_container_themHD {
+#left_container_themPM {
     width: 40%;
     margin-right: 20px;
     height: 462px;
@@ -161,39 +159,39 @@
 
 
 /* CSS cho right container */
-#right_container_themHD {
+#right_container_themPM {
     width: 60%;
     height: 543px;
 }
 
-#left_container_themHD table thead td{
+#left_container_themPM table thead td{
     text-align: center;
     background-color: grey;
     font-weight: bold;
 }
 
-#left_container_themHD table tbody td{
+#left_container_themPM table tbody td{
     text-align: center;
 }
 
 /* CSS cho input trong left container */
-#left_container_themHD input[type="text"]{
+#left_container_themPM input[type="text"]{
     width: 96%;
     margin-bottom: 15px;
 }
-#right_container_themHD input[type="number"], input[type="text"]{
+#right_container_themPM input[type="number"], input[type="text"]{
    border: none;
    width: 98%;
 }
 
 
-#left_container_themHD button img {
+#left_container_themPM button img {
     width: 30px;
     height: 27px;
     margin-top: 3px;
     }
 
-#left_container_themHD button{
+#left_container_themPM button{
     border: none;
     border-radius: 5px;
     width: 8%;
@@ -202,7 +200,7 @@
 }
 
 
-#search_HD_them{
+#search_PM_them{
 display: flex;
 height: 50px;
 margin-top: 10px;
@@ -212,56 +210,56 @@ margin-top: 10px;
 
 
 /* CSS cho table */
-#scroll_themHD table {
+#scroll_themPM table {
     width: 100%;
     border-collapse: collapse;
 }
 
-#scroll_themHD table, #scroll_themHD th, #scroll_themHD td {
+#scroll_themPM table, #scroll_themPM th, #scroll_themPM td {
     border: 1px solid #ddd;
     text-align: left;
 }
 
-#scroll_themHD tr:hover{
+#scroll_themPM tr:hover{
     background-color: grey;
 }
 
 
-#scroll_themHD th {
+#scroll_themPM th {
     background-color: #f2f2f2;
 }
 
-#right_container_themHD{
+#right_container_themPM{
     border: 1px solid black;
     border-bottom: none;
     border-left: none;
 }
-#right_container_themHD h3{
+#right_container_themPM h3{
 text-align: center;
 }
 
-#scroll_themCTHD table {
+#scroll_themCTPM table {
     width: 100%;
     border-collapse: collapse;
 }
 
-#scroll_themCTHD table, #scroll_themCTHD th, #scroll_themCTHD thead {
+#scroll_themCTPM table, #scroll_themCTPM th, #scroll_themCTPM thead {
     border: 1px solid #ddd;
     padding: 0px;
     width: 100%;
 }
 
-#scroll_themCTHD th, #scroll_themCTHD td {
+#scroll_themCTPM th, #scroll_themCTPM td {
     border: 1px solid black;
     text-align: center;
 }
 
-#scroll_themCTHD table thead{
+#scroll_themCTPM table thead{
 background-color: #f2f2f2;
 font-weight: bold;
 }
 
-#xoa_CTHD{
+#xoa_CTPM{
     background-color: red;
     border: 1px solid red;
     color: white;
@@ -275,19 +273,26 @@ font-weight: bold;
 
  //form thêm hóa đơn
  $(document).ready(function(){
-
+    $("#opt_MANSX_themPM").change(function(){
+        var id = $(this).val();
+        $.post("CTPM_MASP_data.php", {id: id}, function(data){
+            $("#data_SP").html(data);
+        });
+    });
 
     // Thêm sự kiện click vào các dòng
-    $(document).on('click', '#scroll_themHD table tbody tr', function() {
+    $(document).on('click', '#scroll_themPM table tbody tr', function() {
         // Lấy thông tin từ các ô trên dòng
         var TEN = $(this).find('#TENSP_them').text();
         var MASP = $(this).find('#MASP_them').text();
         var GIA = $(this).find('#GIA_them').text();
+        var LOAI = $(this).find('#LOAI_them').text();
+        console.log(LOAI);
         var tbody = $('#data_CTSP tr');
         var check = true;
 
         tbody.each(function(){
-            if($(this).find('#MASP_CTHD').text() === MASP){
+            if($(this).find('#MASP_CTPM').text() === MASP){
                 check = false;
             }
         })
@@ -295,25 +300,24 @@ font-weight: bold;
         if(check){
             var html = `
         <tr>
-                <td id="MASP_CTHD">${MASP}</td>
-                <td id="TEN_CTHD">${TEN}</td>
-                <td id="DONGIA_CTHD"><input type="text" value="${GIA}" readonly style="text-align: center"></td>
-                <td id="SL_CTHD"><input id="SL_ctsl" type="number" value="0" style="text-align: center"></td>
-                <td id="THANHTIEN_CTHD"><input type="text" value="0" style="text-align: center; " readonly></td>
-                <td><button id="xoa_CTHD">Xóa</button></td>
+                <td id="MASP_CTPM">${MASP}</td>
+                <td id="TEN_CTPM">${TEN}</td>
+                <td id="LOAI_CTPM">${LOAI}</td>
+                <td><input id="ghichu_trc" type="text" value="Không có ghi chú" style="text-align: center"></td>
+                <td><input id="ghichu_sau" type="text"  value="Không có ghi chú" style="text-align: center"></td>
+                <td><button id="xoa_CTPM">Xóa</button></td>
         </tr> `;
         
         $('#data_CTSP').append(html);
-        check_SL();
         }
         else{
             alert("Đã thêm sản phẩm");
         }
     });
-    
+
     
         // Xử lý sự kiện khi nhấn nút "Xóa"
-        $(document).on('click', '#xoa_CTHD', function() {
+        $(document).on('click', '#xoa_CTPM', function() {
         // Lấy dòng chứa nút "Xóa" mà người dùng đã nhấn
         var tr = $(this).closest('tr');
         // Loại bỏ dòng đó khỏi bảng
@@ -323,18 +327,18 @@ font-weight: bold;
 
 
 // Xử lý sự kiện tính thành tiền
-// $(document).on('change', '#SL_CTHD input', function() {
-//     var THANH_TIEN = $(this).closest('tr').find('#THANHTIEN_CTHD input');
-//     var DON_GIA = $(this).closest('tr').find('#DONGIA_CTHD input');
-//     var temp = changePriceToNormal(DON_GIA.val()) * $(this).val();
-//     THANH_TIEN.val(changePriceToString(temp.toString()));
-// });
+$(document).on('change', '#SL_CTPM input', function() {
+    var THANH_TIEN = $(this).closest('tr').find('#THANHTIEN_CTPM input');
+    var DON_GIA = $(this).closest('tr').find('#DONGIA_CTPM input');
+    var temp = changePriceToNormal(DON_GIA.val()) * $(this).val();
+    THANH_TIEN.val(changePriceToString(temp.toString()));
+});
 
 
 
 //sự kiện tìm kiếm sản phẩm
-document.querySelector('#search_HD_them button').addEventListener('click',function(){
-    var MASP = document.querySelector('#search_HD_them input').value;
+document.querySelector('#search_PM_them button').addEventListener('click',function(){
+    var MASP = document.querySelector('#search_PM_them input').value;
     var tobdy_SP = document.querySelectorAll('#data_SP tr');
     if(MASP !== ""){
         for(var i = 0; i < tobdy_SP.length; i++){
@@ -356,18 +360,24 @@ document.querySelector('#search_HD_them button').addEventListener('click',functi
 })
 
 //ẩn form thêm
-document.getElementById('btn_an_formthemCTHD').addEventListener('click', function(){
-    document.getElementById('container_formthemHD').style.display = "none";
+document.getElementById('btn_an_formthemCTPM').addEventListener('click', function(){
+    document.getElementById('container_formthemPM').style.display = "none";
 })
 
 //hiện form thêm
-document.querySelector('.btn_themHD').addEventListener('click', function(){
+document.querySelector('.btn_themPM').addEventListener('click', function(){
     var txt = document.getElementById('ten_TK_thanhtoan').value;
-    if(txt === ''){
-        alert('Hãy chọn tài khoản cần thêm !!');
+    var txt2 = document.getElementById('ngaytr_PM').value;
+    var currentDate = new Date();
+    var date_tra = new Date(txt2);
+    if(txt === '' && txt2 === ''){
+        alert('Hãy chọn tài khoản và ngày trả !!');
+    }
+    else if(date_tra <= currentDate){
+        alert('Ngày trả phải cách ngày lập ít nhất 1 ngày !!');
     }
     else{
-        document.getElementById('container_formthemHD').style.display = "block";
+        document.getElementById('container_formthemPM').style.display = "block";
     }
 })
 
@@ -391,7 +401,7 @@ function set_TENNV(){
             condition: condition
         },
         success: function(response) {
-                $('#opt_MANV_themHD').val(response[0].MA_TK);
+                $('#opt_MANV_themPM').val(response[0].MA_TK);
         },
         error: function(xhr, status, error) {
             console.log(error);
@@ -404,46 +414,6 @@ function set_TENNV(){
         })
 }
 set_TENNV();
-check_SL();
-function check_SL(){
-    var btns = document.querySelectorAll('#data_CTSP tr');
-    btns.forEach(function(btn){
-        btn.querySelector('#SL_ctsl').addEventListener('change', function(){
-            
-            var MA_SP = btn.querySelector('#MASP_CTHD');
-            var SL =  btn.querySelector('#SL_ctsl').value;
-            
-    var operation = "Read";
-    var tableName = "kho";
-    var condition = "MA_SP =" + MA_SP.innerText;
-
-    $.ajax({
-        url: '../AJAX_PHP/CRUD.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            operation: operation,
-            tableName: tableName,
-            condition: condition
-        },
-        success: function(response) {
-            var SL_CL = response[0].SL_CL;
-            var DG = document.querySelector('#DONGIA_CTHD input').value
-            console.log(SL_CL,btn.querySelector('#SL_ctsl').value);
-            if(SL_CL < btn.querySelector('#SL_ctsl').value){
-                btn.querySelector('#SL_ctsl').value = SL_CL;
-                alert('Số lượng sản phẩm trong kho không đủ !!');
-            }
-            var thanhtien = changePriceToNormal(DG) * btn.querySelector('#SL_ctsl').value;
-            btn.querySelector('#THANHTIEN_CTHD input').value = changePriceToString(thanhtien.toString());
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-        }
-        })
-    })
-})
-}
 
 
 </script>
@@ -485,3 +455,5 @@ function chuyenDoiChuoi($chuoi) {
 }
 
 ?>
+
+

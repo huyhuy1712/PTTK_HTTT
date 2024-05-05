@@ -6,6 +6,7 @@
 }
 #table_Kho{
     width: 70%;
+    height: 93%;
     border: 1px solid black;
 }
 #chucnang_Kho{
@@ -18,7 +19,7 @@
 }
 #scroll-container{
     overflow-y: scroll;
-    height: 88%;
+    height: 87%;
     
 }
 #form_Kho_admin table tr td{
@@ -192,6 +193,29 @@
     height: 10px;
     border: 2px solid black ;
 
+}
+
+.change_page_Kho{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+}
+.change_page_Kho #btn1{
+    background-color: black;
+    color: white;
+    width: 140px; 
+    border-bottom: none;
+    height: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.change_page_Kho #btn2{
+    width: 140px;
+    border-bottom: none;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 #form_them_Kho input[type="file"] {

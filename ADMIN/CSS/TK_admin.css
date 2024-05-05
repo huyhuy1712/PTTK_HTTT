@@ -99,6 +99,17 @@
     background-color: #746d6d11;
 }
 
+#tao_moi_diem{
+    width: 10%;
+    height: 20px;
+    left: 940px;
+    top: 150px;
+    position: absolute;
+
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
 
 .change_page_TK{
     display: flex;

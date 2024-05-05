@@ -261,120 +261,72 @@ function update_kho(MASP, SL, callback) {
     });
 }
 
-function read_SLSP(MASP, callback) {
-    var operation = "Read";
-    var tableName = "kho";
-    var condition = "MA_SP=" + MASP;
-
-    $.ajax({
-        url: '../AJAX_PHP/CRUD.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            operation: operation,   
-            tableName: tableName,
-            condition: condition
-        },
-        success: function(data) {
-            var SL = data[0].SL_CL;
-            callback(SL); // Gọi callback với giá trị số lượng sản phẩm
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-            callback(null); // Gọi callback với giá trị null nếu có lỗi
-        }
-    });
-}
-
-function check_SLSP(MAHD, callback) {
-    // Đọc ra chi tiết hóa đơn
-    var operation = "Read";
-    var tableName = "chi_tiet_hoa_don";
-    var condition = "MA_HD=" + MAHD;
-
-    $.ajax({
-        url: '../AJAX_PHP/CRUD.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            operation: operation,   
-            tableName: tableName,
-            condition: condition
-        },
-        success: function(response){
-            var asyncRequests = response.length; // Số lượng request bất đồng bộ cần hoàn thành
-            var count = 0; // Đếm số lượng request đã hoàn thành
-            for(var i = 0; i < response.length; i++){
-                (function(index) { // Tạo một closure để bảo vệ giá trị của i
-                    read_SLSP(response[index].MA_SP, function(SL) {
-                        count++;
-                        if (SL !== null && response[index].SL > SL) {
-                            console.log(response[index].SL, SL);
-                            callback(null);
-                            return; // Kết thúc hàm khi phát hiện số lượng vượt quá
-                        }
-                        if (count === asyncRequests) {
-                            callback(true); // Gọi callback true nếu không có số lượng nào vượt quá
-                        }
-                    });
-                })(i);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-            callback(null); // Gọi callback với giá trị null nếu có lỗi
-        }
-    });
-}
 
 
-//hàm cho nút xuất
+//hàm cho nút nhập
 function xuat(MAHD) {
+    var data = {
+        TRANG_THAI: 1
+    };
+    var jsonData = JSON.stringify(data);
 
-// Gọi hàm check_SLSP với mã hóa đơn và một callback function
-check_SLSP(MAHD, function(result) {
-    if (result === null) {
-        console.log("Có lỗi xảy ra khi kiểm tra số lượng sản phẩm.");
-    } else if (result === true) {
-        console.log("Số lượng sản phẩm trong hóa đơn không vượt quá số lượng trong kho.");
-    } else {
-        console.log("Số lượng sản phẩm trong hóa đơn vượt quá số lượng trong kho.");
-    }
-});
-    // var data = {
-    //     TRANG_THAI: 1
-    // };
-    // var jsonData = JSON.stringify(data);
+    var operation = "Update";
+    var tableName = "hoa_don";
+    var idName = "MA_HD";
+    var idValue = MAHD;
 
-    // var operation = "Update";
-    // var tableName = "hoa_don";
-    // var idName = "MA_HD";
-    // var idValue = MAHD;
-
-    // $.ajax({
-    //     url: '../AJAX_PHP/CRUD.php',
-    //     type: 'POST',
-    //     dataType: 'json',
-    //     data: {
-    //         jsonData: jsonData,
-    //         operation: operation,
-    //         tableName: tableName,
-    //         idName: idName,
-    //         idValue: idValue
-    //     },
-    //     success: function(response) {
-            
-
-
-    //         // location.reload();
-    //     },
-    //     error: function(xhr, status, error) {
-    //         console.log(error);
-    //     }
+    $.ajax({
+        url: '../AJAX_PHP/CRUD.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            jsonData: jsonData,
+            operation: operation,
+            tableName: tableName,
+            idName: idName,
+            idValue: idValue
+        },
+        success: function(response) {
+            update_TK(response[0].MA_TK);
+            // đọc ra các chi tiết 
+            var operation = "Read";
+            var tableName = "chi_tiet_hoa_don";
+            var condition = "MA_HD=" + MAHD;
+            $.ajax({
+                url: '../AJAX_PHP/CRUD.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    operation: operation,   
+                    tableName: tableName,
+                    condition: condition
+                },
+                success: function(response) {
+                    var updateCounter = 0;
+                    var totalUpdates = response.length;
+                    for (var i = 0; i < response.length; i++) {
+                        update_kho(response[i].MA_SP, response[i].SL, function() {
+                            updateCounter++;
+                            if (updateCounter === totalUpdates) {
+                                location.reload();
+                            }
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
         
-    // });
+    });
+    // location.reload();
 }
 //hàm cho nút nhập
+
 
    // -------------------------------------------formation-chức năng phụ------------------------------------------------ //
 
@@ -409,7 +361,8 @@ check_SLSP(MAHD, function(result) {
             <td id="HD_NGAY_TAO">${elementPage[i].NGAY_TAO}</td>
             <td id="HD_TONG_TIEN">${changePriceToString(elementPage[i].TONG_TIEN)}</td>
             <form action="" method="POST"><input type="hidden" name="MAHD"><td><input type="button" onclick="Delete(${elementPage[i].MA_HD})" value="xóa" class="thaotac"></td></form> 
-            <td>Đã xuát hóa đơn</td>
+            <td><input type="submit" id="HD_xuat_btn" class="thaotac" value="xuất" style="opacity: 0.6"></td></form>
+
             </tr>
             `; 
         }

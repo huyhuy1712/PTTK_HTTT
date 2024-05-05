@@ -34,11 +34,20 @@
              else if($_POST['page'] == 'Sản phẩm' || $_POST['page'] == 'CHTN' || $_POST['page'] == 'CHDT' || $_POST['page'] == 'CHS' || $_POST['page'] == 'CHOL'){
                 echo "Quản lý sản phẩm";
              }
+             else if($_POST['page'] == 'Tài khoản'){
+                echo "Quản lý tài khoản";
+            }
+            else if($_POST['page'] == 'Phiếu mượn' || $_POST['page'] == 'CTPM'){
+                echo "Quản lý phiếu mượn";
+            }
+            else if($_POST['page'] == 'Kho' || $_POST['page'] == 'thong_ke'){
+                echo "Quản lý kho";
+            }
         }
         ?>
     </div>
     <div id="user">
-    <div id="username">Username</div>
+    <div id="username"></div>
     <image src="../Img/avatar.png" id="avatar"></image>
 </div>
     </header>
@@ -52,6 +61,9 @@
             <tr>
             <tr>
             <td><input type="submit" value="Bán hàng" name="page" class="items"></input></td>
+            </tr>
+            <tr>
+            <td><input type="submit" value="Phiếu mượn" name="page" class="items"></input></td>
             </tr>
             <tr>
             <td><input type="submit" value="Kho" name="page" class="items"></input></td>
@@ -100,6 +112,18 @@
 
          else if($_POST['page'] == 'Quyen'){
             require("Quyen_admin.php");
+         }
+         else if($_POST['page'] == 'Phiếu mượn'){
+            require("PM_admin.php");
+         }
+         else if($_POST['page'] == 'CTPM'){
+            require("CTPM_admin.php");
+         }
+         else if($_POST['page'] == 'Kho'){
+            require("Kho_admin.php");
+         }
+         else if($_POST['page'] == 'thong_ke'){
+            require("thong_ke.php");
          }
     }
     ?>

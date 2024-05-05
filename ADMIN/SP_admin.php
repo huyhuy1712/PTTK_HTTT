@@ -145,8 +145,6 @@ $connect->connectDB();
 </div>
 
 </div>
-<?php
-require("form_themCHSP_admin.php");
-?>
+
 <script src="JS/SP.js"></script>
 </div>

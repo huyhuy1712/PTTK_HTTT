@@ -207,7 +207,7 @@ function Delete(MASP) {
     deleteFromTable("chi_tiet_phieu_nhap", idName, idValue);
 
     // // Xóa sản phẩm trong chi tiết phiếu mượn
-    deleteFromTable("cau_tiet_phieu_muon", idName, idValue);
+    deleteFromTable("chi_tiet_phieu_muon", idName, idValue);
 
     // // Xóa sản phẩm trong chi tiết hóa đơn
     deleteFromTable("chi_tiet_hoa_don", idName, idValue);

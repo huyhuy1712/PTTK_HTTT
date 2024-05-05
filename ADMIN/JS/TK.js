@@ -399,6 +399,60 @@ else if(opt === 'TINH_TRANG') {
  //chức năng tìm kiếm
 
  
+document.getElementById('tao_moi_diem').addEventListener('click', function(event){
+    event.preventDefault();
+
+    var operation = "Read";
+    var tableName = "tai_khoan";
+    var condition = "";
+    $.ajax({
+        url: '../AJAX_PHP/CRUD.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            operation: operation,
+            tableName: tableName,
+            condition: condition
+        },
+        success: function(response) {
+            for(var i = 0; i < response.length; i++) {
+                var data = {
+                    DIEM_DA_TICH_LUY_TRONG_TUAN: 10, 
+                   };
+                   var jsonData = JSON.stringify(data);
+         
+             var operation = "Update";
+             var tableName = "tai_khoan";
+             var idName = "MA_TK";
+             var idValue = response[i].MA_TK;
+             $.ajax({
+                url: '../AJAX_PHP/CRUD.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    jsonData : jsonData,
+                    operation: operation,
+                    tableName: tableName,
+                    idName : idName,
+                    idValue : idValue
+                },
+                success: function(response) {
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+            }
+            alert("Đã cập nhật lại điểm tích lũy");
+
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+
+
+})
  //chức năng hiện thị mật khẩu
  function togglePasswordVisibility() {
     var passwordField = document.getElementById("MATKHAU_add");

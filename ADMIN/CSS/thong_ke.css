@@ -1,0 +1,75 @@
+.change_page_thong_ke{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+}
+.change_page_thong_ke #btn2{
+    background-color: black;
+    color: white;
+    width: 140px; 
+    border-bottom: none;
+    height: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.change_page_thong_ke #btn1{
+    width: 140px;
+    border-bottom: none;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#form_thong_ke_admin {
+    font-size: 30px;
+    border: 1px solid black;
+    height: 93%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* Canh giữa các phần tử theo chiều dọc */
+    align-items: center; /* Canh giữa các phần tử theo chiều ngang */
+}
+
+.items {
+    position: relative;
+    margin: 10px; /* Khoảng cách giữa các item */
+    padding: 10px; /* Khoảng cách bên trong các item */
+    background-color: white;
+    border-radius: 5px; /* Bo góc */
+    width: 80%; /* Chiều rộng của các item */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng */
+}
+
+.title{
+    padding: 30px;
+}
+
+#phieu_muon{
+    position: absolute;
+    left: 520px;
+    top: 30px;
+    color: grey;
+}
+
+#hoa_don{
+    position: absolute;
+    left: 460px;
+    top: 30px;
+    color: red;
+}
+
+#doanh_thu{
+    position: absolute;
+    left: 330px;
+    top: 30px;
+    color: green;
+}
+
+#tai_khoan{
+    position: absolute;
+    left: 430px;
+    top: 30px;
+    color: purple;
+}

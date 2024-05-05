@@ -14,7 +14,7 @@ $connect->connectDB();
     <h2 style="margin-left: 230px; ">Danh sách tài khoản</h2>
     </div>
     <div id="scroll-container">
-
+<button id="tao_moi_diem">Tạo mới điểm</button>
         <table>
             <thead style=" background-color: #746d6d11; font-weight: bold;">
                 <tr>
