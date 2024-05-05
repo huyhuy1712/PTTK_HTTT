@@ -1,0 +1,36 @@
+.footer {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f0f0f0;
+    padding: 20px 0;
+}
+
+.service, .support, .account {
+    flex: 1;
+    text-align: center;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.service-detail {
+    margin-top: 10px;
+}
+
+.policy, .user-security {
+    margin-bottom: 5px;
+    display: block; /* Chỉnh các link thành dạng block để chúng hiển thị trên các dòng riêng biệt */
+}
+
+.policy, .user-security {
+    font-size: 0.9em;
+    text-decoration: none; /* Loại bỏ gạch chân mặc định của các liên kết */
+    color: #333; /* Màu chữ của các liên kết */
+}
+
+.policy:hover, .user-security:hover {
+    text-decoration: underline; /* Gạch chân khi di chuột qua các liên kết */
+}

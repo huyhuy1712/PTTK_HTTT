@@ -1,0 +1,137 @@
+.page {    
+    max-width: 100%;
+}
+
+/* TOP MENU */
+
+.topMenu-wrap {
+    width: 100%;
+    height: 100px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.topMenu {
+    min-width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.wraper {
+    max-width: 1280px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: 0 auto;
+}
+
+.logo-img {
+    height: 55px;
+}
+
+.shaw {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Them margin-right */
+
+.container_LogoShop img {
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.container_IconCart {
+    width: 5%;
+}
+
+.cart-icon{
+    width: 35px;
+    height: 29px;
+    cursor: pointer;
+}
+
+.container_Element_TopMenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 80%;
+}
+
+.element_TopMenu {
+    display: inline-block;
+    width: 25%;
+    margin: 10px 10px;
+}
+
+.element_TopMenu a {
+    color: black;
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+}
+
+.element_TopMenu a:hover {
+    text-decoration: underline;
+}
+
+/* TOP MENU */
+
+/* CONTENT */
+
+.content {
+    width: 100%;
+    min-height: 1000px;
+    max-height: none;
+}
+
+/* SUA O DAY NUA */
+/* CONTENT */
+
+/* FOOTER */
+
+.myFooter {
+    width: 100%;
+    height: 280px;
+    background-color: rgb(32, 33, 38);
+}
+
+.container_Col_myFooter {
+    width: 70%;
+    height: 100%;
+    margin: 0px auto;
+    display: flex;
+}
+
+.col1 {
+    width: 60%;
+    height: 100%;
+}
+
+.col2 {
+    width: 20%;
+    height: 100%;
+}
+
+.row_OfCol {
+    width: 100%;
+    display: flex;
+    margin: 20px;
+}
+
+.row_OfCol a{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.row_OfCol a:hover{
+    text-decoration: underline;
+}
+/* FOOTER */

@@ -1,0 +1,443 @@
+
+/*form_HD_admin*/
+#form_HD_admin{
+    display: flex;
+    height: 100%;
+}
+#table_HD{
+    width: 70%;
+    border: 1px solid black;
+    height: 93%;
+}
+
+#chucnang_HD{
+    width: 30%;
+}
+#form_HD_admin table{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+#scroll-container{
+    overflow-y: scroll;
+    height: 88%;
+    
+}
+#form_HD_admin table tr td{
+    border: 1px solid black;
+}
+#form_HD_admin table .thaotac {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_HD_admin table .thaotac:hover{
+    background-color: #746d6d11;
+}
+
+#form_timkiem_HD{
+    border: 1px solid black;
+    width: 80%;
+    margin-left: 50px;
+    padding: 10px;
+}
+
+#form_timkiem_HD #title{
+    text-align: center;
+    margin-top: 10px;
+}
+#form_timkiem_HD #opt_timkiem_HD{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+}
+#form_timkiem_HD #btn_timkiem_HD{
+    width: 30%;
+    height: 20px;
+    margin-left: 120px;
+    margin-top: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_timkiem_HD #btn_timkiem_HD:hover{
+    background-color: #746d6d11;
+}
+
+
+
+.change_page_PN{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+}
+.change_page_PN #btn1{
+    background-color: black;
+    color: white;
+    width: 140px; 
+    border-bottom: none;
+    height: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.change_page_PN #btn2{
+    width: 140px;
+    border-bottom: none;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#form_sapxep_HD{
+    border: 1px solid black;
+    width: 82%;
+    margin-left: 53px;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+#opt_sapxep_HD{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+    width: 100px;
+}
+
+.btn_sortAZ, .btn_sortZA{
+    width: 30%;
+    margin-left: 10px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+/*form_HD_admin*/
+
+
+
+
+/*form_CTHD_admin*/
+#form_CTHD_admin{
+    display: flex;
+    height: 93%;
+}
+#table_CTHD{
+    width: 70%;
+    border: 1px solid black;
+}
+#chucnang_CTHD{
+    width: 30%;
+}
+#form_CTHD_admin table{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+#form_CTHD_admin table tr td{
+    border: 1px solid black;
+}
+#form_CTHD_admin table .thaotac {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_CTHD_admin table .thaotac:hover{
+    background-color: #746d6d11;
+}
+
+#form_timkiem_CTHD{
+    border: 1px solid black;
+    width: 80%;
+    margin-left: 50px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+#form_timkiem_CTHD #title{
+    text-align: center;
+    margin-top: 10px;
+}
+#form_timkiem_CTHD #opt_timkiem_CTHD{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+}
+#form_timkiem_CTHD #btn_timkiem_CTHD{
+    width: 30%;
+    height: 20px;
+    margin-left: 120px;
+    margin-top: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+#form_timkiem_CTHD #btn_timkiem_CTHD:hover{
+    background-color: #746d6d11;
+}
+#scroll-container1{
+    overflow-y: scroll;
+    height: 88%;
+    
+}
+#form_sapxep_CTHD{
+    border: 1px solid black;
+    width: 82%;
+    margin-left: 53px;
+    padding: 5px;
+}
+
+#opt_sapxep_CTHD{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+    width: 100px;
+}
+
+.btn_sortAZ, .btn_sortZA{
+    width: 30%;
+    margin-left: 10px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.change_page_CTHD{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+}
+.change_page_CTHD #btn1{
+    width: 140px; 
+    border-bottom: none;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+.change_page_CTHD #btn2{
+    background-color: black;
+    color: white;
+    width: 140px;
+    border-bottom: none;
+    height: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+/*form_CTHD_admin*/
+
+
+
+#form_them_HD {
+    border: 1px solid black;
+    width: 75%;
+    margin: 30px auto;
+    padding: 20px;
+    margin-left: 50px;
+}
+
+#form_them_HD h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+#form_them_HD {
+    border: 1px solid black;
+    width: 75%;
+    margin: 30px auto;
+    padding: 20px;
+    margin-left: 50px;
+}
+
+#form_them_HD h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+#form_them_HD input[type="text"],
+#form_them_HD input[type="number"]{
+    width: calc(100% - 140px); /* Subtracting label width */
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    height: 10px;
+    border: 2px solid black ;
+
+}
+
+#form_them_HD input[type="file"] {
+    width: 60%;
+    margin-bottom: 10px;
+}
+
+#form_them_HD .btn_themHD {
+    width: 40%;
+    height: 30px;
+    margin: 10px auto;
+    display: block;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#form_them_HD .btn_themSP:hover {
+    background-color: #45a049;
+}
+
+
+
+#container_suaHD {
+    margin: 0 auto;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0%;
+    background-color: rgba(240, 204, 204, 0.7);
+    display: none;
+    
+}
+
+#form_sua_HD {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    top: 100px;
+    left: 550px;
+    width: 400px;
+}
+
+#form_sua_HD h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#form_sua_HD label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#form_sua_HD input[type="text"],
+#form_sua_HD input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#form_sua_HD input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#form_sua_HD input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+#container_chonTK {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(255, 55, 8, 0.7);
+}
+
+#container_chonTK #form_chon_TK{
+    padding: 20px;
+    position: relative;
+    top: 140px;
+    left: 240px;
+    width: 60%;
+    height: 60%;
+    background-color: white;
+}
+#container_chonTK h2 {
+    color: #333;
+    text-align:center;
+}
+#container_chonTK #scroll_chon_tk{
+    overflow-y: scroll;
+    height: 77%;
+}
+
+
+
+#container_chonTK #search_TK {
+    margin-bottom: 10px;
+    display: flex;
+}
+
+#container_chonTK input[type="text"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#container_chonTK button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#container_chonTK table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#container_chonTK table, th, td {
+    border: 1px solid #ccc;
+}
+
+#container_chonTK th,#container_chonTK td {
+    padding: 10px;
+    text-align: left;
+}
+
+
+#container_chonTK tr {
+cursor: pointer;
+}
+
+#container_chonTK tr:hover {
+    background-color: #f5f5f5;
+}
+
+
