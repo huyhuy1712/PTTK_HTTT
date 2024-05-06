@@ -1,0 +1,91 @@
+    /* CSS cho phần tổng thể */
+    .callcard-body {
+        display: flex;
+        /* Sử dụng flexbox để các phần tử .bill nằm cạnh nhau */
+        flex-wrap: wrap;
+        margin-left: 90px;
+        /* Cho phép các phần tử .bill xuống dòng khi không đủ không gian */
+    }
+
+    .callcard {
+        flex: 0 0 300px;
+        /* Mỗi .bill chiếm 1 phần và có độ rộng tối thiểu 300px */
+        background-color: #f0f0f0;
+        padding: 15px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        margin-left: 30px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        cursor: pointer;
+        /* Đảm bảo kích thước của .bill không bị thêm vào do padding và border */
+    }
+
+    /* Hiệu ứng hover cho phần bill */
+    .callcard:hover {
+        background-color: #e0e0e0;
+        /* Màu nền thay đổi khi di chuột qua */
+    }
+
+    .callcard-id {
+        font-size: 25px;
+    }
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .wrapper {
+        overflow-x: auto;
+    }
+
+    .callcard-detail {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ccc;
+        position: fixed;
+        width: 70%;
+        top: 300px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+
+    .detail {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .detail td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+        font-family: Arial, sans-serif;
+    }
+
+    .detail td {
+        background-color: #f2f2f2;
+    }
+
+    .detail tbody td {
+        background-color: #fff;
+    }
+
+    /* CSS cho các phần tử bên trong bảng */
+    .scope {
+        font-weight: bold;
+    }
+
+    /* CSS cho phần thông tin sản phẩm */
+    td {
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: Arial, sans-serif;
+    }
