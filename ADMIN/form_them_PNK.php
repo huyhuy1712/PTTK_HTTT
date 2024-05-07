@@ -4,7 +4,7 @@
         <button id="btn_an_formthemCTPN">X</button>
     <h2>Thêm phiếu nhập</h2>
 <label for="">Mã thủ thư nhập phiếu: </label>
-<input type="text" readonly id="opt_MANV_themPNK" style="width: 10px; margin-right: 40px; border-radius: 10%; text-align: center; border: none ">
+<input type="text" readonly id="opt_MANV_themPNK" style="width: 20px; margin-right: 20px; marrgin-left: 5px; border-radius: 10%; text-align: center; border: none ">
 
 <label for="">Nhà cung cấp phiếu nhập: </label>
 <select name="" id="opt_MANSX_themPNK">
@@ -283,49 +283,45 @@ font-weight: bold;
 
 <script>
 
- //form thêm phiếu nhập
- $(document).ready(function(){
+// form thêm phiếu nhập
+// Thêm sự kiện click vào các dòng
+$(document).on('click', '#scroll_themPNK table tbody tr', function() {
+    // Lấy thông tin từ các ô trên dòng
+    var TEN = $(this).find('#TENSP_them').text();
+    var MASP = $(this).find('#MASP_them').text();
+    var tbody = $('#data_CTSP tr');
+    var check = true;
 
-    // Thêm sự kiện click vào các dòng
-    $(document).on('click', '#scroll_themPNK table tbody tr', function() {
-        // Lấy thông tin từ các ô trên dòng
-        var TEN = $(this).find('#TENSP_them').text();
-        var MASP = $(this).find('#MASP_them').text();
-        var tbody = $('#data_CTSP tr');
-        var check = true;
-
-        tbody.each(function(){
-            if($(this).find('#MASP_CTPN').text() === MASP){
-                check = false;
-            }
-        })
-
-        if(check){
-            var html = `
-        <tr>
-                <td id="MASP_CTPN">${MASP}</td>
-                <td id="TEN_CTPN">${TEN}</td>
-                <td id="DONGIA_CTPN"><input type="number" value="0" style="text-align: center"></td>
-                <td id="SL_CTPN"><input type="number" value="0" style="text-align: center"></td>
-                <td id="THANHTIEN_CTPN"><input type="number" value="0" style="text-align: center; " readonly></td>
-                <td><button id="xoa_CTPN">Xóa</button></td>
-        </tr> `;
-        
-        $('#data_CTSP').append(html);
+    tbody.each(function(){
+        if($(this).find('#MASP_CTPN').text() === MASP){
+            check = false;
         }
-        else{
-            alert("Đã thêm sản phẩm");
-        }
-    });
+    })
 
+    if(check){
+        var html = `
+    <tr>
+            <td id="MASP_CTPN">${MASP}</td>
+            <td id="TEN_CTPN">${TEN}</td>
+            <td id="DONGIA_CTPN"><input type="number" value="0" style="text-align: center"></td>
+            <td id="SL_CTPN"><input type="number" value="0" style="text-align: center"></td>
+            <td id="THANHTIEN_CTPN"><input type="number" value="0" style="text-align: center; " readonly></td>
+            <td><button id="xoa_CTPN">Xóa</button></td>
+    </tr> `;
     
-        // Xử lý sự kiện khi nhấn nút "Xóa"
-        $(document).on('click', '#xoa_CTPN', function() {
-        // Lấy dòng chứa nút "Xóa" mà người dùng đã nhấn
-        var tr = $(this).closest('tr');
-        // Loại bỏ dòng đó khỏi bảng
-        tr.remove();
-    });
+    $('#data_CTSP').append(html);
+    }
+    else{
+        alert("Đã thêm sản phẩm");
+    }
+});
+
+// Xử lý sự kiện khi nhấn nút "Xóa"
+$(document).on('click', '#xoa_CTPN', function() {
+    // Lấy dòng chứa nút "Xóa" mà người dùng đã nhấn
+    var tr = $(this).closest('tr');
+    // Loại bỏ dòng đó khỏi bảng
+    tr.remove();
 });
 
 
@@ -345,8 +341,7 @@ $(document).on('change', '#SL_CTPN input', function() {
 });
 
 
-
-//sự kiện tìm kiếm sản phẩm
+// sự kiện tìm kiếm sản phẩm
 document.querySelector('#search_PNK_them button').addEventListener('click',function(){
     var MASP = document.querySelector('#search_PNK_them input').value;
     var tobdy_SP = document.querySelectorAll('#data_SP tr');
@@ -367,7 +362,7 @@ document.querySelector('#search_PNK_them button').addEventListener('click',funct
         }
     }
 
-})
+});
 
 function chuyenDoiChuoi(chuoi) {
     return chuoi.toLowerCase()
@@ -375,17 +370,10 @@ function chuyenDoiChuoi(chuoi) {
                 .replace(/[\u0300-\u036f\s]/g, "");
 }
 
-
 function set_TENNV(){
-    $.ajax({
-            url: '../AJAX_PHP/Current_Account.php',
-            type: 'POST',
-            dataType: 'json',
-            success: function(response){
-
     var operation = "Read";
     var tableName = "tai_khoan";
-    var condition = "MA_TK=" + response.tai_khoan.MA_TK;
+    var condition = "MA_TK=" + localStorage.getItem("account_curr");
     $.ajax({
         url: '../AJAX_PHP/CRUD.php',
         type: 'POST',
@@ -395,23 +383,18 @@ function set_TENNV(){
             tableName: tableName,
             condition: condition
         },
-        success: function(response) {
-                $('#opt_MANV_themPNK').val(response[0].MA_TK);
+        success: function(response){
+            $('#opt_MANV_themPNK').val(response[0].MA_TK);
         },
         error: function(xhr, status, error) {
-            console.log(error);
+           console.log(error);
         }
-    });
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-            }
-        })
+     });
 }
+
 set_TENNV();
 
 </script>
-
 
 
 <?php

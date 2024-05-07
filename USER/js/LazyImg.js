@@ -51,15 +51,16 @@ dots.forEach((li, key)=>{
 
 
 // Gọi hàm read để lấy dữ liệu 
-read_TK();
+
 // Gọi hàm read để lấy dữ liệu 
 check();           
     function check(){
-      var page = localStorage.getItem('page_curr');
+      var page = localStorage.getItem('page');
       var title = document.querySelector('h2');
       if(page == 'Sản phẩm'){
          title.innerHTML = 'Sách nổi bật';
          read();
+         read_TK();
       }
     }            
   
@@ -92,18 +93,26 @@ check();
    //loadData
 
 function read_TK(){
-   $.ajax({
-      url: '../AJAX_PHP/Current_Account.php',
-      type: 'POST',
-      dataType: 'json',
-      success: function(response){
-         var point = document.querySelector('#point_TK');
-         var point_week = document.querySelector('#point_week');
-         point.innerHTML = response.tai_khoan['DIEM'];
-         point_week.innerHTML = response.tai_khoan['DIEM_DA_TICH_LUY_TRONG_TUAN'];
-         localStorage.setItem('account_curr', response.tai_khoan['MA_TK']);
-      }
-   })
+      var operation = "Read";
+      var tableName = "tai_khoan";
+      var condition = "MA_TK=" + localStorage.getItem("account_curr");
+      $.ajax({
+          url: '../AJAX_PHP/CRUD.php',
+          type: 'POST',
+          dataType: 'json',
+          data: {
+              operation: operation,
+              tableName: tableName,
+              condition: condition
+          },
+          success: function(response){
+            document.getElementById("point_TK").innerText = response[0].DIEM;
+            document.getElementById("point_week").innerHTML = response[0].DIEM_DA_TICH_LUY_TRONG_TUAN;
+          },
+          error: function(xhr, status, error) {
+             console.log(error);
+          }
+       });
 }
    // -------------------------------------------formation-chức năng phụ------------------------------------------------ //
    
@@ -135,7 +144,7 @@ function read_TK(){
 
       if(event.key === "Enter")
    {
-      var page = localStorage.getItem('page_curr');
+      var page = localStorage.getItem('page');
     
       if(page == 'Sản phẩm'){
          var txt = document.getElementById('search').value;
@@ -181,15 +190,15 @@ var PM_btn = document.getElementById('PM_btn');
 var logo = document.getElementById('logo');
 
 HD_btn.addEventListener('click', function(){
-   localStorage.setItem('page_curr','Bán hàng');
+   localStorage.setItem('page','Bán hàng');
 })
 
 PM_btn.addEventListener('click', function(){
-   localStorage.setItem('page_curr','Phiếu mượn');
+   localStorage.setItem('page','Phiếu mượn');
 })
 
 logo.addEventListener('click', function(){
-   localStorage.setItem('page_curr','Sản phẩm');
+   localStorage.setItem('page','Sản phẩm');
 })
 
 

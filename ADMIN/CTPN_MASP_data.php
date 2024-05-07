@@ -1,10 +1,11 @@
 <?php
 require('../Model/Database.php');
-$connect = new MyConnection("127.0.0.1", "root", "", "ql_thu_vien");
+$connect = new MyConnection("127.0.0.1", "root", "", "qldienthoai");
 $connect->connectDB();
+
 ?>
-
-
+  
+                
 
 <!-- sửa từng chi tiết -->
 <?php

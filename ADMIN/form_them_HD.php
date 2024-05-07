@@ -4,7 +4,7 @@
         <button id="btn_an_formthemCTHD">X</button>
     <h2>Thêm Hóa Đơn</h2>
 <label for="" style="margin-left: 20px;">Mã nhân viên xuất hóa đơn: </label>
-<input type="text" readonly id="opt_MANV_themHD" style="width: 10px; margin-right: 40px; border-radius: 10%; text-align: center; ">
+<input type="text" readonly id="opt_MANV_themHD" style="width: 50px; margin-right: 40px; border-radius: 10%; text-align: center; ">
 </input>
 
 <div id="container_content_themHD">
@@ -372,15 +372,9 @@ document.querySelector('.btn_themHD').addEventListener('click', function(){
 })
 
 function set_TENNV(){
-    $.ajax({
-            url: '../AJAX_PHP/Current_Account.php',
-            type: 'POST',
-            dataType: 'json',
-            success: function(response){
-
     var operation = "Read";
     var tableName = "tai_khoan";
-    var condition = "MA_TK=" + response.tai_khoan.MA_TK;
+    var condition = "MA_TK=" + localStorage.getItem("account_curr");
     $.ajax({
         url: '../AJAX_PHP/CRUD.php',
         type: 'POST',
@@ -390,19 +384,14 @@ function set_TENNV(){
             tableName: tableName,
             condition: condition
         },
-        success: function(response) {
-                $('#opt_MANV_themHD').val(response[0].MA_TK);
+        success: function(response){
+            $('#opt_MANV_themHD').val(response[0].MA_TK);
         },
         error: function(xhr, status, error) {
-            console.log(error);
+           console.log(error);
         }
-    });
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-            }
-        })
-}
+     });
+    }
 set_TENNV();
 check_SL();
 function check_SL(){

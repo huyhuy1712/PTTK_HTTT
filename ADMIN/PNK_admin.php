@@ -7,7 +7,7 @@ $connect->connectDB();
 <script src="https://kit.fontawesome.com/3918fe69ba.js" crossorigin="anonymous"></script>
 <div  class="change_page_PN">
 <form action="" method="POST">
-   <input type="hidden" name="page" value="Nhập hàng">
+   <input type="hidden" name="page" value="Phiếu nhập">
     <input type="submit" value="Phiếu nhập" id="btn1">
     </form>
     <form action="" method="POST">
@@ -70,7 +70,8 @@ $connect->connectDB();
         <select name="" id="opt_sapxep_PN">
             <option value="MA_PN">MAPN</option>
             <option value="NGAY_NHAP">Ngày Nhập</option>
-            <option value="MA_NV">MANV</option>
+            <option value="MA_TT">MATT</option>
+            <option value="MA_NCC">MANCC</option>
             <option value="TRANG_THAI">Trạng Thái</option>
         </select>
         <input type="hidden" name="page" value="<?php echo $_POST['page']; ?>">

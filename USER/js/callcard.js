@@ -66,11 +66,12 @@ function show_CTPM(){
   
 check_PM();           
     function check_PM(){
-      var page = localStorage.getItem('page_curr');
+      var page = localStorage.getItem('page');
       var title = document.querySelector('h2');
       if(page == 'Phiếu mượn'){
          title.innerHTML = 'Phiếu mượn';
          read_PM();
+         read_TK_PM();
       }
     }   
 
@@ -102,6 +103,30 @@ check_PM();
     });
 }
    //loadData
+
+   function read_TK_PM(){
+    var operation = "Read";
+    var tableName = "tai_khoan";
+    var condition = "MA_TK=" + localStorage.getItem("account_curr");
+    $.ajax({
+        url: '../AJAX_PHP/CRUD.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            operation: operation,
+            tableName: tableName,
+            condition: condition
+        },
+        success: function(response){
+          document.getElementById("point_TK").innerText = response[0].DIEM;
+          document.getElementById("point_week").innerHTML = response[0].DIEM_DA_TICH_LUY_TRONG_TUAN;
+        },
+        error: function(xhr, status, error) {
+           console.log(error);
+        }
+     });
+}
+
 
    // -------------------------------------------formation-chức năng phụ------------------------------------------------ //
    
@@ -151,7 +176,7 @@ check_PM();
  
        if(event.key === "Enter")
     {
-       var page = localStorage.getItem('page_curr');
+       var page = localStorage.getItem('page');
      
        
        if(page == "Phiếu mượn"){

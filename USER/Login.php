@@ -13,27 +13,23 @@
 
 <body>
    <div>
-      <form class="login-form" id="login-form" action="./Genaral/xuly_login_signup.php" , method="POST">
+      <form class="login-form" id="login-form" method="POST">
          <h1>Đăng nhập</h1>
          <div class="form-input">
             <label for="">Tài Khoản:</label>
-            <input placeholder="Căn cước công dân" type="text" id="text_username_login" name="text_username_login" onchange="checking()">
-            <div id="empty-username-error-massage" style="display: none; color: red;" ">Tài khoản không được để trống</div>
+            <input placeholder="Căn cước công dân" type="text" id="text_username_login" name="text_username_login">
+            <div id="empty-username-error-massage" style="display: none; color: red;">Tài khoản phải có đủ 12 số</div>
          </div>
-         <div class=" form-input">
+         <div class="form-input">
                <label for="">Mật khẩu:</label>
-               <input placeholder="Số điện thoại" type="password" id="text_password_login" name="text_password_login" onchange="checking()">
-               <div id="empty-password-error-massage" style="display: none; color: red;" ">Mật khẩu không được để trống</div>
+               <input placeholder="Số điện thoại" type="password" id="text_password_login" name="text_password_login"> 
+            <span id="togglePassword" onclick="togglePasswordVisibility()" style="position: absolute; right: 10px; top: 35px;">
+            <i id="eyeIcon" class="fa fa-eye"></i> </span>
+               <div id="empty-password-error-massage" style="display: none; color: red;">Mật khẩu phải có đủ 10 số</div>
          </div>
-         <div class=" remember-fogot">
-                  <label for="">
-                     <input class="rememberme" type="checkbox" name="text_remember">
-                     Lưu mật khẩu
-                  </label>
-                  <a class="fogot-password" href="">Quên mật khẩu</a>
-               </div>
+
                <div class="just-a-line"></div>
-               <button class="login-button" type="submit" name="login-button">ĐĂNG NHẬP</button>
+               <button class="login-button">ĐĂNG NHẬP</button>
                <label class="registor" for="">Chưa có tài khoản? <a href="Signup.php">đăng ký</a></label>
       </form>
    </div>
@@ -43,49 +39,129 @@
 
 </html>
 
-<script>
-   $("#login-form").on("submit", function(event) {
-      event.preventDefault();
-      $.ajax({
-         type: "POST",
-         url: './Genaral/xuly_login_signup.php',
-         data: $(this).serializeArray(),
-         success: function(response) {
-            console.log("response: ", response);
-            // Kiểm tra phản hồi từ máy chủ
-            var responseObject = JSON.parse(response);
-            // Kiểm tra phản hồi từ máy chủ
-            if (responseObject.status === 1 && responseObject.message === 'login_success') {
-               alert("Đăng nhập thành công");
-               window.location.href = "./Main.php";
-            }else if (responseObject.status === 0 && responseObject.message === 'password_error') {
-               alert("Tên đăng nhập hoặc mật khẩu hông đúng");
-            } else if(responseObject.status === 0 && responseObject.message === 'do-not-exist_error') {
-               alert("Tài khoản không tồn tại");
-            } else if (responseObject.status === 0 && responseObject.message === 'active_error') {
-               alert("Tài khoản chưa được kích hoạt");
-            }
-         }
-      });
-   });
-</script>
-
 
 <script>
-   function checking(){
-      let username = document.getElementsByName('text_username_login')[0];
-      let password = document.getElementsByName('text_password_login')[0];
 
-      if (username.value === "") {
+
+ //chức năng hiện thị mật khẩu
+ function togglePasswordVisibility() {
+    var passwordField = document.getElementById("text_password_login");
+    var eyeIcon = document.getElementById("eyeIcon");
+  
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      eyeIcon.classList.remove("fa-eye");
+      eyeIcon.classList.add("fa-eye-slash");
+    } else {
+      passwordField.type = "password";
+      eyeIcon.classList.remove("fa-eye-slash");
+      eyeIcon.classList.add("fa-eye");
+    }
+}
+
+function checking(){
+
+   let username = document.getElementsByName('text_username_login')[0];
+   let password = document.getElementsByName('text_password_login')[0];
+
+      if (username.value === "" || !isValidString_username(username.value)) {
          document.getElementById('empty-username-error-massage').style.display = "block";
+         return false;
       } else {
          document.getElementById('empty-username-error-massage').style.display = "none";
       }
 
-      if (password.value === "") {
+      if (password.value === "" || !isValidString_pass(password.value)) {
          document.getElementById('empty-password-error-massage').style.display = "block";
+         return false;
       } else {
          document.getElementById('empty-password-error-massage').style.display = "none";
       }
+         return true;
    }
+
+
+   function isValidString_username(input) {
+    // Kiểm tra độ dài chuỗi
+    if (input.length !== 12) {
+        return false;
+    }
+
+    // Kiểm tra ký tự đặc biệt
+    var regex = /^[a-zA-Z0-9]+$/; // Chỉ chấp nhận chữ cái và số
+    if (!regex.test(input)) {
+        return false;
+    }
+
+    return true;
+}
+
+function isValidString_pass(input) {
+    // Kiểm tra độ dài chuỗi
+    if (input.length !== 10) {
+        return false;
+    }
+
+    // Kiểm tra ký tự đặc biệt
+    var regex = /^[a-zA-Z0-9]+$/; // Chỉ chấp nhận chữ cái và số
+    if (!regex.test(input)) {
+        return false;
+    }
+
+    return true;
+}
+
+document.querySelector('.login-button').addEventListener('click', function(event){
+   event.preventDefault();
+   if(checking()){
+      var operation = "Read";
+      var tableName = "tai_khoan";
+      var condition = "";
+      $.ajax({
+         url: '../AJAX_PHP/CRUD.php',
+         type: 'POST',
+         dataType: 'json',
+         data: {
+            operation: operation,
+            tableName: tableName,
+            condition: condition
+         },
+         success: function(response){
+            var check = false;
+            let username = document.getElementsByName('text_username_login')[0].value;
+            let password = document.getElementsByName('text_password_login')[0].value;
+
+            for(var i = 0; i < response.length; i++){
+               if(response[i].CCCD === username && response[i].SDT === password){
+                  if(response[i].TINH_TRANG == 0){
+                     check = true;
+                     alert("Tài khoản chưa được kích hoạt !!");
+                  }
+                  else{
+                     check = true;
+                     localStorage.setItem('page','Sản phẩm');
+                     localStorage.setItem('account_curr',response[i].MA_TK);
+   
+                     if(response[i].LOAI == "Khách Hàng"){
+                        window.location.href = "Main.php"; 
+                     }
+                     else{
+                        window.location.href = "../ADMIN/index_admin.php";
+                     }
+                  }
+               }
+            }
+
+            if(!check){
+               alert('Tài khoản không tồn tại !!');
+            }
+         },
+         error: function(xhr, status, error) {
+            console.log(error);
+         }
+      });
+   }
+});
+
+
 </script>

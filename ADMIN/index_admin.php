@@ -25,7 +25,7 @@
             else if($_POST['page'] == 'Kho'){
                 echo "Quản lý kho";
             }
-            else if($_POST['page'] == 'Nhập hàng' || $_POST['page'] == 'CTPN'){
+            else if($_POST['page'] == 'Phiếu nhập' || $_POST['page'] == 'CTPN'){
                 echo "Quản lý phiếu nhập";
             }
             else if($_POST['page'] == 'Bán hàng' || $_POST['page'] == 'CTHD'){
@@ -43,6 +43,9 @@
             else if($_POST['page'] == 'Kho' || $_POST['page'] == 'thong_ke'){
                 echo "Quản lý kho";
             }
+        }
+        else{
+            echo "Quản lý sản phẩm";
         }
         ?>
     </div>
@@ -69,7 +72,7 @@
             <td><input type="submit" value="Kho" name="page" class="items"></input></td>
             </tr>
             <tr>
-            <td><input type="submit" value="Nhập hàng" name="page" class="items"></input></td>
+            <td><input type="submit" value="Phiếu nhập" name="page" class="items"></input></td>
             </tr>
             <tr>
             <td><input type="submit" value="Nhà cung cấp" name="page" class="items"></input></td>
@@ -94,7 +97,7 @@
         else if($_POST['page'] == 'Kho'){
             require("Kho_admin.php");
         }
-        else if($_POST['page'] == 'Nhập hàng'){
+        else if($_POST['page'] == 'Phiếu nhập'){
            require("PNK_admin.php");
         }
         else if($_POST['page'] == 'CTPN'){
@@ -125,6 +128,9 @@
          else if($_POST['page'] == 'thong_ke'){
             require("thong_ke.php");
          }
+    }
+    else{
+        require("SP_admin.php");
     }
     ?>
 </div>

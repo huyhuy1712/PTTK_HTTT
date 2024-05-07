@@ -1,7 +1,8 @@
 <?php
 session_start();
 // $userID = $_SESSION['ID_ACCOUNT'];
-$userID = 5;
+$userID = $_POST['MA_TK'];
+echo $_POST['MA_TK'];
 require '../Model/Database.php';
 $connect = new MyConnection('localhost', 'root', '', 'ql_thu_vien');
 $connect->connectDB();

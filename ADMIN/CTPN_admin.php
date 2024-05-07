@@ -8,7 +8,7 @@ $connect->connectDB();
 
 <div  class="change_page_CTPN">
 <form action="" method="POST">
-   <input type="hidden" name="page" value="Nhập hàng">
+   <input type="hidden" name="page" value="Phiếu nhập">
     <input type="submit" value="Phiếu nhập" id="btn1">
     </form>
     <form action="" method="POST">

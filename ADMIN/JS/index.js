@@ -1,21 +1,33 @@
-localStorage.setItem("SOTK", 0);
-//hàm cho nút nhập
+
+
+
+
+
 
 function setusername(){
+    var operation = "Read";
+    var tableName = "tai_khoan";
+    var condition = "MA_TK=" + localStorage.getItem("account_curr");
+    
     $.ajax({
-        url: '../AJAX_PHP/Current_Account.php',
+        url: '../AJAX_PHP/CRUD.php',
         type: 'POST',
         dataType: 'json',
+        data: {
+            operation: operation,
+            tableName: tableName,
+            condition: condition
+        },
         success: function(response){
-            document.getElementById('username').innerText = response.tai_khoan.CCCD;
-            
+            document.querySelector('#username').innerHTML = response[0].CCCD;
         },
         error: function(xhr, status, error) {
-            console.log(error);
+           console.log(error);
         }
-    })
+     });
 }
 
 setusername();
+
 
 

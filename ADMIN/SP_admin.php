@@ -49,7 +49,7 @@ $connect->connectDB();
                 <option value="the_loai">Thể loại</option>
                 <option value="trang_thai">Trạng thái</option>
             </select>
-            <input type="hidden" name="page" value="<?php echo $_POST['page']; ?>">
+            <input type="hidden" name="page" value="Sản phẩm">
             <input type="text" id="txt_timkiem_SP" style="width: 54%; margin-left: 20px;" placeholder="Nhập SP cần tìm">
             <input type="button" value="Tìm" id="btn_timkiem_SP">
     </form>
@@ -92,7 +92,7 @@ $connect->connectDB();
         </select>
     </div>
 
-        <input type="hidden" name="page" value="<?php echo $_POST['page']; ?>">
+        <input type="hidden" name="page" value="Sản phẩm">
         <input type="button" onclick="add()" class="btn_themSP" name="btn_themSP" value="Thêm">
     </form>
 

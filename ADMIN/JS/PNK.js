@@ -22,7 +22,7 @@ read();
 
             // Sau HDi nhận được dữ liệu, gọi hàm DisplayElementPage
             DisplayElementPage(response);
-
+            display_sort();
             //cập nhật lại số lượng sản phẩm
             var SLPN_HT = document.querySelector('.SLPN_HT span');
             var rows = document.querySelectorAll('#table_PNK table tbody tr ');
@@ -166,7 +166,7 @@ function Delete(MAPN) {
 
 function update(MASP, SL, callback) {
     var operation = "Read";
-    var tableName = "kho";
+    var tableName = "PNK";
     var condition = "MA_SP=" + MASP;
     $.ajax({
         url: '../AJAX_PHP/CRUD.php',
@@ -189,7 +189,7 @@ function update(MASP, SL, callback) {
                 data: {
                     jsonData: jsonData,
                     operation: "Update",
-                    tableName: "kho",
+                    tableName: "PNK",
                     idName: "MA_SP",
                     idValue: MASP
                 },
@@ -471,4 +471,83 @@ function nhap(MAPN) {
     return chuoi.toLowerCase()
                 .normalize("NFD")
                 .replace(/[\u0300-\u036f\s]/g, "");
+}
+
+
+
+
+ //chức năng sắp xếp
+
+    // Hàm so sánh tăng dần
+    function sortByKey_tang(array, key) {
+        return array.sort(function(a, b) {
+            var x = a[key];
+            var y = b[key];
+            if(checkType(x) == 1){ return x - y; }
+            else{ 
+                if (x > y) return -1;
+                if (x < y) return 1;
+                return 0;
+            }
+        });
+    }
+
+        // Hàm so sánh tăng dần
+        function sortByKey_giam(array, key) {
+            return array.sort(function(a, b) {
+                var x = a[key];
+                var y = b[key];
+                if(checkType(x) == 1){ return y - x; }
+                else{ 
+                    if (x < y) return -1;
+                    if (x > y) return 1;
+                    return 0;
+                }
+            });
+        }
+
+
+    function display_sort() {
+        var table_PNK = document.querySelectorAll('#table_PNK tbody tr');
+        var jsonArray = [];
+
+        for (var i = 0; i < table_PNK.length; i++) {
+            var MA_PN = table_PNK[i].querySelector('#PNK_Ma').innerText;
+            var NGAY_NHAP = table_PNK[i].querySelector('#PNK_NGAYNHAP').innerText;
+            var MA_TT = table_PNK[i].querySelector('#PNK_MaTT').innerText;
+            var MA_NCC = table_PNK[i].querySelector('#PNK_MaNCC').innerText;
+            var TRANG_THAI = table_PNK[i].querySelector('#PNK_trang_thai').innerText;
+
+            var object = { MA_PN: MA_PN, NGAY_NHAP: NGAY_NHAP, MA_TT: MA_TT, TRANG_THAI: TRANG_THAI, MA_NCC: MA_NCC};
+            jsonArray.push(object);
+
+        }
+    
+        document.querySelector('#btn_sortAZ_PN').addEventListener('click', function(event) {
+            event.preventDefault();
+            var tbody = document.querySelector('#table_PNK tbody');
+            var key = document.querySelector('#opt_sapxep_PN').value;
+            tbody.innerHTML = '';
+            var array_sapxep = sortByKey_tang(jsonArray, key); // sắp xếp mảng
+         DisplayElementPage(array_sapxep);
+        });
+
+        document.querySelector('#btn_sortZA_PN').addEventListener('click', function(event) {
+            event.preventDefault();
+            var tbody = document.querySelector('#table_PNK tbody');
+            var key = document.querySelector('#opt_sapxep_PN').value;
+            tbody.innerHTML = '';
+            var array_sapxep = sortByKey_giam(jsonArray, key); // sắp xếp mảng
+         DisplayElementPage(array_sapxep);
+        });
+
+    }
+
+      //hàm kiểm tra xem chuỗi là số hay chuỗi kí tự
+  function checkType(input) {
+    if (!isNaN(input)) {
+       return 1;
+    } else {
+        return 0;
+    }
 }
