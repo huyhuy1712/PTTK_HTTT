@@ -7,7 +7,7 @@
 function setusername(){
     var operation = "Read";
     var tableName = "tai_khoan";
-    var condition = "MA_TK=" + localStorage.getItem("account_curr");
+    var condition = "MA_TK=" + localStorage.getItem("account_curr_NV");
     
     $.ajax({
         url: '../AJAX_PHP/CRUD.php',

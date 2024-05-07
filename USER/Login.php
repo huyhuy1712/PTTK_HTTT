@@ -140,12 +140,13 @@ document.querySelector('.login-button').addEventListener('click', function(event
                   else{
                      check = true;
                      localStorage.setItem('page','Sản phẩm');
-                     localStorage.setItem('account_curr',response[i].MA_TK);
    
                      if(response[i].LOAI == "Khách Hàng"){
+                        localStorage.setItem('account_curr',response[i].MA_TK);
                         window.location.href = "Main.php"; 
                      }
                      else{
+                        localStorage.setItem('account_curr_NV',response[i].MA_TK);
                         window.location.href = "../ADMIN/index_admin.php";
                      }
                   }
