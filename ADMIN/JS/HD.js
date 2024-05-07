@@ -77,7 +77,13 @@ function Delete(MAHD) {
 
    function add() {
     var currentDate = new Date();
-    var NGAY_TAO = currentDate;
+    var year = currentDate.getFullYear();
+    var month = currentDate.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
+    var day = currentDate.getDate();
+    
+    // Định dạng lại chuỗi theo định dạng "YYYY-MM-DD"
+    var formattedDateString = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+    
     var MA_TK = $("#ten_TK_thanhtoan").val();
     var MA_TT = $("#opt_MANV_themHD").val();
     var TRANG_THAI = "0";
@@ -96,7 +102,7 @@ function Delete(MAHD) {
 
     if(check){
         var data = {
-            NGAY_TAO: NGAY_TAO,
+            NGAY_TAO: formattedDateString,
             MA_TK: MA_TK,
             MA_TT: MA_TT,
             TRANG_THAI: TRANG_THAI,

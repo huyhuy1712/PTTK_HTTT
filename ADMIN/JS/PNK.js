@@ -37,7 +37,13 @@ read();
    //loadData
    function add() {
     var currentDate = new Date();
-    var NGAY_NHAP = currentDate;
+    var year = currentDate.getFullYear();
+    var month = currentDate.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
+    var day = currentDate.getDate();
+    
+    // Định dạng lại chuỗi theo định dạng "YYYY-MM-DD"
+    var formattedDateString = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+    
     var MA_TT = $("#opt_MANV_themPNK").val();
     var MA_NCC = $("#opt_MANSX_themPNK").val();
     var TRANG_THAI = 0;
@@ -52,7 +58,7 @@ read();
 
     if(check){
         var data = {
-            NGAY_NHAP: NGAY_NHAP,
+            NGAY_NHAP: formattedDateString,
             MA_TT: MA_TT,
             MA_NCC: MA_NCC,
             TRANG_THAI: TRANG_THAI

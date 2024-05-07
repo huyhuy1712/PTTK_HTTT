@@ -37,7 +37,15 @@ read();
    //loadData
    function add() {
     var currentDate = new Date();
-    var NGAY_CAP = currentDate;
+var year = currentDate.getFullYear();
+var month = currentDate.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
+var day = currentDate.getDate();
+
+// Định dạng lại chuỗi theo định dạng "YYYY-MM-DD"
+var formattedDateString = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+
+
+
     var NGAY_TRA = $('#ngaytr_PM').val();
     var MA_TK = $('#ten_TK_thanhtoan').val();
     var GHI_CHU = "Không có ghi chú";
@@ -51,14 +59,14 @@ read();
     else{
             var data = {
                 MA_TK: MA_TK,
-                NGAY_CAP: NGAY_CAP,
+                NGAY_CAP: formattedDateString,
                 NGAY_TRA: NGAY_TRA,
                 MA_TT: MA_TT,
                 GHI_CHU: GHI_CHU,
                 TRANG_THAI: TRANG_THAI,
                 TIEN_DO: TIEN_DO
             };
-        
+            
             var jsonData = JSON.stringify(data);
             console.log(data);
             var operation = "Create";
