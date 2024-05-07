@@ -6,6 +6,9 @@ $ss = new Session();
 $ss ->start();
 function SignupUser($id, $sdt, $address, $fullname)
 {
+    if(empty($id) && empty($sdt) && empty($address) && empty($fullname)){
+        echo json_encode(array("status" => 0, "message" => "empty_fields"));
+    }
     $db = new DatabaseUtil();
     $conn = $db->connect();
 
@@ -86,12 +89,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['text_username_login']) && isset($_POST['text_password_login'])) {
         LoginUser($_POST['text_username_login'], $_POST['text_password_login']);
     }
-}
-
-
-if ($ss->exist('username')) { // Sử dụng session thông qua session manager
-    $username = $ss->get('username');
-    echo json_encode(array("status_log" => 1, "message" => "logged_in", "username" => $username));
-} else {
-    echo json_encode(array("status_log" => 0, "message" => "not_logged_in", "username" => ""));
 }
