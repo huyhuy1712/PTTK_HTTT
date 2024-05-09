@@ -6,8 +6,9 @@ $ss = new Session();
 $ss ->start();
 function SignupUser($id, $sdt, $address, $fullname)
 {
-    if(empty($id) && empty($sdt) && empty($address) && empty($fullname)){
+    if(empty($id) || empty($sdt) || empty($address) || empty($fullname)){
         echo json_encode(array("status" => 0, "message" => "empty_fields"));
+        exit();
     }
     $db = new DatabaseUtil();
     $conn = $db->connect();
@@ -42,6 +43,10 @@ function SignupUser($id, $sdt, $address, $fullname)
 
 function LoginUser($username, $password)
 {
+    if(empty($username) || empty($password)){
+        echo json_encode(array("status" => 0, "message" => "empty_error"));
+        exit();
+    }
     $db = new DatabaseUtil();
     $conn = $db->connect();
     global $ss;
@@ -50,8 +55,6 @@ function LoginUser($username, $password)
     $user = $result->fetch_assoc();
     if ($result->num_rows == 0) {
         echo json_encode(array("status" => 0, "message" => "do-not-exist_error"));
-        // Tài khoản không tồn tại, trả về thông báo lỗi
-        // header("Location: ../login.php?error=username_not_found");
         exit();
     } elseif ($password !== $user['SDT']) {
         echo json_encode(array("status" => 0, "message" => "password_error"));

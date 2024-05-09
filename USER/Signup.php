@@ -13,26 +13,26 @@
 <body>
    <form class="signup-form" id="signup-form" action="./Signup.php" method="POST">
       <h1>Đăng ký</h1>
-      <div class="form-input">
-         <label for="">Căn cước công dân:</label>
-         <input placeholder="ID" type="text" name="text_id" id="text_id" onchange="checkId()">
-         <div id="empty-error-id" style="display: none; color: red;" ">CCCD không được để trống</div>
-            <div id=" require-error-cccd" style="display: none; color: red;" ">Căn cước công dân phải 10 số</div>
+         <div class="form-input">
+            <label for="">Căn cước công dân:</label>
+            <input placeholder="ID" type="text" name="text_id" id="text_id" oninput="checkId()">
+            <div id="empty-error-id" style="display: none; color: red;" ">CCCD không được để trống</div>
+            <div id="require-error-cccd" style="display: none; color: red;" ">Căn cước công dân phải 10 số</div>
          </div>
          <div class=" form-input">
             <label for="">Số điện thoại:</label>
-            <input placeholder="Phone Numbers" type="text" name="text_phonenums" id="text_phonenums" onchange="checkPhone()">
+            <input placeholder="Phone Numbers" type="text" name="text_phonenums" id="text_phonenums" oninput="checkPhone()">
             <div id="empty-error-phone" style="display: none; color: red;">Số điện thoại không được để trống</div>
             <div id="dismatch_phoneNumber" style="display: none; color: red;">Số điện thoại phải 10 số và bắt đầu bằng 09</div>
          </div>
          <div class="form-input">
             <label for="">Địa chỉ:</label>
-            <input placeholder="Address" type="text" name="text_address" id="text_address" onchange="checkAddress()">
+            <input placeholder="Address" type="text" name="text_address" id="text_address" oninput="checkAddress()">
             <div id="empty-error-address" style="display: none; color: red;">Địa chỉ không được để trống</div>
          </div>
          <div class="form-input">
             <label for="">Nhập họ tên:</label>
-            <input placeholder="Fullname" type="text" name="text_fullname" id="text_fullname" onchange="checkName()">
+            <input placeholder="Fullname" type="text" name="text_fullname" id="text_fullname" oninput="checkName()">
             <div id="empty-error-name" style="display: none; color: red;">Họ tên không được để trống</div>
          </div>
          <div class="just-a-line">

@@ -61,6 +61,8 @@
                alert("Tài khoản không tồn tại");
             } else if (responseObject.status === 0 && responseObject.message === 'active_error') {
                alert("Tài khoản chưa được kích hoạt");
+            }else if(responseObject.status === 0 && responseObject.message === 'empty_error'){
+               alert("Vui lòng điền đầy đủ thông tin");
             }
          }
       });
