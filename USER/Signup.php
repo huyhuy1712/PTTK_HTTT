@@ -17,13 +17,13 @@
             <label for="">Căn cước công dân:</label>
             <input placeholder="ID" type="text" name="text_id" id="text_id" oninput="checkId()">
             <div id="empty-error-id" style="display: none; color: red;" ">CCCD không được để trống</div>
-            <div id="require-error-cccd" style="display: none; color: red;" ">Căn cước công dân phải 10 số</div>
+            <div id="require-error-cccd" style="display: none; color: red;" ">Căn cước công dân phải 12 số</div>
          </div>
          <div class=" form-input">
             <label for="">Số điện thoại:</label>
             <input placeholder="Phone Numbers" type="text" name="text_phonenums" id="text_phonenums" oninput="checkPhone()">
             <div id="empty-error-phone" style="display: none; color: red;">Số điện thoại không được để trống</div>
-            <div id="dismatch_phoneNumber" style="display: none; color: red;">Số điện thoại phải 10 số và bắt đầu bằng 09</div>
+            <div id="dismatch_phoneNumber" style="display: none; color: red;">Số điện thoại phải 10 số và bắt đầu bằng 0</div>
          </div>
          <div class="form-input">
             <label for="">Địa chỉ:</label>
@@ -85,7 +85,7 @@
 
    function checkPhone() {
       let sdt = document.getElementById('text_phonenums');
-      var regexPhone_Number = /^09\d{8}$/;
+      var regexPhone_Number = /^0\d{9}$/;
       if (sdt.value === "") {
          document.getElementById('empty-error-phone').style.display = 'block';
          document.getElementById('dismatch_phoneNumber').style.display = 'none';

@@ -22,10 +22,10 @@ function SignupUser($id, $sdt, $address, $fullname)
     $id_taikhoan = $max_id + 1;
 
     // Lấy ngày hiện tại và cộng thêm 10 ngày
-    $date = date('Y-m-d', strtotime('+10 days'));
+    $date = date('Y-m-d', strtotime('+365 days'));
 
     // Thực hiện truy vấn để thêm tài khoản mới vào cơ sở dữ liệu
-    $query_taikhoan = "INSERT INTO tai_khoan(MA_TK, CCCD, SDT, Dia_Chi, Ho_Ten, Diem, NGAY_HET_HAN, LOAI, TINH_TRANG, DIEM_DA_TICH_LUY_TRONG_TUAN) VALUES ('$id_taikhoan','$id','$sdt', '$address', '$fullname', 0, '$date','Khách Hàng', 0, 0)";
+    $query_taikhoan = "INSERT INTO tai_khoan(MA_TK, CCCD, SDT, Dia_Chi, Ho_Ten, Diem, NGAY_HET_HAN, LOAI, TINH_TRANG, DIEM_DA_TICH_LUY_TRONG_TUAN) VALUES ('$id_taikhoan','$id','$sdt', '$address', '$fullname', 0, '$date','Khách Hàng', 0, 10)";
 
     $query_check_exist_account = "SELECT * FROM tai_khoan WHERE CCCD='$id'";
     $result_check_exist_account = $db->executeQuery($query_check_exist_account);
