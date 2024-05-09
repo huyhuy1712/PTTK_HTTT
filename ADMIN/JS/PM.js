@@ -22,7 +22,7 @@ read();
 
             // Sau HDi nhận được dữ liệu, gọi hàm DisplayElementPage
             DisplayElementPage(response);
-
+            display_sort();
             //cập nhật lại số lượng sản phẩm
             var SLPM_HT = document.querySelector('.SLPM_HT span');
             var rows = document.querySelectorAll('#table_PM table tbody tr ');
@@ -165,14 +165,61 @@ function update()
                 idName : idName,
                 idValue : idValue
             },
-            success: function(response) {
-                console.log(response);
-                location.reload();
+            success: function(response0) {
+                    if(tiendo == 1){
+                        $.ajax({
+                            url: '../AJAX_PHP/CRUD.php',
+                            type: 'POST',
+                            datatype: 'json',
+                            data: {
+                                operation: 'Read',
+                                tableName: 'chi_tiet_phieu_muon',
+                                condition: 'MA_PM=' + MAPM
+                            },
+                            success: function(response1) {
+                                var JSONArray = JSON.parse(response1);
+                                for(var i = 0; i < response1.length; i++){
+                                   
+                                    var data = {
+                                        TRANG_THAI: 0,
+                                    }
+                                    var jsonData = JSON.stringify(data);
+                                    var operation = "Update";
+                                    var tableName = "san_pham";
+                                    var idName = "MA_SP";
+                                    var idValue = JSONArray[i].MA_SP;
+                                    $.ajax({
+                                        url: '../AJAX_PHP/CRUD.php',
+                                        type: 'POST',
+                                        data: {
+                                            jsonData : jsonData,
+                                            operation: operation,
+                                            tableName: tableName,
+                                            idName : idName,
+                                            idValue : idValue
+                                        },
+                                        success: function(data){
+                                            location.reload();
+                                        }
+                                    })
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(error);
+                            }
+                        });   
+                    }
+                    else{
+                        console.log('không có cập nhật');
+                    }
             },
             error: function(xhr, status, error) {
                 console.log(error);
             }
         });
+
+        location.reload();
+
     }
 }
 
@@ -218,12 +265,11 @@ function Delete(MAPM) {
 
 
 //hàm cho nút nhập
-function nhap(MAPM) {
+function nhap(MAPM,MATK) {
 
     var operation = "Read";
     var tableName = "chi_tiet_phieu_muon";
     var condition = "MA_PM=" + MAPM;
-
 
     $.ajax({
         url: '../AJAX_PHP/CRUD.php',
@@ -234,102 +280,196 @@ function nhap(MAPM) {
             tableName: tableName,
             condition: condition
         },
-        success: function(response) {
-            for(var i=0; i<response.length; i++){
-                var data = {
-                    TRANG_THAI: 1
-                };
-                var jsonData = JSON.stringify(data);
-            
-                var operation = "Update";
-                var tableName = "san_pham";
-                var idName = "MA_SP";
-                var idValue = response[i].MA_SP;
-                $.ajax({
-                    url: '../AJAX_PHP/CRUD.php',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        jsonData: jsonData,
-                        operation: operation,
-                        tableName: tableName,
-                        idName: idName,
-                        idValue: idValue
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(error);
-                    }    
-                })
+        success: function(response_0) {
+          
+            //đọc ra tài khoản
+    var operation = "Read";
+    var tableName = "tai_khoan";
+    var condition = "MA_TK=" + MATK;
+
+    $.ajax({
+        url: '../AJAX_PHP/CRUD.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            operation: operation,
+            tableName: tableName,
+            condition: condition
+        },
+        success: function(response_1) {
+            var DIEM_TUAN_old = parseFloat(response_1[0].DIEM_DA_TICH_LUY_TRONG_TUAN);
+            var DIEM_old =  parseFloat(response_1[0].DIEM);
+            var DIEM_new = DIEM_old + parseFloat(response_0.length);
+
+            //cập nhật lại số diểm
+            if(DIEM_TUAN_old !== 0){
+                var DIEM_TUAN_new = DIEM_TUAN_old - parseFloat(response_0.length);
+            if(DIEM_TUAN_new < 0){
+                DIEM_TUAN_new = 0;
             }
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-        }
-        
-    });
+          
+            var data = {
+             DIEM: DIEM_new,
+             DIEM_DA_TICH_LUY_TRONG_TUAN: DIEM_TUAN_new
+            }
+    
+            var jsonData = JSON.stringify(data);
+            var operation = "Update";
+            var tableName = "tai_khoan";
+            var idName = "MA_TK";
+            var idValue = MATK;
+            $.ajax({
+                url: '../AJAX_PHP/CRUD.php',
+                type: 'POST',
+                data: {
+                    jsonData : jsonData,
+                    operation: operation,
+                    tableName: tableName,
+                    idName : idName,
+                    idValue : idValue
+                },
+                success: function(){
+                    console.log("Đã cập nhật điểm thành công !!");
 
-    var data = {
-        TRANG_THAI: 1
-    };
-    var jsonData = JSON.stringify(data);
 
-    var operation = "Update";
-    var tableName = "phieu_muon";
-    var idName = "MA_PM";
-    var idValue = MAPM;
+                    //cập nhật trạng thái của phiếu mượn
+                        var data = {
+                            TRANG_THAI: 1,
+                        }
 
-    $.ajax({
-        url: '../AJAX_PHP/CRUD.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            jsonData: jsonData,
-            operation: operation,
-            tableName: tableName,
-            idName: idName,
-            idValue: idValue
-        },
-        success: function(response) {
-                    var updateCounter = 0;
-                    var totalUpdates = response.length;
-                    for (var i = 0; i < response.length; i++) {
-                        update_TK(response[i].MA_TK,MAPM, function() {
-                            updateCounter++;
-                            if (updateCounter === totalUpdates) {
-                                console.log(updateCounter);
+                        var jsonData = JSON.stringify(data);
+                        var operation = "Update";
+                        var tableName = "phieu_muon";
+                        var idName = "MA_PM";
+                        var idValue = MAPM;
+                        $.ajax({
+                            url: '../AJAX_PHP/CRUD.php',
+                            type: 'POST',
+                            data: {
+                                jsonData : jsonData,
+                                operation: operation,
+                                tableName: tableName,
+                                idName : idName,
+                                idValue : idValue
+                            },
+                            success: function(data){
+                                console.log('đã cập nhật phiếu mượn thành công');
+
+                //cập nhật trạng thái sách
+                    for(var i = 0; i < response_0.length; i++){
+
+                        var data = {
+                            TRANG_THAI: 1,
+                        }
+
+                        var jsonData = JSON.stringify(data);
+                        var operation = "Update";
+                        var tableName = "san_pham";
+                        var idName = "MA_SP";
+                        var idValue = response_0[i].MA_SP;
+                        $.ajax({
+                            url: '../AJAX_PHP/CRUD.php',
+                            type: 'POST',
+                            data: {
+                                jsonData : jsonData,
+                                operation: operation,
+                                tableName: tableName,
+                                idName : idName,
+                                idValue : idValue
+                            },
+                            success: function(data){
+                                console.log('Đã cập nhất sản phẩm thành công');
                                 location.reload();
+                            },
+                            error: function(xhr,status,error){
+                                console.log(error);
                             }
-                        });
+                        })
+                        
                     }
+                            },
+                            error: function(xhr,status,error){
+                                console.log(error);
+                            }
+                        })
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                },
+            })
+            }
+            
+            else{
+                    //cập nhật trạng thái của phiếu mượn
+                        var data = {
+                            TRANG_THAI: 1,
+                        }
+
+                        var jsonData = JSON.stringify(data);
+                        var operation = "Update";
+                        var tableName = "phieu_muon";
+                        var idName = "MA_PM";
+                        var idValue = MAPM;
+                        $.ajax({
+                            url: '../AJAX_PHP/CRUD.php',
+                            type: 'POST',
+                            data: {
+                                jsonData : jsonData,
+                                operation: operation,
+                                tableName: tableName,
+                                idName : idName,
+                                idValue : idValue
+                            },
+                            success: function(data){
+                                console.log('đã cập nhật phiếu mượn thành công');
+
+                //cập nhật trạng thái sách
+                    for(var i = 0; i < response_0.length; i++){
+
+                        var data = {
+                            TRANG_THAI: 1,
+                        }
+
+                        var jsonData = JSON.stringify(data);
+                        var operation = "Update";
+                        var tableName = "san_pham";
+                        var idName = "MA_SP";
+                        var idValue = response_0[i].MA_SP;
+                        $.ajax({
+                            url: '../AJAX_PHP/CRUD.php',
+                            type: 'POST',
+                            data: {
+                                jsonData : jsonData,
+                                operation: operation,
+                                tableName: tableName,
+                                idName : idName,
+                                idValue : idValue
+                            },
+                            success: function(data){
+                                console.log('Đã cập nhất sản phẩm thành công');
+                                location.reload();
+                            },
+                            error: function(xhr,status,error){
+                                console.log(error);
+                            }
+                        })
+                        
+                    }
+                            },
+                            error: function(xhr,status,error){
+                                console.log(error);
+                            }
+                        })
+                
+
+            }         
         },
-        error: function(xhr, status, error) {
-            console.log(error);
-        }
-    });
-    location.reload(); 
-}
-//hàm cho nút nhập
-function read_SOPM(MAPM){
-    var operation = "Read";
-    var tableName = "chi_tiet_phieu_muon";
-    var condition = "MA_PM=" + MAPM;
-    $.ajax({
-        url: '../AJAX_PHP/CRUD.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            operation: operation,
-            tableName: tableName,
-            condition: condition
-        },
-        success: function (data) {
-            localStorage.setItem('SOPM', data.length);
-        },
-        error: function (xhr, status, error){
-            console.log(error);
+    })
         },
     })
 }
+//hàm cho nút nhập
+
 // update số lượng sản phẩm khi xác nhận nhập phiếu
 
 function update_TK(MATK,MAPM, callback) {
@@ -429,7 +569,7 @@ function update_TK(MATK,MAPM, callback) {
            <form action="" method="POST">
            <input type="hidden" name="MAPM_nhap" value="${elementPage[i].MA_PM}">
            <input type="hidden" name="page" value="<?php echo $_POST['page']; ?>">
-          <td><input type="submit" value="nhập" name="btn_nhap_PM" id="btn_nhap_PM" class="thaotac"  onclick="nhap(${elementPage[i].MA_PM})"></td>
+          <td><input type="button" value="nhập" name="btn_nhap_PM" id="btn_nhap_PM" class="thaotac"  onclick="nhap(${elementPage[i].MA_PM},${elementPage[i].MA_TK})"></td>
            </form>
            </tr>
             `;
@@ -471,6 +611,14 @@ function update_TK(MATK,MAPM, callback) {
                     form_sua_PM.querySelector('#tien_do_sua').value = elementPage[index].TIEN_DO;
 
                     form_sua_PM.querySelector('#NGAY_TRA_old').value = elementPage[index].NGAY_TRA;
+
+                    var tiendo_body = document.getElementById('form_tiendo');
+                    if(elementPage[index].TRANG_THAI == 0){
+                        tiendo_body.style.display = 'none';
+                    }
+                    else{
+                        tiendo_body.style.display = 'block';
+                    }
                     form_sua_PM.style.display = 'block';
                 });
             });
@@ -493,7 +641,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var txt = document.getElementById('txt_timkiem_PM'); // Lấy thẻ select
 
     function toggleDateInput() {
-        if(opt.value === 'NGAY_NHAP'){
+        if(opt.value === 'NGAY_NHAP' || opt.value === 'NGAY_TRA'){
            txt.type = 'date';
         }
         else {
@@ -524,10 +672,10 @@ document.getElementById('btn_timkiem_PM').addEventListener('click', function(eve
      }
  }
  
- else if(opt === 'MATT'){
+ else if(opt === 'MATK'){
  
  for(var i = 0; i < rows.length; i++){
-     var MaNV = rows[i].querySelector('#PM_MaTT').innerText;
+     var MaNV = rows[i].querySelector('#PM_MaTK').innerText;
      if(chuyenDoiChuoi(MaNV).includes(chuyenDoiChuoi(txt))){
         rows[i].style.display = 'table-row';
      }
@@ -537,10 +685,10 @@ document.getElementById('btn_timkiem_PM').addEventListener('click', function(eve
  }
  }
  
- else if(opt === 'MANCC'){
+ else if(opt === 'MATT'){
  
  for(var i = 0; i < rows.length; i++){
-     var MaNSX = rows[i].querySelector('#PM_MaNCC').innerText;
+     var MaNSX = rows[i].querySelector('#PM_TT').innerText;
      if(chuyenDoiChuoi(MaNSX).includes(chuyenDoiChuoi(txt))){
         rows[i].style.display = 'table-row';
      }
@@ -550,10 +698,10 @@ document.getElementById('btn_timkiem_PM').addEventListener('click', function(eve
  }
  }
 
- else if(opt === 'TRANG_THAI'){
+ else if(opt === 'NGAY_CAP'){
  
     for(var i = 0; i < rows.length; i++){
-        var MaNSX = rows[i].querySelector('#PM_trang_thai').innerText;
+        var MaNSX = rows[i].querySelector('#PM_NGAYCAP').innerText;
         if(chuyenDoiChuoi(MaNSX).includes(chuyenDoiChuoi(txt))){
            rows[i].style.display = 'table-row';
         }
@@ -563,10 +711,23 @@ document.getElementById('btn_timkiem_PM').addEventListener('click', function(eve
     }
     }
 
-    else if(opt === 'NGAY_NHAP'){
+    else if(opt === 'NGAY_TRA'){
  
         for(var i = 0; i < rows.length; i++){
-            var MaNSX = rows[i].querySelector('#PM_NGAYNHAP').innerText;
+            var MaNSX = rows[i].querySelector('#PM_NGAYTRA').innerText;
+            if(chuyenDoiChuoi(MaNSX).includes(chuyenDoiChuoi(txt))){
+               rows[i].style.display = 'table-row';
+            }
+            else{ 
+                rows[i].style.display = 'none';
+             }
+        }
+        }
+        
+    else if(opt === 'TIEn_DO'){
+ 
+        for(var i = 0; i < rows.length; i++){
+            var MaNSX = rows[i].querySelector('#PM_trang_thai').innerText;
             if(chuyenDoiChuoi(MaNSX).includes(chuyenDoiChuoi(txt))){
                rows[i].style.display = 'table-row';
             }
@@ -680,3 +841,87 @@ function chuyenDoiChuoi(chuoi) {
                 .replace(/[\u0300-\u036f\s]/g, "");
 }
 
+
+ //chức năng sắp xếp
+
+    // Hàm so sánh tăng dần
+    function sortByKey_tang(array, key) {
+        return array.sort(function(a, b) {
+            var x = a[key];
+            var y = b[key];
+            if(checkType(x) == 1){ return x - y; }
+            else{ 
+                if (x > y) return -1;
+                if (x < y) return 1;
+                return 0;
+            }
+        });
+    }
+
+        // Hàm so sánh tăng dần
+        function sortByKey_giam(array, key) {
+            return array.sort(function(a, b) {
+                var x = a[key];
+                var y = b[key];
+                if(checkType(x) == 1){ return y - x; }
+                else{ 
+                    if (x < y) return -1;
+                    if (x > y) return 1;
+                    return 0;
+                }
+            });
+        }
+
+
+    function display_sort() {
+        var table_PM = document.querySelectorAll('#table_PM tbody tr');
+        var jsonArray = [];
+
+        for (var i = 0; i < table_PM.length; i++) {
+            var MA_PM = table_PM[i].querySelector('#PM_Ma').innerText;
+            var MA_TK = table_PM[i].querySelector('#PM_MaTK').innerText;
+            var NGAY_CAP = table_PM[i].querySelector('#PM_NGAYCAP').innerText;
+            var NGAY_TRA = table_PM[i].querySelector('#PM_NGAYTRA').innerText;
+            var MA_TT = table_PM[i].querySelector('#PM_TT').innerText;
+            var TIEN_DO = table_PM[i].querySelector('#PM_trang_thai').innerText;
+            var GHI_CHU = table_PM[i].querySelector('#PM_GHI_CHU').innerText;
+
+            if(TIEN_DO == 'hoàn tất'){
+                TIEN_DO = 1;
+            }
+            else{
+                TIEN_DO = 0;
+            }
+            var object = { MA_PM: MA_PM, NGAY_CAP: NGAY_CAP, GHI_CHU: GHI_CHU, MA_TT: MA_TT, MA_TK: MA_TK, NGAY_TRA: NGAY_TRA, TIEN_DO: TIEN_DO};
+            jsonArray.push(object);
+
+        }
+    
+        document.querySelector('#btn_sortAZ_PM').addEventListener('click', function(event) {
+            event.preventDefault();
+            var tbody = document.querySelector('#table_PM tbody');
+            var key = document.querySelector('#opt_sapxep_PM').value;
+            tbody.innerHTML = '';
+            var array_sapxep = sortByKey_tang(jsonArray, key); // sắp xếp mảng
+         DisplayElementPage(array_sapxep);
+        });
+
+        document.querySelector('#btn_sortZA_PM').addEventListener('click', function(event) {
+            event.preventDefault();
+            var tbody = document.querySelector('#table_PM tbody');
+            var key = document.querySelector('#opt_sapxep_PM').value;
+            tbody.innerHTML = '';
+            var array_sapxep = sortByKey_giam(jsonArray, key); // sắp xếp mảng
+         DisplayElementPage(array_sapxep);
+        });
+
+    }
+
+      //hàm kiểm tra xem chuỗi là số hay chuỗi kí tự
+  function checkType(input) {
+    if (!isNaN(input)) {
+       return 1;
+    } else {
+        return 0;
+    }
+}

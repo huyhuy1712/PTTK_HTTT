@@ -51,10 +51,11 @@ $connect->connectDB();
         <h2 id="title">Tìm kiếm</h2>
             <select name="" id="opt_timkiem_PM">
                 <option value="MAPM">MAPM</option>
+                <option value="MATK">MATK</option>
                 <option value="MATT">MATT</option>
-                <option value="MANCC">MANCC</option>
-                <option value="NGAY_NHAP">Ngày nhập</option>
-                <option value="TRANG_THAI">Tiến độ</option>
+                <option value="NGAY_CAP">Ngày cấp</option>
+                <option value="NGAY_TRA">Ngày trả</option>
+                <option value="TIEn_DO">Tiến độ</option>
 
             </select>
             <input type="hidden" name="page" value="<?php echo $_POST['page']; ?>">
@@ -77,6 +78,22 @@ $connect->connectDB();
       </div>
         <input type="hidden" name="page" value="<?php echo $_POST['page']; ?>">
         <input type="button" class="btn_themPM" name="btn_themPM" value="Thêm chi tiết">
+    </form>
+
+
+    <form action="" method="POST" id="form_sapxep_PM">
+        <h2 style="margin-top: 10px; text-align: center; ">Sắp xếp</h2>
+        <select name="" id="opt_sapxep_PM">
+            <option value="MA_PM">MAPM</option>
+            <option value="MA_TK">MATK</option>
+            <option value="MA_TT">MATT</option>
+            <option value="NGAY_CAP">Ngày Cấp</option>
+            <option value="NGAY_TRA">Ngày Trả</option>
+            <option value="TIEN_DO">Tiến Độ</option>
+        </select>
+        <input type="hidden" name="page" value="<?php echo $_POST['page']; ?>">
+        <input type="button" value="tăng dần" name="btn_sortAZ_PM" id="btn_sortAZ_PM"></input>
+        <input type="button" value="giảm dần" name="btn_sortZA_PM" id="btn_sortZA_PM"></input>
     </form>
 </div>
 </div>
@@ -134,8 +151,10 @@ $connect->connectDB();
         <textarea name="" id="ghi_chu_sua"></textarea> 
 </div>
 
-<div style="display: flex; margin-bottom: 20px;"> 
+<div style="display: flex; margin-bottom: 20px;" id="form_tiendo"> 
         <label for="">Tiến độ: </label>
+        <input type="hidden" id="TRANG_THAI_hidden">
+
         <select name="" id="tien_do_sua" style="margin-left: 10px; border: none;">
             <option value="0">Chưa hoàn tất</option>
             <option value="1">Hoàn tất</option>
@@ -149,8 +168,9 @@ $connect->connectDB();
 
         <input type="button" class="btn_suaPM" name="btn_suaPM" value="sửa" onclick="update()">
     </form>
-    
 </div>
+
+
 <?php
 require("form_them_CTPM.php");
 ?>

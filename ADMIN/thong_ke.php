@@ -33,7 +33,7 @@ foreach($connect->read('phieu_muon','TRANG_THAI = "1"') as $row){
  }; 
 ?>
     <div id="phieu_muon">
-    <?php echo $SL; ?> phiếu mượn đã đượck xuất trong tháng này
+    <?php echo $SL; ?> phiếu mượn đã được xuất trong tháng này
     </div>
 </div>
 

@@ -38,7 +38,9 @@ SLTK_HT.innerText = rows.length;
 {
     var currentDate = new Date(); // Lấy ngày hiện tại
 var futureDate = addYearsToDate(currentDate, 1);
-    var NGAY_HH = futureDate;
+var formattedDate = formatDate(futureDate);
+
+    var NGAY_HH = formattedDate;
     var TEN_TK = $('#CCCD_add').val();
     var MAT_KHAU = $('#MATKHAU_add').val();
     var TEN = $('#TenTK_add').val();
@@ -91,7 +93,8 @@ var futureDate = addYearsToDate(currentDate, 1);
                 var SOTK =  localStorage.getItem('SOTK');
                 var new_SOTK = parseFloat(SOTK) + 1;
                 
-                localStorage.setItem('SOTK',new_SOTK);                location.reload();
+                localStorage.setItem('SOTK',new_SOTK);                
+                location.reload();
             },
             error: function(xhr, status, error) {
                 console.log(error);
@@ -506,3 +509,36 @@ function addYearsToDate(date, years) {
                 .normalize("NFD")
                 .replace(/[\u0300-\u036f\s]/g, "");
 }
+
+
+// Hàm chuyển đổi ngày thành dạng yyyy/mm/dd
+function formatDate(date) {
+    // Lấy thông tin về ngày, tháng và năm từ đối tượng Date
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1; // Tháng bắt đầu từ 0 nên cần cộng thêm 1
+    var day = date.getDate();
+
+    // Đảm bảo rằng tháng và ngày đều có hai chữ số
+    if (month < 10) {
+        month = '0' + month;
+    }
+    if (day < 10) {
+        day = '0' + day;
+    }
+
+    // Trả về chuỗi dạng yyyy/mm/dd
+    return year + '/' + month + '/' + day;
+}
+
+// Hàm thêm năm vào ngày hiện tại
+function addYearsToDate(date, years) {
+    // Sao chép ngày hiện tại để tránh thay đổi ngày ban đầu
+    var newDate = new Date(date);
+    // Thêm số năm vào ngày
+    newDate.setFullYear(newDate.getFullYear() + years);
+    return newDate;
+}
+
+
+
+

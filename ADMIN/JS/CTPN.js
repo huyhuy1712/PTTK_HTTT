@@ -20,7 +20,7 @@ read();
         },
         success: function(response){
             DisplayElementPage(response);
-
+            display_sort();
 
             //cập nhật lại số lượng sản phẩm
             var SLCTPN_HT = document.querySelector('#SLHT_CTPN span');
@@ -355,4 +355,82 @@ function changePriceToNormal(price)
                 .replace(/[\u0300-\u036f\s]/g, "");
 }
 
+
+
+
+ //chức năng sắp xếp
+
+    // Hàm so sánh tăng dần
+    function sortByKey_tang(array, key) {
+        return array.sort(function(a, b) {
+            var x = a[key];
+            var y = b[key];
+            if(checkType(x) == 1){ return x - y; }
+            else{ 
+                if (x > y) return -1;
+                if (x < y) return 1;
+                return 0;
+            }
+        });
+    }
+
+        // Hàm so sánh tăng dần
+        function sortByKey_giam(array, key) {
+            return array.sort(function(a, b) {
+                var x = a[key];
+                var y = b[key];
+                if(checkType(x) == 1){ return y - x; }
+                else{ 
+                    if (x < y) return -1;
+                    if (x > y) return 1;
+                    return 0;
+                }
+            });
+        }
+
+
+    function display_sort() {
+        var table_CTPN = document.querySelectorAll('#table_CTPN tbody tr');
+        var jsonArray = [];
+
+        for (var i = 0; i < table_CTPN.length; i++) {
+            var MA_PN = table_CTPN[i].querySelector('#MAPN_CTPN').value;
+            var MA_SP = table_CTPN[i].querySelector('#MaSP_CTPN').value;
+            var DON_GIA = changePriceToNormal(table_CTPN[i].querySelector('#DON_GIA_CTPN').value);
+            var SL = table_CTPN[i].querySelector('#SL_CTPN').value;
+            var THANH_TIEN = changePriceToNormal(table_CTPN[i].querySelector('#ThanhTien_CTPN').value);
+            var object = { MA_PN: MA_PN, SL: SL, MA_SP: MA_SP, DON_GIA: DON_GIA, THANH_TIEN: THANH_TIEN};
+            jsonArray.push(object);
+
+        }
+    
+        document.querySelector('.btn_sortAZ_CTPN').addEventListener('click', function(event) {
+            event.preventDefault();
+            var tbody = document.querySelector('#table_CTPN tbody');
+            var key = document.querySelector('#opt_sapxep_CTPN').value;
+            tbody.innerHTML = '';
+            var array_sapxep = sortByKey_tang(jsonArray, key); // sắp xếp mảng
+         DisplayElementPage(array_sapxep);
+        });
+
+        document.querySelector('.btn_sortZA_CTPN').addEventListener('click', function(event) {
+            event.preventDefault();
+            var tbody = document.querySelector('#table_CTPN tbody');
+            var key = document.querySelector('#opt_sapxep_CTPN').value;
+            tbody.innerHTML = '';
+            var array_sapxep = sortByKey_giam(jsonArray, key); // sắp xếp mảng
+            console.log(array_sapxep);
+         DisplayElementPage(array_sapxep);
+        });
+
+    }
+
+      //hàm kiểm tra xem chuỗi là số hay chuỗi kí tự
+  function checkType(input) {
+    if (!isNaN(input)) {
+       return 1;
+    } else {
+        return 0;
+    }
+}
 

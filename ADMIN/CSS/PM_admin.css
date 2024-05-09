@@ -110,7 +110,7 @@
     width: 100px;
 }
 
-.btn_sortAZ_PM, .btn_sortZA_PM{
+#btn_sortAZ_PM, #btn_sortZA_PM{
     width: 30%;
     margin-left: 10px;
     height: 20px;
@@ -170,6 +170,32 @@
 
 #form_sua_PM input[type="submit"]:hover {
     background-color: #45a049;
+}
+
+
+#form_sapxep_PM{
+    border: 1px solid black;
+    width: 82%;
+    margin-left: 53px;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+#opt_sapxep_PM{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+    width: 100px;
+}
+
+.btn_sortAZ_PM, .btn_sortZA_PM{
+    width: 30%;
+    margin-left: 10px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
 }
 /*form_PM_admin*/
 
@@ -260,14 +286,6 @@
     width: 100px;
 }
 
-.btn_sortAZ, .btn_sortZA{
-    width: 30%;
-    margin-left: 10px;
-    height: 20px;
-    background-color: transparent;
-    cursor: pointer;
-    font-weight: bold;
-}
 
 .change_page_CTPM{
     display: flex;
@@ -488,5 +506,30 @@ margin-bottom: 10px;
 }
 
 
+
+#form_sapxep_CTPM{
+    border: 1px solid black;
+    width: 82%;
+    margin-left: 53px;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+#opt_sapxep_CTPM{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+    width: 100px;
+}
+
+#btn_sortAZ_CTPM, #btn_sortZA_CTPM{
+    width: 30%;
+    margin-left: 10px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
 /*form_CTPM_admin*/
 

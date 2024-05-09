@@ -48,14 +48,15 @@ $connect->connectDB();
 <form action="" method="POST" id="form_sapxep_CTPN">
         <h2 style="margin-top: 10px; text-align: center; ">Sắp xếp</h2>
         <select name="" id="opt_sapxep_CTPN">
-            <option value="MACTPN">MAPN</option>
-            <option value="MASP">MASP</option>
-            <option value="DON_GIA">Đơn Giá</option>
-            <option value="Số lượng">Số lượng</option>
+            <option value="MA_PN">MAPN</option>
+            <option value="MA_SP">MASP</option>
+            <option value="DON_GIA">Đơn giá</option>
+            <option value="THANH_TIEN">Thành tiền</option>
+            <option value="SL">Số lượng</option>
         </select>
         <input type="hidden" name="page" value="<?php echo $_POST['page']; ?>">
-        <input type="submit" value="tăng dần" name="btn_sortAZ_CTPN" class="btn_sortAZ_CTPN"></input>
-        <input type="submit" value="giảm dần" name="btn_sortZA_CTPN" class="btn_sortZA_CTPN"></input>
+        <input type="button" value="tăng dần" name="btn_sortAZ_CTPN" class="btn_sortAZ_CTPN"></input>
+        <input type="button" value="giảm dần" name="btn_sortZA_CTPN" class="btn_sortZA_CTPN"></input>
     </form>
 
     <form action="" method="POST" id="form_timkiem_CTPN">

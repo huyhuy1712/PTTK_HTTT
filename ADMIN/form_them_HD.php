@@ -297,14 +297,13 @@ font-weight: bold;
         <tr>
                 <td id="MASP_CTHD">${MASP}</td>
                 <td id="TEN_CTHD">${TEN}</td>
-                <td id="DONGIA_CTHD"><input type="text" value="${GIA}" readonly style="text-align: center"></td>
-                <td id="SL_CTHD"><input id="SL_ctsl" type="number" value="0" style="text-align: center"></td>
-                <td id="THANHTIEN_CTHD"><input type="text" value="0" style="text-align: center; " readonly></td>
+                <td id="DONGIA_CTHD"><input class="dongia_input" type="text" value="${GIA}" readonly style="text-align: center"></td>
+                <td id="SL_CTHD"><input class="SL_ctsl" type="number" value="0" style="text-align: center"></td>
+                <td id="THANHTIEN_CTHD"><input class="thanhtien_input" type="text" value="0" style="text-align: center; " readonly></td>
                 <td><button id="xoa_CTHD">Xóa</button></td>
         </tr> `;
         
         $('#data_CTSP').append(html);
-        check_SL();
         }
         else{
             alert("Đã thêm sản phẩm");
@@ -319,16 +318,41 @@ font-weight: bold;
         // Loại bỏ dòng đó khỏi bảng
         tr.remove();
     });
+
+    $(document).on('change', '#SL_CTHD input', function() {
+        var tr = $(this).closest('tr');
+        var SL = tr.find('#SL_CTHD input');
+        var thanhtien = tr.find('#THANHTIEN_CTHD input');
+        var dongia = changePriceToNormal(tr.find('#DONGIA_CTHD input').val());
+        var MASP = tr.find('#MASP_CTHD').text();
+
+    var operation = "Read";
+    var tableName = "kho";
+    var condition = "MA_SP=" + MASP;
+    $.ajax({
+        url: '../AJAX_PHP/CRUD.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            operation: operation,
+            tableName: tableName,
+            condition: condition
+        },
+        success: function(response){
+            if(response[0].SL_CL < SL.val()){
+                alert('Số lượng trong kho không đủ');
+                SL.val(response[0].SL_CL);
+            }
+          thanhtien.val(changePriceToString((dongia * SL.val()).toString()));       
+        },
+        error: function(xhr, status, error) {
+           console.log(error);
+        }
+     });
+})
 });
 
 
-// Xử lý sự kiện tính thành tiền
-// $(document).on('change', '#SL_CTHD input', function() {
-//     var THANH_TIEN = $(this).closest('tr').find('#THANHTIEN_CTHD input');
-//     var DON_GIA = $(this).closest('tr').find('#DONGIA_CTHD input');
-//     var temp = changePriceToNormal(DON_GIA.val()) * $(this).val();
-//     THANH_TIEN.val(changePriceToString(temp.toString()));
-// });
 
 
 
@@ -393,46 +417,8 @@ function set_TENNV(){
      });
     }
 set_TENNV();
-check_SL();
-function check_SL(){
-    var btns = document.querySelectorAll('#data_CTSP tr');
-    btns.forEach(function(btn){
-        btn.querySelector('#SL_ctsl').addEventListener('change', function(){
-            
-            var MA_SP = btn.querySelector('#MASP_CTHD');
-            var SL =  btn.querySelector('#SL_ctsl').value;
-            
-    var operation = "Read";
-    var tableName = "kho";
-    var condition = "MA_SP =" + MA_SP.innerText;
 
-    $.ajax({
-        url: '../AJAX_PHP/CRUD.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            operation: operation,
-            tableName: tableName,
-            condition: condition
-        },
-        success: function(response) {
-            var SL_CL = response[0].SL_CL;
-            var DG = document.querySelector('#DONGIA_CTHD input').value
-            console.log(SL_CL,btn.querySelector('#SL_ctsl').value);
-            if(SL_CL < btn.querySelector('#SL_ctsl').value){
-                btn.querySelector('#SL_ctsl').value = SL_CL;
-                alert('Số lượng sản phẩm trong kho không đủ !!');
-            }
-            var thanhtien = changePriceToNormal(DG) * btn.querySelector('#SL_ctsl').value;
-            btn.querySelector('#THANHTIEN_CTHD input').value = changePriceToString(thanhtien.toString());
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-        }
-        })
-    })
-})
-}
+
 
 
 </script>

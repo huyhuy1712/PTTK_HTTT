@@ -68,6 +68,21 @@ $connect->connectDB();
         <input type="hidden" name="page" value="<?php echo $_POST['page']; ?>">
         <input type="button" class="btn_themHD" name="btn_themHD" value="Thêm chi tiết">
     </form>
+
+
+    <form action="" method="POST" id="form_sapxep_HD">
+        <h2 style="margin-top: 10px; text-align: center; ">Sắp xếp</h2>
+        <select name="" id="opt_sapxep_HD">
+            <option value="MA_HD">MAHD</option>
+            <option value="MA_TK">MATK</option>
+            <option value="MA_TT">MATT</option>
+            <option value="NGAY_TAO">ngày tạo</option>
+            <option value="TONG_TIEN">Tổng tiền</option>
+        </select>
+        <input type="hidden" name="page" value="<?php echo $_POST['page']; ?>">
+        <input type="button" value="tăng dần" name="btn_sortAZ_HD" id="btn_sortAZ_HD"></input>
+        <input type="button" value="giảm dần" name="btn_sortZA_HD" id="btn_sortZA_HD"></input>
+    </form>
 </div>
 <?php require('form_them_HD.php'); ?>
 

@@ -137,7 +137,7 @@
 
 #scroll_themPM{
     overflow-y: scroll;
-    height: 90%;
+    height: 88%;
 }
 #scroll_themCTPM{
     overflow-y: scroll;

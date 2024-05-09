@@ -119,6 +119,31 @@
     cursor: pointer;
     font-weight: bold;
 }
+
+#form_sapxep_HD{
+    border: 1px solid black;
+    width: 82%;
+    margin-left: 53px;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+#opt_sapxep_HD{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+    width: 100px;
+}
+
+#btn_sortAZ_HD, #btn_sortZA_HD{
+    width: 30%;
+    margin-left: 10px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
 /*form_HD_admin*/
 
 
@@ -282,6 +307,31 @@
     height: 10px;
     border: 2px solid black ;
 
+}
+
+#form_sapxep_CTHD{
+    border: 1px solid black;
+    width: 82%;
+    margin-left: 53px;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+#opt_sapxep_CTHD{
+    text-align: center;
+    border: none;
+    background-color: #21020211;
+    border-radius: 50px;
+    width: 100px;
+}
+
+#btn_sortAZ_CTHD, #btn_sortZA_CTHD{
+    width: 30%;
+    margin-left: 10px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 #form_them_HD input[type="file"] {

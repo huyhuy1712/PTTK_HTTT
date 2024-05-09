@@ -172,7 +172,7 @@ function Delete(MAPN) {
 
 function update(MASP, SL, callback) {
     var operation = "Read";
-    var tableName = "PNK";
+    var tableName = "kho";
     var condition = "MA_SP=" + MASP;
     $.ajax({
         url: '../AJAX_PHP/CRUD.php',
@@ -195,7 +195,7 @@ function update(MASP, SL, callback) {
                 data: {
                     jsonData: jsonData,
                     operation: "Update",
-                    tableName: "PNK",
+                    tableName: "kho",
                     idName: "MA_SP",
                     idValue: MASP
                 },
@@ -523,7 +523,12 @@ function nhap(MAPN) {
             var MA_TT = table_PNK[i].querySelector('#PNK_MaTT').innerText;
             var MA_NCC = table_PNK[i].querySelector('#PNK_MaNCC').innerText;
             var TRANG_THAI = table_PNK[i].querySelector('#PNK_trang_thai').innerText;
-
+            if(TRANG_THAI == 'CHƯA XỬ LÝ'){
+                TRANG_THAI = 0;
+            }
+            else{
+                TRANG_THAI = 1;
+            }
             var object = { MA_PN: MA_PN, NGAY_NHAP: NGAY_NHAP, MA_TT: MA_TT, TRANG_THAI: TRANG_THAI, MA_NCC: MA_NCC};
             jsonArray.push(object);
 
@@ -544,6 +549,7 @@ function nhap(MAPN) {
             var key = document.querySelector('#opt_sapxep_PN').value;
             tbody.innerHTML = '';
             var array_sapxep = sortByKey_giam(jsonArray, key); // sắp xếp mảng
+            console.log(array_sapxep);
          DisplayElementPage(array_sapxep);
         });
 

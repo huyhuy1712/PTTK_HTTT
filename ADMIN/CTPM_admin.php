@@ -93,6 +93,18 @@ $connect->connectDB();
     
 </div>
 
+
+
+<form action="" method="POST" id="form_sapxep_CTPM">
+        <h2 style="margin-top: 10px; text-align: center; ">Sắp xếp</h2>
+        <select name="" id="opt_sapxep_CTPM">
+            <option value="MA_PM">MAPM</option>
+            <option value="MA_SP">MASP</option>
+        </select>
+        <input type="hidden" name="page" value="<?php echo $_POST['page']; ?>">
+        <input type="button" value="tăng dần" name="btn_sortAZ_CTPM" id="btn_sortAZ_CTPM"></input>
+        <input type="button" value="giảm dần" name="btn_sortZA_CTPM" id="btn_sortZA_CTPM"></input>
+    </form>
 </div>
 </div>
 

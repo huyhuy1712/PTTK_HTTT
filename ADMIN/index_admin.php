@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/index_admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>admin</title>
 </head>
@@ -134,8 +135,21 @@
     }
     ?>
 </div>
-<script src="JS/index.js"></script>
+
+
+<div id="form_TK_nguoidung">
+    <div id="form_TK">
+        <div id="infor_KH">
+            <h2 style="text-align: center;">Thông tin người dùng</h2>
+            <div>Tên: <span id="ten_user"></span></div>
+            <div>CCCD: <span id="CCCD_user"></span></div>
+            <div>Password: <span id="pass_user"></span></div>
+            <button id="logout_btn"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+        </div>
+    </div>
+</div>
 
 </section>
+<script src="JS/index.js"></script>
 </body>
 </html>

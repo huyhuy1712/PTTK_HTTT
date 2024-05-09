@@ -22,7 +22,7 @@ read();
 
             // Sau CTHDi nhận được dữ liệu, gọi hàm DisplayElementPage
             DisplayElementPage(response);
-
+            display_sort();
             //cập nhật lại số lượng sản phẩm
             var SLCTHD_HT = document.querySelector('#SLCTHD_HT span');
 var rows = document.querySelectorAll('#table_CTHD table tbody tr ');
@@ -307,3 +307,84 @@ function chuyenDoiChuoi(chuoi) {
                 .normalize("NFD")
                 .replace(/[\u0300-\u036f\s]/g, "");
 }
+
+ //chức năng sắp xếp
+
+    // Hàm so sánh tăng dần
+    function sortByKey_tang(array, key) {
+        return array.sort(function(a, b) {
+            var x = a[key];
+            var y = b[key];
+            if(checkType(x) == 1){ return x - y; }
+            else{ 
+                if (x > y) return -1;
+                if (x < y) return 1;
+                return 0;
+            }
+        });
+    }
+
+        // Hàm so sánh tăng dần
+        function sortByKey_giam(array, key) {
+            return array.sort(function(a, b) {
+                var x = a[key];
+                var y = b[key];
+                if(checkType(x) == 1){ return y - x; }
+                else{ 
+                    if (x < y) return -1;
+                    if (x > y) return 1;
+                    return 0;
+                }
+            });
+        }
+
+
+
+
+function display_sort() {
+    var table_CTHD = document.querySelectorAll('#table_CTHD tbody tr');
+    var jsonArray = [];
+
+    for (var i = 0; i < table_CTHD.length; i++) {
+        var MA_HD = table_CTHD[i].querySelector('#MAHD').innerText;
+        var MA_SP = table_CTHD[i].querySelector('#MASP').innerText;
+        var SL = table_CTHD[i].querySelector('#SL').innerText;
+        var DON_GIA = changePriceToNormal(table_CTHD[i].querySelector('#dongia').innerText);
+        var THANH_TIEN = changePriceToNormal(table_CTHD[i].querySelector('#thanhtien').innerText);
+
+        var object = { THANH_TIEN: THANH_TIEN,DON_GIA: DON_GIA,  SL: SL, MA_SP: MA_SP, MA_HD: MA_HD};
+        jsonArray.push(object);
+
+    }
+
+    document.querySelector('#btn_sortAZ_CTHD').addEventListener('click', function(event) {
+        event.preventDefault();
+        var tbody = document.querySelector('#table_CTHD tbody');
+        var key = document.querySelector('#opt_sapxep_CTHD').value;
+        tbody.innerHTML = '';
+        var array_sapxep = sortByKey_tang(jsonArray, key); // sắp xếp mảng
+     DisplayElementPage(array_sapxep);
+    });
+
+    document.querySelector('#btn_sortZA_CTHD').addEventListener('click', function(event) {
+        event.preventDefault();
+        var tbody = document.querySelector('#table_CTHD tbody');
+        var key = document.querySelector('#opt_sapxep_CTHD').value;
+        tbody.innerHTML = '';
+        var array_sapxep = sortByKey_giam(jsonArray, key); // sắp xếp mảng
+     DisplayElementPage(array_sapxep);
+    });
+
+}
+
+  //hàm kiểm tra xem chuỗi là số hay chuỗi kí tự
+function checkType(input) {
+if (!isNaN(input)) {
+   return 1;
+} else {
+    return 0;
+}
+}
+
+
+

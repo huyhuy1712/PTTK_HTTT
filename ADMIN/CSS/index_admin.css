@@ -32,6 +32,7 @@ margin-top: 10px;
 #header_admin #avatar{
     height: 50px;
     border-radius: 50%;
+    cursor: pointer;
 }
 /*header*/
 
@@ -81,3 +82,56 @@ margin-top: 10px;
     width: 90%;
 }
 /*section*/
+
+#form_TK_nguoidung {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    display: none;
+
+}
+
+#infor_KH {
+    margin-bottom: 20px;
+    width: 400px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+    left: 36%;
+}
+
+#infor_KH h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#infor_KH div {
+    margin-bottom: 10px;
+}
+
+#infor_KH span{
+    font-weight: bold;
+}
+
+#logout_btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: red;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#logout_btn:hover {
+    background-color: grey;
+}
+

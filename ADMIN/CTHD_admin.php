@@ -89,8 +89,24 @@ $connect->connectDB();
 
         <input type="submit" class="btn_suaHD" name="btn_suaHD" value="sửa" onclick="update()">
     </form>
-    
 </div>
+
+
+
+<form action="" method="POST" id="form_sapxep_CTHD">
+        <h2 style="margin-top: 10px; text-align: center; ">Sắp xếp</h2>
+        <select name="" id="opt_sapxep_CTHD">
+            <option value="MA_HD">MAHD</option>
+            <option value="MA_SP">MASP</option>
+            <option value="SL">SL</option>
+            <option value="DON_GIA">đơn giá</option>
+            <option value="THANH_TIEN">Thành tiền</option>
+        </select>
+        <input type="hidden" name="page" value="<?php echo $_POST['page']; ?>">
+        <input type="button" value="tăng dần" name="btn_sortAZ_CTHD" id="btn_sortAZ_CTHD"></input>
+        <input type="button" value="giảm dần" name="btn_sortZA_CTHD" id="btn_sortZA_CTHD"></input>
+    </form>
+
 </div>
 
 

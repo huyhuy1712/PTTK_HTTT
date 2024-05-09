@@ -6,6 +6,10 @@ $ss = new Session();
 $ss ->start();
 function SignupUser($id, $sdt, $address, $fullname)
 {
+    if(empty($id) || empty($sdt) || empty($address) || empty($fullname)){
+        echo json_encode(array("status" => 0, "message" => "empty_fields"));
+        exit();
+    }
     $db = new DatabaseUtil();
     $conn = $db->connect();
 
@@ -18,10 +22,10 @@ function SignupUser($id, $sdt, $address, $fullname)
     $id_taikhoan = $max_id + 1;
 
     // Lấy ngày hiện tại và cộng thêm 10 ngày
-    $date = date('Y-m-d', strtotime('+10 days'));
+    $date = date('Y-m-d', strtotime('+365 days'));
 
     // Thực hiện truy vấn để thêm tài khoản mới vào cơ sở dữ liệu
-    $query_taikhoan = "INSERT INTO tai_khoan(MA_TK, CCCD, SDT, Dia_Chi, Ho_Ten, Diem, NGAY_HET_HAN, LOAI, TINH_TRANG, DIEM_DA_TICH_LUY_TRONG_TUAN) VALUES ('$id_taikhoan','$id','$sdt', '$address', '$fullname', 0, '$date','Khách Hàng', 0, 0)";
+    $query_taikhoan = "INSERT INTO tai_khoan(MA_TK, CCCD, SDT, Dia_Chi, Ho_Ten, Diem, NGAY_HET_HAN, LOAI, TINH_TRANG, DIEM_DA_TICH_LUY_TRONG_TUAN) VALUES ('$id_taikhoan','$id','$sdt', '$address', '$fullname', 0, '$date','Khách Hàng', 0, 10)";
 
     $query_check_exist_account = "SELECT * FROM tai_khoan WHERE CCCD='$id'";
     $result_check_exist_account = $db->executeQuery($query_check_exist_account);
@@ -39,6 +43,10 @@ function SignupUser($id, $sdt, $address, $fullname)
 
 function LoginUser($username, $password)
 {
+    if(empty($username) || empty($password)){
+        echo json_encode(array("status" => 0, "message" => "empty_error"));
+        exit();
+    }
     $db = new DatabaseUtil();
     $conn = $db->connect();
     global $ss;
@@ -47,8 +55,6 @@ function LoginUser($username, $password)
     $user = $result->fetch_assoc();
     if ($result->num_rows == 0) {
         echo json_encode(array("status" => 0, "message" => "do-not-exist_error"));
-        // Tài khoản không tồn tại, trả về thông báo lỗi
-        // header("Location: ../login.php?error=username_not_found");
         exit();
     } elseif ($password !== $user['SDT']) {
         echo json_encode(array("status" => 0, "message" => "password_error"));
@@ -86,12 +92,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['text_username_login']) && isset($_POST['text_password_login'])) {
         LoginUser($_POST['text_username_login'], $_POST['text_password_login']);
     }
-}
-
-
-if ($ss->exist('username')) { // Sử dụng session thông qua session manager
-    $username = $ss->get('username');
-    echo json_encode(array("status_log" => 1, "message" => "logged_in", "username" => $username));
-} else {
-    echo json_encode(array("status_log" => 0, "message" => "not_logged_in", "username" => ""));
 }

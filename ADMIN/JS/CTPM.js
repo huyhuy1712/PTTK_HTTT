@@ -22,7 +22,7 @@ read();
 
             // Sau CTPMi nhận được dữ liệu, gọi hàm DisplayElementPage
             DisplayElementPage(response);
-
+            display_sort();
             //cập nhật lại số lượng sản phẩm
             var SLCTPM_HT = document.querySelector('#SLCTPM_HT span');
 var rows = document.querySelectorAll('#table_CTPM table tbody tr ');
@@ -285,4 +285,83 @@ function chuyenDoiChuoi(chuoi) {
     return chuoi.toLowerCase()
                 .normalize("NFD")
                 .replace(/[\u0300-\u036f\s]/g, "");
+}
+
+
+
+
+ //chức năng sắp xếp
+
+    // Hàm so sánh tăng dần
+    function sortByKey_tang(array, key) {
+        return array.sort(function(a, b) {
+            var x = a[key];
+            var y = b[key];
+            if(checkType(x) == 1){ return x - y; }
+            else{ 
+                if (x > y) return -1;
+                if (x < y) return 1;
+                return 0;
+            }
+        });
+    }
+
+        // Hàm so sánh tăng dần
+        function sortByKey_giam(array, key) {
+            return array.sort(function(a, b) {
+                var x = a[key];
+                var y = b[key];
+                if(checkType(x) == 1){ return y - x; }
+                else{ 
+                    if (x < y) return -1;
+                    if (x > y) return 1;
+                    return 0;
+                }
+            });
+        }
+
+
+    function display_sort() {
+        var table_CTPM = document.querySelectorAll('#table_CTPM tbody tr');
+        var jsonArray = [];
+
+        for (var i = 0; i < table_CTPM.length; i++) {
+            var MA_PM = table_CTPM[i].querySelector('#MAPM').innerText;
+            var MA_SP = table_CTPM[i].querySelector('#MASP').innerText;
+            var GHI_CHU_TRUOC_MUON = table_CTPM[i].querySelector('#ghi_chu_truoc').innerText;
+            var GHI_CHU_SAU_MUON = table_CTPM[i].querySelector('#ghi_chu_sau').innerText;
+            var SL = 1;
+
+            var object = { MA_PM: MA_PM, MA_SP: MA_SP, GHI_CHU_TRUOC_MUON: GHI_CHU_TRUOC_MUON, GHI_CHU_SAU_MUON: GHI_CHU_SAU_MUON, SL: SL};
+            jsonArray.push(object);
+
+        }
+    
+        document.querySelector('#btn_sortAZ_CTPM').addEventListener('click', function(event) {
+            event.preventDefault();
+            var tbody = document.querySelector('#table_CTPM tbody');
+            var key = document.querySelector('#opt_sapxep_CTPM').value;
+            tbody.innerHTML = '';
+            var array_sapxep = sortByKey_tang(jsonArray, key); // sắp xếp mảng
+         DisplayElementPage(array_sapxep);
+        });
+
+        document.querySelector('#btn_sortZA_CTPM').addEventListener('click', function(event) {
+            event.preventDefault();
+            var tbody = document.querySelector('#table_CTPM tbody');
+            var key = document.querySelector('#opt_sapxep_CTPM').value;
+            tbody.innerHTML = '';
+            var array_sapxep = sortByKey_giam(jsonArray, key); // sắp xếp mảng
+         DisplayElementPage(array_sapxep);
+        });
+
+    }
+
+      //hàm kiểm tra xem chuỗi là số hay chuỗi kí tự
+  function checkType(input) {
+    if (!isNaN(input)) {
+       return 1;
+    } else {
+        return 0;
+    }
 }
