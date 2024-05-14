@@ -39,53 +39,58 @@ SLCTPM_HT.innerText = rows.length;
 
    function update()
 {
-    var MAPM = $('#MACTPM_sua').val();
-    var MASP_new = $('#MASP_sua').val();
-    var SL_new = $('#SL_CTPM_sua').val();
-    var ghichu_trc = $('#ghi_chu_Trc').val();
-    var ghichu_sau = $('#ghi_chu_Sau').val();
-
-    var MASP_old = $('#MASP_old').val(); 
-
-    $.ajax({
-        url: '../AJAX_PHP/CTPM.ajax.php',
-        type: 'POST',
-        data: {
-            MAPM: MAPM,
-            MASP_new: MASP_new,
-            SL_new: SL_new,
-            ghichu_trc: ghichu_trc,
-            ghichu_sau: ghichu_sau,
-            
-            MASP_old: MASP_old
-        },
-        success: function(response) {
-            console.log(response);
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-        }
-    });
+    if (confirm("Bạn có chắc chắn muốn sửa không?")) {
+    
+        var MAPM = $('#MACTPM_sua').val();
+        var MASP_new = $('#MASP_sua').val();
+        var SL_new = $('#SL_CTPM_sua').val();
+        var ghichu_trc = $('#ghi_chu_Trc').val();
+        var ghichu_sau = $('#ghi_chu_Sau').val();
+    
+        var MASP_old = $('#MASP_old').val(); 
+    
+        $.ajax({
+            url: '../AJAX_PHP/CTPM.ajax.php',
+            type: 'POST',
+            data: {
+                MAPM: MAPM,
+                MASP_new: MASP_new,
+                SL_new: SL_new,
+                ghichu_trc: ghichu_trc,
+                ghichu_sau: ghichu_sau,
+                
+                MASP_old: MASP_old
+            },
+            success: function(response) {
+                console.log(response);
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
 }
 
 function Delete(MAPM,MASP)
 {
+    if (confirm("Bạn có chắc chắn muốn xóa không?")) {
 
-    $.ajax({
-        url: '../AJAX_PHP/CTPM.ajax.php',
-        type: 'POST',
-        data: {
-            MAPM_xoa: MAPM,
-            MASP_xoa: MASP,
-        },
-        success: function(response) {
-            console.log(response);
-            location.reload();
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-        }
-    });
+        $.ajax({
+            url: '../AJAX_PHP/CTPM.ajax.php',
+            type: 'POST',
+            data: {
+                MAPM_xoa: MAPM,
+                MASP_xoa: MASP,
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
 }
 
    // -------------------------------------------formation-chức năng phụ------------------------------------------------ //

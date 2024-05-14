@@ -36,288 +36,129 @@ read();
 }
    //loadData
    function add() {
-    var currentDate = new Date();
-var year = currentDate.getFullYear();
-var month = currentDate.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
-var day = currentDate.getDate();
-
-// Định dạng lại chuỗi theo định dạng "YYYY-MM-DD"
-var formattedDateString = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
-
-
-
-    var NGAY_TRA = $('#ngaytr_PM').val();
-    var MA_TK = $('#ten_TK_thanhtoan').val();
-    var GHI_CHU = "Không có ghi chú";
-    var MA_TT = $("#opt_MANV_themPM").val();
-    var TRANG_THAI = 0;
-    var TIEN_DO = 0;
-    var table_CTPM = document.querySelectorAll('#data_CTSP tr');
-    if(table_CTPM.length == 0){
-        alert('Hãy chọn sản phẩm cần mượn !!');
-    }
-    else{
-            var data = {
-                MA_TK: MA_TK,
-                NGAY_CAP: formattedDateString,
-                NGAY_TRA: NGAY_TRA,
-                MA_TT: MA_TT,
-                GHI_CHU: GHI_CHU,
-                TRANG_THAI: TRANG_THAI,
-                TIEN_DO: TIEN_DO
-            };
+    if (confirm("Bạn có chắc chắn muốn thêm không?")) {
+   
+        var currentDate = new Date();
+    var year = currentDate.getFullYear();
+    var month = currentDate.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
+    var day = currentDate.getDate();
+    
+    // Định dạng lại chuỗi theo định dạng "YYYY-MM-DD"
+    var formattedDateString = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+    
+    
+    
+        var NGAY_TRA = $('#ngaytr_PM').val();
+        var MA_TK = $('#ten_TK_thanhtoan').val();
+        var GHI_CHU = "Không có ghi chú";
+        var MA_TT = $("#opt_MANV_themPM").val();
+        var TRANG_THAI = 0;
+        var TIEN_DO = 0;
+        var table_CTPM = document.querySelectorAll('#data_CTSP tr');
+        if(table_CTPM.length == 0){
+            alert('Hãy chọn sản phẩm cần mượn !!');
+        }
+        else{
+                var data = {
+                    MA_TK: MA_TK,
+                    NGAY_CAP: formattedDateString,
+                    NGAY_TRA: NGAY_TRA,
+                    MA_TT: MA_TT,
+                    GHI_CHU: GHI_CHU,
+                    TRANG_THAI: TRANG_THAI,
+                    TIEN_DO: TIEN_DO
+                };
+                
+                var jsonData = JSON.stringify(data);
+                console.log(data);
+                var operation = "Create";
+                var tableName = "phieu_muon";
+                $.ajax({
+                    url: '../AJAX_PHP/CRUD.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        jsonData: jsonData,
+                        operation: operation,
+                        tableName: tableName
+                    },
+                    success: function(response) {
+                        //đọc ra phiếu mượn vừa thêm
+                        var newMAPM = response[response.length - 1].MA_PM;
+                        var table_CTPM = document.querySelectorAll('#data_CTSP tr');
             
-            var jsonData = JSON.stringify(data);
-            console.log(data);
-            var operation = "Create";
-            var tableName = "phieu_muon";
-            $.ajax({
-                url: '../AJAX_PHP/CRUD.php',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    jsonData: jsonData,
-                    operation: operation,
-                    tableName: tableName
-                },
-                success: function(response) {
-                    //đọc ra phiếu mượn vừa thêm
-                    var newMAPM = response[response.length - 1].MA_PM;
-                    var table_CTPM = document.querySelectorAll('#data_CTSP tr');
-        
-                    for (var i = 0; i < table_CTPM.length; i++) {
-                        var MASP_CTPM = table_CTPM[i].querySelector('#MASP_CTPM').innerText;
-                        var ghichu_trc = table_CTPM[i].querySelector('#ghichu_trc').value;
-                        var ghichu_sau = table_CTPM[i].querySelector('#ghichu_sau').value;
-                        var data = {
-                            MA_PM: newMAPM,
-                            MA_SP: MASP_CTPM,
-                            GHI_CHU_TRUOC_MUON: ghichu_trc,
-                            GHI_CHU_SAU_MUON: ghichu_sau,
-                            SL: 1
-
-                        };
-        
-                        var jsonData = JSON.stringify(data);
-        
-                        $.ajax({
-                            url: '../AJAX_PHP/CRUD.php',
-                            type: 'POST',
-                            dataType: 'json',
-                            data: {
-                                jsonData: jsonData,
-                                operation: "Create",
-                                tableName: 'chi_tiet_phieu_muon'
-                            },
-                            success: function(response) {
-                                console.log(response);
-                            },
-                            error: function(xhr, status, error) {
-                                console.log(error);
-                            }
-                        });
+                        for (var i = 0; i < table_CTPM.length; i++) {
+                            var MASP_CTPM = table_CTPM[i].querySelector('#MASP_CTPM').innerText;
+                            var ghichu_trc = table_CTPM[i].querySelector('#ghichu_trc').value;
+                            var ghichu_sau = table_CTPM[i].querySelector('#ghichu_sau').value;
+                            var data = {
+                                MA_PM: newMAPM,
+                                MA_SP: MASP_CTPM,
+                                GHI_CHU_TRUOC_MUON: ghichu_trc,
+                                GHI_CHU_SAU_MUON: ghichu_sau,
+                                SL: 1
+    
+                            };
+            
+                            var jsonData = JSON.stringify(data);
+            
+                            $.ajax({
+                                url: '../AJAX_PHP/CRUD.php',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: {
+                                    jsonData: jsonData,
+                                    operation: "Create",
+                                    tableName: 'chi_tiet_phieu_muon'
+                                },
+                                success: function(response) {
+                                    console.log(response);
+                                },
+                                error: function(xhr, status, error) {
+                                    console.log(error);
+                                }
+                            });
+                        }
+                           location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
                     }
-                       location.reload();
-                },
-                error: function(xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        
-    
-    
+                });
+            
+        }
     }
+
 }
 
 
 function update()
 {
-    var NGAY_TRA = $('#NGAY_TRA').val();
-    var NGAY_TRA_old = $('#NGAY_TRA_old').val();
-    var ghichu = $('#ghi_chu_sua').val();
-    var tiendo = $('#tien_do_sua').val();
-    var MAPM = $('#MAPM_sua').val();
-
-    var date_new = new Date(NGAY_TRA);
-    var date_old = new Date(NGAY_TRA_old);
-    if(date_new < date_old){
-        alert("ngày trả mới không được nhỏ hơn ngày trả cũ !!");
-    }
-    else{
-        var data = {
-            NGAY_TRA: NGAY_TRA,
-            GHI_CHU: ghichu,
-            TIEN_DO: tiendo,
+    if (confirm("Bạn có chắc chắn muốn sửa không?")) {
+    
+        var NGAY_TRA = $('#NGAY_TRA').val();
+        var NGAY_TRA_old = $('#NGAY_TRA_old').val();
+        var ghichu = $('#ghi_chu_sua').val();
+        var tiendo = $('#tien_do_sua').val();
+        var MAPM = $('#MAPM_sua').val();
+    
+        var date_new = new Date(NGAY_TRA);
+        var date_old = new Date(NGAY_TRA_old);
+        if(date_new < date_old){
+            alert("ngày trả mới không được nhỏ hơn ngày trả cũ !!");
         }
-
-        var jsonData = JSON.stringify(data);
-        var operation = "Update";
-        var tableName = "phieu_muon";
-        var idName = "MA_PM";
-        var idValue = MAPM;
-        $.ajax({
-            url: '../AJAX_PHP/CRUD.php',
-            type: 'POST',
-            data: {
-                jsonData : jsonData,
-                operation: operation,
-                tableName: tableName,
-                idName : idName,
-                idValue : idValue
-            },
-            success: function(response0) {
-                    if(tiendo == 1){
-                        $.ajax({
-                            url: '../AJAX_PHP/CRUD.php',
-                            type: 'POST',
-                            datatype: 'json',
-                            data: {
-                                operation: 'Read',
-                                tableName: 'chi_tiet_phieu_muon',
-                                condition: 'MA_PM=' + MAPM
-                            },
-                            success: function(response1) {
-                                var JSONArray = JSON.parse(response1);
-                                for(var i = 0; i < response1.length; i++){
-                                   
-                                    var data = {
-                                        TRANG_THAI: 0,
-                                    }
-                                    var jsonData = JSON.stringify(data);
-                                    var operation = "Update";
-                                    var tableName = "san_pham";
-                                    var idName = "MA_SP";
-                                    var idValue = JSONArray[i].MA_SP;
-                                    $.ajax({
-                                        url: '../AJAX_PHP/CRUD.php',
-                                        type: 'POST',
-                                        data: {
-                                            jsonData : jsonData,
-                                            operation: operation,
-                                            tableName: tableName,
-                                            idName : idName,
-                                            idValue : idValue
-                                        },
-                                        success: function(data){
-                                            location.reload();
-                                        }
-                                    })
-                                }
-                            },
-                            error: function(xhr, status, error) {
-                                console.log(error);
-                            }
-                        });   
-                    }
-                    else{
-                        console.log('không có cập nhật');
-                    }
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-            }
-        });
-
-        location.reload();
-
-    }
-}
-
-
-function Delete(MAPM) {
-    var operation = "Delete";
-    var idName = "MA_PM";
-    var idValue = MAPM;
-
-    // Hàm xóa từng bảng
-    function deleteFromTable(tableName, idName, idValue) {
-        $.ajax({
-            url: '../AJAX_PHP/CRUD.php',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                operation: operation,
-                tableName: tableName,
-                idName: idName,
-                idValue: idValue
-            },
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-            }
-        });
-
-    }
-
-    // // Xóa sản phẩm trong chi tiết phiếu mượn
-    deleteFromTable("chi_tiet_phieu_muon", idName, idValue);
-
-    // Xóa sản phẩm
-    deleteFromTable("phieu_muon", idName, idValue);
-    location.reload();
-}
-
-
-
-
-
-
-//hàm cho nút nhập
-function nhap(MAPM,MATK) {
-
-    var operation = "Read";
-    var tableName = "chi_tiet_phieu_muon";
-    var condition = "MA_PM=" + MAPM;
-
-    $.ajax({
-        url: '../AJAX_PHP/CRUD.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            operation: operation,
-            tableName: tableName,
-            condition: condition
-        },
-        success: function(response_0) {
-          
-            //đọc ra tài khoản
-    var operation = "Read";
-    var tableName = "tai_khoan";
-    var condition = "MA_TK=" + MATK;
-
-    $.ajax({
-        url: '../AJAX_PHP/CRUD.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            operation: operation,
-            tableName: tableName,
-            condition: condition
-        },
-        success: function(response_1) {
-            var DIEM_TUAN_old = parseFloat(response_1[0].DIEM_DA_TICH_LUY_TRONG_TUAN);
-            var DIEM_old =  parseFloat(response_1[0].DIEM);
-            var DIEM_new = DIEM_old + parseFloat(response_0.length);
-
-            //cập nhật lại số diểm
-            if(DIEM_TUAN_old !== 0){
-                var DIEM_TUAN_new = DIEM_TUAN_old - parseFloat(response_0.length);
-            if(DIEM_TUAN_new < 0){
-                DIEM_TUAN_new = 0;
-            }
-          
+        else{
             var data = {
-             DIEM: DIEM_new,
-             DIEM_DA_TICH_LUY_TRONG_TUAN: DIEM_TUAN_new
+                NGAY_TRA: NGAY_TRA,
+                GHI_CHU: ghichu,
+                TIEN_DO: tiendo,
             }
     
             var jsonData = JSON.stringify(data);
             var operation = "Update";
-            var tableName = "tai_khoan";
-            var idName = "MA_TK";
-            var idValue = MATK;
+            var tableName = "phieu_muon";
+            var idName = "MA_PM";
+            var idValue = MAPM;
             $.ajax({
                 url: '../AJAX_PHP/CRUD.php',
                 type: 'POST',
@@ -328,145 +169,314 @@ function nhap(MAPM,MATK) {
                     idName : idName,
                     idValue : idValue
                 },
-                success: function(){
-                    console.log("Đã cập nhật điểm thành công !!");
-
-
-                    //cập nhật trạng thái của phiếu mượn
-                        var data = {
-                            TRANG_THAI: 1,
+                success: function(response0) {
+                        if(tiendo == 1){
+                            $.ajax({
+                                url: '../AJAX_PHP/CRUD.php',
+                                type: 'POST',
+                                datatype: 'json',
+                                data: {
+                                    operation: 'Read',
+                                    tableName: 'chi_tiet_phieu_muon',
+                                    condition: 'MA_PM=' + MAPM
+                                },
+                                success: function(response1) {
+                                    var JSONArray = JSON.parse(response1);
+                                    for(var i = 0; i < response1.length; i++){
+                                       
+                                        var data = {
+                                            TRANG_THAI: 0,
+                                        }
+                                        var jsonData = JSON.stringify(data);
+                                        var operation = "Update";
+                                        var tableName = "san_pham";
+                                        var idName = "MA_SP";
+                                        var idValue = JSONArray[i].MA_SP;
+                                        $.ajax({
+                                            url: '../AJAX_PHP/CRUD.php',
+                                            type: 'POST',
+                                            data: {
+                                                jsonData : jsonData,
+                                                operation: operation,
+                                                tableName: tableName,
+                                                idName : idName,
+                                                idValue : idValue
+                                            },
+                                            success: function(data){
+                                                location.reload();
+                                            }
+                                        })
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    console.log(error);
+                                }
+                            });   
                         }
-
-                        var jsonData = JSON.stringify(data);
-                        var operation = "Update";
-                        var tableName = "phieu_muon";
-                        var idName = "MA_PM";
-                        var idValue = MAPM;
-                        $.ajax({
-                            url: '../AJAX_PHP/CRUD.php',
-                            type: 'POST',
-                            data: {
-                                jsonData : jsonData,
-                                operation: operation,
-                                tableName: tableName,
-                                idName : idName,
-                                idValue : idValue
-                            },
-                            success: function(data){
-                                console.log('đã cập nhật phiếu mượn thành công');
-
-                //cập nhật trạng thái sách
-                    for(var i = 0; i < response_0.length; i++){
-
-                        var data = {
-                            TRANG_THAI: 1,
+                        else{
+                            console.log('không có cập nhật');
                         }
-
-                        var jsonData = JSON.stringify(data);
-                        var operation = "Update";
-                        var tableName = "san_pham";
-                        var idName = "MA_SP";
-                        var idValue = response_0[i].MA_SP;
-                        $.ajax({
-                            url: '../AJAX_PHP/CRUD.php',
-                            type: 'POST',
-                            data: {
-                                jsonData : jsonData,
-                                operation: operation,
-                                tableName: tableName,
-                                idName : idName,
-                                idValue : idValue
-                            },
-                            success: function(data){
-                                console.log('Đã cập nhất sản phẩm thành công');
-                                location.reload();
-                            },
-                            error: function(xhr,status,error){
-                                console.log(error);
-                            }
-                        })
-                        
-                    }
-                            },
-                            error: function(xhr,status,error){
-                                console.log(error);
-                            }
-                        })
                 },
                 error: function(xhr, status, error) {
                     console.log(error);
+                }
+            });
+    
+            location.reload();
+    
+        }
+    }
+}
+
+
+function Delete(MAPM) {
+    if (confirm("Bạn có chắc chắn muốn xóa không?")) {
+    
+        var operation = "Delete";
+        var idName = "MA_PM";
+        var idValue = MAPM;
+    
+        // Hàm xóa từng bảng
+        function deleteFromTable(tableName, idName, idValue) {
+            $.ajax({
+                url: '../AJAX_PHP/CRUD.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    operation: operation,
+                    tableName: tableName,
+                    idName: idName,
+                    idValue: idValue
                 },
-            })
-            }
-            
-            else{
-                    //cập nhật trạng thái của phiếu mượn
-                        var data = {
-                            TRANG_THAI: 1,
-                        }
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+    
+        }
+    
+        // // Xóa sản phẩm trong chi tiết phiếu mượn
+        deleteFromTable("chi_tiet_phieu_muon", idName, idValue);
+    
+        // Xóa sản phẩm
+        deleteFromTable("phieu_muon", idName, idValue);
+        location.reload();
+    }
+}
 
-                        var jsonData = JSON.stringify(data);
-                        var operation = "Update";
-                        var tableName = "phieu_muon";
-                        var idName = "MA_PM";
-                        var idValue = MAPM;
-                        $.ajax({
-                            url: '../AJAX_PHP/CRUD.php',
-                            type: 'POST',
-                            data: {
-                                jsonData : jsonData,
-                                operation: operation,
-                                tableName: tableName,
-                                idName : idName,
-                                idValue : idValue
-                            },
-                            success: function(data){
-                                console.log('đã cập nhật phiếu mượn thành công');
 
-                //cập nhật trạng thái sách
-                    for(var i = 0; i < response_0.length; i++){
 
-                        var data = {
-                            TRANG_THAI: 1,
-                        }
 
-                        var jsonData = JSON.stringify(data);
-                        var operation = "Update";
-                        var tableName = "san_pham";
-                        var idName = "MA_SP";
-                        var idValue = response_0[i].MA_SP;
-                        $.ajax({
-                            url: '../AJAX_PHP/CRUD.php',
-                            type: 'POST',
-                            data: {
-                                jsonData : jsonData,
-                                operation: operation,
-                                tableName: tableName,
-                                idName : idName,
-                                idValue : idValue
-                            },
-                            success: function(data){
-                                console.log('Đã cập nhất sản phẩm thành công');
-                                location.reload();
-                            },
-                            error: function(xhr,status,error){
-                                console.log(error);
+
+
+//hàm cho nút nhập
+function nhap(MAPM,MATK) {
+    if (confirm("Bạn có chắc chắn muốn nhập không?")) {
+    
+        var operation = "Read";
+        var tableName = "chi_tiet_phieu_muon";
+        var condition = "MA_PM=" + MAPM;
+    
+        $.ajax({
+            url: '../AJAX_PHP/CRUD.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                operation: operation,
+                tableName: tableName,
+                condition: condition
+            },
+            success: function(response_0) {
+              
+                //đọc ra tài khoản
+        var operation = "Read";
+        var tableName = "tai_khoan";
+        var condition = "MA_TK=" + MATK;
+    
+        $.ajax({
+            url: '../AJAX_PHP/CRUD.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                operation: operation,
+                tableName: tableName,
+                condition: condition
+            },
+            success: function(response_1) {
+                var DIEM_TUAN_old = parseFloat(response_1[0].DIEM_DA_TICH_LUY_TRONG_TUAN);
+                var DIEM_old =  parseFloat(response_1[0].DIEM);
+                var DIEM_new = DIEM_old + parseFloat(response_0.length);
+    
+                //cập nhật lại số diểm
+                if(DIEM_TUAN_old !== 0){
+                    var DIEM_TUAN_new = DIEM_TUAN_old - parseFloat(response_0.length);
+                if(DIEM_TUAN_new < 0){
+                    DIEM_TUAN_new = 0;
+                }
+              
+                var data = {
+                 DIEM: DIEM_new,
+                 DIEM_DA_TICH_LUY_TRONG_TUAN: DIEM_TUAN_new
+                }
+        
+                var jsonData = JSON.stringify(data);
+                var operation = "Update";
+                var tableName = "tai_khoan";
+                var idName = "MA_TK";
+                var idValue = MATK;
+                $.ajax({
+                    url: '../AJAX_PHP/CRUD.php',
+                    type: 'POST',
+                    data: {
+                        jsonData : jsonData,
+                        operation: operation,
+                        tableName: tableName,
+                        idName : idName,
+                        idValue : idValue
+                    },
+                    success: function(){
+                        console.log("Đã cập nhật điểm thành công !!");
+    
+    
+                        //cập nhật trạng thái của phiếu mượn
+                            var data = {
+                                TRANG_THAI: 1,
                             }
-                        })
-                        
-                    }
-                            },
-                            error: function(xhr,status,error){
-                                console.log(error);
+    
+                            var jsonData = JSON.stringify(data);
+                            var operation = "Update";
+                            var tableName = "phieu_muon";
+                            var idName = "MA_PM";
+                            var idValue = MAPM;
+                            $.ajax({
+                                url: '../AJAX_PHP/CRUD.php',
+                                type: 'POST',
+                                data: {
+                                    jsonData : jsonData,
+                                    operation: operation,
+                                    tableName: tableName,
+                                    idName : idName,
+                                    idValue : idValue
+                                },
+                                success: function(data){
+                                    console.log('đã cập nhật phiếu mượn thành công');
+    
+                    //cập nhật trạng thái sách
+                        for(var i = 0; i < response_0.length; i++){
+    
+                            var data = {
+                                TRANG_THAI: 1,
                             }
-                        })
+    
+                            var jsonData = JSON.stringify(data);
+                            var operation = "Update";
+                            var tableName = "san_pham";
+                            var idName = "MA_SP";
+                            var idValue = response_0[i].MA_SP;
+                            $.ajax({
+                                url: '../AJAX_PHP/CRUD.php',
+                                type: 'POST',
+                                data: {
+                                    jsonData : jsonData,
+                                    operation: operation,
+                                    tableName: tableName,
+                                    idName : idName,
+                                    idValue : idValue
+                                },
+                                success: function(data){
+                                    console.log('Đã cập nhất sản phẩm thành công');
+                                    location.reload();
+                                },
+                                error: function(xhr,status,error){
+                                    console.log(error);
+                                }
+                            })
+                            
+                        }
+                                },
+                                error: function(xhr,status,error){
+                                    console.log(error);
+                                }
+                            })
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    },
+                })
+                }
                 
-
-            }         
-        },
-    })
-        },
-    })
+                else{
+                        //cập nhật trạng thái của phiếu mượn
+                            var data = {
+                                TRANG_THAI: 1,
+                            }
+    
+                            var jsonData = JSON.stringify(data);
+                            var operation = "Update";
+                            var tableName = "phieu_muon";
+                            var idName = "MA_PM";
+                            var idValue = MAPM;
+                            $.ajax({
+                                url: '../AJAX_PHP/CRUD.php',
+                                type: 'POST',
+                                data: {
+                                    jsonData : jsonData,
+                                    operation: operation,
+                                    tableName: tableName,
+                                    idName : idName,
+                                    idValue : idValue
+                                },
+                                success: function(data){
+                                    console.log('đã cập nhật phiếu mượn thành công');
+    
+                    //cập nhật trạng thái sách
+                        for(var i = 0; i < response_0.length; i++){
+    
+                            var data = {
+                                TRANG_THAI: 1,
+                            }
+    
+                            var jsonData = JSON.stringify(data);
+                            var operation = "Update";
+                            var tableName = "san_pham";
+                            var idName = "MA_SP";
+                            var idValue = response_0[i].MA_SP;
+                            $.ajax({
+                                url: '../AJAX_PHP/CRUD.php',
+                                type: 'POST',
+                                data: {
+                                    jsonData : jsonData,
+                                    operation: operation,
+                                    tableName: tableName,
+                                    idName : idName,
+                                    idValue : idValue
+                                },
+                                success: function(data){
+                                    console.log('Đã cập nhất sản phẩm thành công');
+                                    location.reload();
+                                },
+                                error: function(xhr,status,error){
+                                    console.log(error);
+                                }
+                            })
+                            
+                        }
+                                },
+                                error: function(xhr,status,error){
+                                    console.log(error);
+                                }
+                            })
+                    
+    
+                }         
+            },
+        })
+            },
+        })
+    }
 }
 //hàm cho nút nhập
 

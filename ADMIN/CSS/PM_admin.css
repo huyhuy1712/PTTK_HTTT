@@ -491,7 +491,7 @@ width: 100%;
 margin-bottom: 10px;
 }
 
-#form_sua_CTPM input[type="submit"] {
+#form_sua_CTPM input[type="button"] {
     width: 100%;
     background-color: #4CAF50;
     color: white;
@@ -501,7 +501,7 @@ margin-bottom: 10px;
     cursor: pointer;
 }
 
-#form_sua_CTPM input[type="submit"]:hover {
+#form_sua_CTPM input[type="button"]:hover {
     background-color: #45a049;
 }
 

@@ -36,70 +36,73 @@ SLTK_HT.innerText = rows.length;
 
    function add()
 {
-    var currentDate = new Date(); // Lấy ngày hiện tại
-var futureDate = addYearsToDate(currentDate, 1);
-var formattedDate = formatDate(futureDate);
-
-    var NGAY_HH = formattedDate;
-    var TEN_TK = $('#CCCD_add').val();
-    var MAT_KHAU = $('#MATKHAU_add').val();
-    var TEN = $('#TenTK_add').val();
-    var DC = $('#DIACHI_TK_add').val();
-
-    var tr = document.querySelectorAll('#form_TK_admin table tbody tr');
-    var check_TEN_TK = true;
-    for(var i=0; i<tr.length; i++){
-        if(tr[i].querySelector('#TK_TenTK').innerText === TEN_TK){
-            check_TEN_TK = false;
-        }
-    }
-
-    if(TEN_TK === "" || MAT_KHAU === "" || TEN === "" || DC === ""){
-        alert('Vui lòng nhập đầy đủ thông tin !!');
-    }
-
-    else if(!check_TEN_TK){
-        alert("Tên tài khoản đã tồn tại !!")
-    }
-    else if(!checkSDT(MAT_KHAU)  || !checkCCCD(TEN_TK)){
-        alert("Mật khẩu phải đủ 10 số và CCCD phải đủ 12 số");
-    }
-    else{
-        var data = {
-            CCCD: TEN_TK,
-            SDT: MAT_KHAU,
-            DIA_CHI: DC,
-            TINH_TRANG: 0,
-            NGAY_HET_HAN: NGAY_HH,
-            HO_TEN: TEN,
-            DIEM: 1,
-            LOAI: "Khách Hàng"
-        };
+    if (confirm("Bạn có chắc chắn muốn thêm không?")) {
     
-        var jsonData = JSON.stringify(data);
+        var currentDate = new Date(); // Lấy ngày hiện tại
+    var futureDate = addYearsToDate(currentDate, 1);
+    var formattedDate = formatDate(futureDate);
     
-        var operation = "Create";
-        var tableName = "tai_khoan";
-        $.ajax({
-            url: '../AJAX_PHP/CRUD.php',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                jsonData : jsonData,
-                operation: operation,
-                tableName: tableName
-            }, 
-            success: function(response){
-                var SOTK =  localStorage.getItem('SOTK');
-                var new_SOTK = parseFloat(SOTK) + 1;
-                
-                localStorage.setItem('SOTK',new_SOTK);                
-                location.reload();
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
+        var NGAY_HH = formattedDate;
+        var TEN_TK = $('#CCCD_add').val();
+        var MAT_KHAU = $('#MATKHAU_add').val();
+        var TEN = $('#TenTK_add').val();
+        var DC = $('#DIACHI_TK_add').val();
+    
+        var tr = document.querySelectorAll('#form_TK_admin table tbody tr');
+        var check_TEN_TK = true;
+        for(var i=0; i<tr.length; i++){
+            if(tr[i].querySelector('#TK_TenTK').innerText === TEN_TK){
+                check_TEN_TK = false;
             }
-        })
+        }
+    
+        if(TEN_TK === "" || MAT_KHAU === "" || TEN === "" || DC === ""){
+            alert('Vui lòng nhập đầy đủ thông tin !!');
+        }
+    
+        else if(!check_TEN_TK){
+            alert("Tên tài khoản đã tồn tại !!")
+        }
+        else if(!checkSDT(MAT_KHAU)  || !checkCCCD(TEN_TK)){
+            alert("Mật khẩu phải đủ 10 số và CCCD phải đủ 12 số");
+        }
+        else{
+            var data = {
+                CCCD: TEN_TK,
+                SDT: MAT_KHAU,
+                DIA_CHI: DC,
+                TINH_TRANG: 0,
+                NGAY_HET_HAN: NGAY_HH,
+                HO_TEN: TEN,
+                DIEM: 1,
+                LOAI: "Khách Hàng"
+            };
+        
+            var jsonData = JSON.stringify(data);
+        
+            var operation = "Create";
+            var tableName = "tai_khoan";
+            $.ajax({
+                url: '../AJAX_PHP/CRUD.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    jsonData : jsonData,
+                    operation: operation,
+                    tableName: tableName
+                }, 
+                success: function(response){
+                    var SOTK =  localStorage.getItem('SOTK');
+                    var new_SOTK = parseFloat(SOTK) + 1;
+                    
+                    localStorage.setItem('SOTK',new_SOTK);                
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            })
+        }
     }
    }
 
@@ -108,6 +111,8 @@ var formattedDate = formatDate(futureDate);
 function vohieu(MATK)
 {
 
+    if (confirm("Bạn có chắc chắn muốn vô hiệu tài khoản không?")) {
+    
         var data = {
             TINH_TRANG: 0
           };
@@ -136,12 +141,14 @@ function vohieu(MATK)
             console.log(error);
         }
     });
+    }
 }
 
 
 function mo(MATK)
 {
-
+    if (confirm("Bạn có chắc chắn muốn kích hoạt tài khoản không?")) {
+    
         var data = {
             TINH_TRANG: 1
           };
@@ -170,44 +177,48 @@ function mo(MATK)
             console.log(error);
         }
     });
+    }
 }
  
 
 function giahan(MATK)
 {
-var currentDate = new Date(); // Lấy ngày hiện tại
-var futureDate = addYearsToDate(currentDate, 1);
-        var data = {
-            NGAY_HET_HAN: futureDate
-        };
-
-          var jsonData = JSON.stringify(data);
-
-    var operation = "Update";
-    var tableName = "tai_khoan";
-    var idName = "MA_TK";
-    var idValue = MATK;
-    $.ajax({
-        url: '../AJAX_PHP/CRUD.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            jsonData : jsonData,
-            operation: operation,
-            tableName: tableName,
-            idName : idName,
-            idValue : idValue
-        },
-        success: function(response) {
-           var SOTK =  localStorage.getItem('SOTK');
-           var new_SOTK = parseFloat(SOTK) + 1;
-           localStorage.setItem('SOTK',new_SOTK);
-            location.reload();
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-        }
-    });
+    if (confirm("Bạn có chắc chắn muốn gia hạn tài khoản không?")) {
+    
+        var currentDate = new Date(); // Lấy ngày hiện tại
+        var futureDate = addYearsToDate(currentDate, 1);
+                var data = {
+                    NGAY_HET_HAN: futureDate
+                };
+        
+                  var jsonData = JSON.stringify(data);
+        
+            var operation = "Update";
+            var tableName = "tai_khoan";
+            var idName = "MA_TK";
+            var idValue = MATK;
+            $.ajax({
+                url: '../AJAX_PHP/CRUD.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    jsonData : jsonData,
+                    operation: operation,
+                    tableName: tableName,
+                    idName : idName,
+                    idValue : idValue
+                },
+                success: function(response) {
+                   var SOTK =  localStorage.getItem('SOTK');
+                   var new_SOTK = parseFloat(SOTK) + 1;
+                   localStorage.setItem('SOTK',new_SOTK);
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+    }
 }
 // -------------------------------------------formation-chức năng phụ------------------------------------------------ //
 

@@ -40,182 +40,192 @@ SLSP_HT.innerText = rows.length;
 
    function add()
    { 
-   //thêm sản phẩm trước
-       var loai = $("#Loai_add").val();
-       var Ten_SP = $("#TenSP_add").val();
-       var Gia = $("#GIA_SP_add").val();
-       var tacgia = $("#tacgia_add").val();
-       var NXB = $("#NXB_add").val();
-   var filePath = $('#ANH_SP_add').val();
-   var ANH = filePath.split('\\').pop();
-   
-       var data = {
-           TEN: Ten_SP,
-           TAC_GIA: tacgia,
-           NAM_XB: NXB,
-           GIA: Gia,
-           LOAI: loai,
-           HINH_ANH: ANH,
-           TRANG_THAI: 0
-         };
-         var jsonData = JSON.stringify(data);
-
-   var operation = "Create";
-   var tableName = "san_pham";
-
-   if(loai !== '' && Ten_SP !== '' && Gia !== '' && tacgia !== '' && NXB !== '' && ANH !== ''){
-   $.ajax({
-   url: '../AJAX_PHP/CRUD.php',
-   type: 'POST',
-   dataType: 'json',
-   data: {
-       jsonData : jsonData,
-       operation: operation,
-       tableName: tableName
-   },
-   success: function(response) {
-    //thêm vào kho
-    var data = {
-        MA_SP: response[response.length-1].MA_SP,
-        SL_CL: 1
-    }
-    var jsonData = JSON.stringify(data);
-    $.ajax({
-        url: '../AJAX_PHP/CRUD.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            jsonData : jsonData,
-            operation: 'Create',
-            tableName: 'kho'
-        },
-        success: function(response){
-            location.reload();
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-        }
-   })
-},
-   error: function(xhr, status, error) {
-       console.log(error);
-   },
-   });
-}
-
-else{
-    alert('Hãy nhập đầy đủ thông tin !!');
-}
-   }
-
-function update()
-{
-    var TenSP = $('#TenSP_sua').val();
-    var Gia = $('#Gia_SP_sua').val();
-    var tacgia = $('#TacGia_sua').val();
-    var NXB = $('#NamXB_sua').val();
-    var loai = $('#Loai_sua').val();
-    var TrangThai = $('#TrangThai_sua').val();
-    var fileInput = $('#AnhSP_sua')[0]; 
-// Lấy giá trị của phần tử input loại file bằng jQuery
-var filePath = $('#AnhSP_sua').val();
-
-// Tách phần cuối của đường dẫn file (tức là tên file) bằng cách chia chuỗi bằng dấu gạch chéo (/)
-var file = filePath.split('\\').pop();
-    var files = fileInput.files;
-    var MASP = $('#MASP_sua').val();
-
-    if (files.length !== 0) {
-        var data = {
-            TEN: TenSP,
-            GIA: Gia,
-            TAC_GIA: tacgia,
-            NAM_XB: NXB,
-            LOAI: loai,
-            TRANG_THAi: TrangThai,
-            HINH_ANH: file
-          };
-    }
-    else{
-        var data = {
-            TEN: TenSP,
-            GIA: Gia,
-            TAC_GIA: tacgia,
-            NAM_XB: NXB,
-            LOAI: loai,
-            TRANG_THAi: TrangThai,
-            HINH_ANH: $('#anh_su').val()
-          };
-}
-    var jsonData = JSON.stringify(data);
-    var operation = "Update";
-    var tableName = "san_pham";
-    var idName = "MA_SP";
-    var idValue = MASP;
-    $.ajax({
+    if (confirm("Bạn có chắc chắn muốn thêm không?")) {
+    
+        //thêm sản phẩm trước
+            var loai = $("#Loai_add").val();
+            var Ten_SP = $("#TenSP_add").val();
+            var Gia = $("#GIA_SP_add").val();
+            var tacgia = $("#tacgia_add").val();
+            var NXB = $("#NXB_add").val();
+        var filePath = $('#ANH_SP_add').val();
+        var ANH = filePath.split('\\').pop();
+        
+            var data = {
+                TEN: Ten_SP,
+                TAC_GIA: tacgia,
+                NAM_XB: NXB,
+                GIA: Gia,
+                LOAI: loai,
+                HINH_ANH: ANH,
+                TRANG_THAI: 0
+              };
+              var jsonData = JSON.stringify(data);
+     
+        var operation = "Create";
+        var tableName = "san_pham";
+     
+        if(loai !== '' && Ten_SP !== '' && Gia !== '' && tacgia !== '' && NXB !== '' && ANH !== ''){
+        $.ajax({
         url: '../AJAX_PHP/CRUD.php',
         type: 'POST',
         dataType: 'json',
         data: {
             jsonData : jsonData,
             operation: operation,
-            tableName: tableName,
-            idName : idName,
-            idValue : idValue
+            tableName: tableName
         },
         success: function(response) {
-            console.log(response);
-        },
+         //thêm vào kho
+         var data = {
+             MA_SP: response[response.length-1].MA_SP,
+             SL_CL: 1
+         }
+         var jsonData = JSON.stringify(data);
+         $.ajax({
+             url: '../AJAX_PHP/CRUD.php',
+             type: 'POST',
+             dataType: 'json',
+             data: {
+                 jsonData : jsonData,
+                 operation: 'Create',
+                 tableName: 'kho'
+             },
+             success: function(response){
+                 location.reload();
+             },
+             error: function(xhr, status, error) {
+                 console.log(error);
+             }
+        })
+     },
         error: function(xhr, status, error) {
             console.log(error);
+        },
+        });
+     }
+     
+     else{
+         alert('Hãy nhập đầy đủ thông tin !!');
+     }
+    }
+   }
+
+function update()
+{
+    if (confirm("Bạn có chắc chắn muốn sửa không?")) {
+    
+        var TenSP = $('#TenSP_sua').val();
+        var Gia = $('#Gia_SP_sua').val();
+        var tacgia = $('#TacGia_sua').val();
+        var NXB = $('#NamXB_sua').val();
+        var loai = $('#Loai_sua').val();
+        var TrangThai = $('#TrangThai_sua').val();
+        var fileInput = $('#AnhSP_sua')[0]; 
+    // Lấy giá trị của phần tử input loại file bằng jQuery
+    var filePath = $('#AnhSP_sua').val();
+    
+    // Tách phần cuối của đường dẫn file (tức là tên file) bằng cách chia chuỗi bằng dấu gạch chéo (/)
+    var file = filePath.split('\\').pop();
+        var files = fileInput.files;
+        var MASP = $('#MASP_sua').val();
+    
+        if (files.length !== 0) {
+            var data = {
+                TEN: TenSP,
+                GIA: Gia,
+                TAC_GIA: tacgia,
+                NAM_XB: NXB,
+                LOAI: loai,
+                TRANG_THAi: TrangThai,
+                HINH_ANH: file
+              };
         }
-    });
-}
-
-
-function Delete(MASP) {
-    var operation = "Delete";
-    var idName = "MA_SP";
-    var idValue = MASP;
-
-    // Hàm xóa từng bảng
-    function deleteFromTable(tableName, idName, idValue) {
+        else{
+            var data = {
+                TEN: TenSP,
+                GIA: Gia,
+                TAC_GIA: tacgia,
+                NAM_XB: NXB,
+                LOAI: loai,
+                TRANG_THAi: TrangThai,
+                HINH_ANH: $('#anh_su').val()
+              };
+    }
+        var jsonData = JSON.stringify(data);
+        var operation = "Update";
+        var tableName = "san_pham";
+        var idName = "MA_SP";
+        var idValue = MASP;
         $.ajax({
             url: '../AJAX_PHP/CRUD.php',
             type: 'POST',
             dataType: 'json',
             data: {
+                jsonData : jsonData,
                 operation: operation,
                 tableName: tableName,
-                idName: idName,
-                idValue: idValue
+                idName : idName,
+                idValue : idValue
             },
             success: function(response) {
                 console.log(response);
+                location.reload();
             },
             error: function(xhr, status, error) {
                 console.log(error);
             }
         });
-
     }
+}
 
-    // Xóa sản phẩm trong kho
-    deleteFromTable("kho", idName, idValue);
 
-    // // Xóa sản phẩm trong chi tiết phiếu nhập
-    deleteFromTable("chi_tiet_phieu_nhap", idName, idValue);
-
-    // // Xóa sản phẩm trong chi tiết phiếu mượn
-    deleteFromTable("chi_tiet_phieu_muon", idName, idValue);
-
-    // // Xóa sản phẩm trong chi tiết hóa đơn
-    deleteFromTable("chi_tiet_hoa_don", idName, idValue);
+function Delete(MASP) {
+    if (confirm("Bạn có chắc chắn muốn xóa không?")) {
     
-
-    // Xóa sản phẩm
-    deleteFromTable("san_pham", idName, idValue);
-    location.reload();
+        var operation = "Delete";
+        var idName = "MA_SP";
+        var idValue = MASP;
+    
+        // Hàm xóa từng bảng
+        function deleteFromTable(tableName, idName, idValue) {
+            $.ajax({
+                url: '../AJAX_PHP/CRUD.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    operation: operation,
+                    tableName: tableName,
+                    idName: idName,
+                    idValue: idValue
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+    
+        }
+    
+        // Xóa sản phẩm trong kho
+        deleteFromTable("kho", idName, idValue);
+    
+        // // Xóa sản phẩm trong chi tiết phiếu nhập
+        deleteFromTable("chi_tiet_phieu_nhap", idName, idValue);
+    
+        // // Xóa sản phẩm trong chi tiết phiếu mượn
+        deleteFromTable("chi_tiet_phieu_muon", idName, idValue);
+    
+        // // Xóa sản phẩm trong chi tiết hóa đơn
+        deleteFromTable("chi_tiet_hoa_don", idName, idValue);
+        
+    
+        // Xóa sản phẩm
+        deleteFromTable("san_pham", idName, idValue);
+        location.reload();
+    }
 }
 
    

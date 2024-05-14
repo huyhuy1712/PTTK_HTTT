@@ -137,7 +137,7 @@ $connect->connectDB();
         <input type="hidden" name="MASP" value="" id="MASP_sua"> 
         <input type="hidden" name="anh_su" value="" id="anh_su"> 
 
-        <input type="submit" class="btn_suaSP" name="btn_suaSP" value="sửa" onclick="update()">
+        <input type="button" class="btn_suaSP" name="btn_suaSP" value="sửa" onclick="update()">
 
     </form>
     </div>

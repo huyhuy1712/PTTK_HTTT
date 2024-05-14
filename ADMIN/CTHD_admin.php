@@ -87,7 +87,7 @@ $connect->connectDB();
         <input type="hidden" name="SL_old" value="" id="SL_old"> 
         <input type="hidden" name="dongia_old" value="" id="dongia_old"> 
 
-        <input type="submit" class="btn_suaHD" name="btn_suaHD" value="sửa" onclick="update()">
+        <input type="button" class="btn_suaHD" name="btn_suaHD" value="sửa" onclick="update()">
     </form>
 </div>
 

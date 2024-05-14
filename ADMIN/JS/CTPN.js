@@ -35,23 +35,25 @@ read();
 
 
    function Delete(MAPN,MASP) {
-
-    var MAPN = MAPN;
-    var MASP = MASP;
-        $.ajax({
-            url: 'CTPN_MASP_data.php',
-            type: 'POST',
-            data: {
-                MAPN: MAPN,
-                MASP: MASP
-            },
-            success: function(response) {
-                location.reload();
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-            }
-        });
+    if (confirm("Bạn có chắc chắn muốn xóa không?")) {
+    
+        var MAPN = MAPN;
+        var MASP = MASP;
+            $.ajax({
+                url: 'CTPN_MASP_data.php',
+                type: 'POST',
+                data: {
+                    MAPN: MAPN,
+                    MASP: MASP
+                },
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+    }
 
 }
 
@@ -59,25 +61,29 @@ read();
 
 function update(MAPN,MASP,DONGIA,SL,MASP_old)
 {
-    THANHTIEN = parseFloat(DONGIA) * parseFloat(SL);
-    $.ajax({
-        url: 'CTPN_MASP_data.php',
-        type: 'POST',
-        data: {
-            MAPN_update: MAPN,
-            MASP_update: MASP,
-            DONGIA_update: DONGIA,
-            SO_LUONG_update: SL,
-            THANHTIEN_update: THANHTIEN,
-            MASP_old: MASP_old 
-        },
-        success: function(response) {
-            console.log(response);
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-        }
-    });
+    if (confirm("Bạn có chắc chắn muốn sửa không?")) {
+    
+        THANHTIEN = parseFloat(DONGIA) * parseFloat(SL);
+        $.ajax({
+            url: 'CTPN_MASP_data.php',
+            type: 'POST',
+            data: {
+                MAPN_update: MAPN,
+                MASP_update: MASP,
+                DONGIA_update: DONGIA,
+                SO_LUONG_update: SL,
+                THANHTIEN_update: THANHTIEN,
+                MASP_old: MASP_old 
+            },
+            success: function(response) {
+                console.log(response);
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
 }
    // -------------------------------------------formation-chức năng phụ------------------------------------------------ //
    function DisplayElementPage(elementPage) {

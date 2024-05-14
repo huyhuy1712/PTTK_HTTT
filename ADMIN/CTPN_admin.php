@@ -111,7 +111,7 @@ $connect->connectDB();
         <input type="hidden" value="" name="MAPN" id="MAPN_sua_hidden">
         <input type="hidden" value="" id="MASP_sua_old">
 
-        <input type="submit" value="Xác nhận" name="btn_xacnhan_sua" id="btn_xacnhan_sua">
+        <input type="button" value="Xác nhận" name="btn_xacnhan_sua" id="btn_xacnhan_sua">
     </form>
 </div>
 

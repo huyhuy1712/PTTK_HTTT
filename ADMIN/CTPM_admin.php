@@ -88,7 +88,7 @@ $connect->connectDB();
         <input type="hidden" name="MASP_old" value="" id="MASP_old"> 
 
 
-        <input type="submit" class="btn_suaCTPM" name="btn_suaCTPM" value="sửa" onclick="update()">
+        <input type="button" class="btn_suaCTPM" name="btn_suaCTPM" value="sửa" onclick="update()">
     </form>
     
 </div>

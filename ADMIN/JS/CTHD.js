@@ -39,53 +39,56 @@ SLCTHD_HT.innerText = rows.length;
 
    function update()
 {
-    var MAHD = $('#MAHD_sua').val();
-    var MASP_new = $('#MASP_sua').val();
-    var SL_new = $('#SL_HD_sua').val();
-    var dongia_new = $('#dongia_sua').val();
-    var thanhtien_new = parseFloat(SL_new) * parseFloat(dongia_new);
-
-    var MASP_old = $('#MASP_old').val(); 
-
-    $.ajax({
-        url: '../AJAX_PHP/CTHD.ajax.php',
-        type: 'POST',
-        data: {
-            MAHD: MAHD,
-            MASP_new: MASP_new,
-            SL_new: SL_new,
-            dongia_new: dongia_new,
-            thanhtien_new: thanhtien_new,
-            
-            MASP_old: MASP_old
-        },
-        success: function(response) {
-            console.log(response);
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-        }
-    });
+    if (confirm("Bạn có chắc chắn muốn sửa không?")) {
+        var MAHD = $('#MAHD_sua').val();
+        var MASP_new = $('#MASP_sua').val();
+        var SL_new = $('#SL_HD_sua').val();
+        var dongia_new = $('#dongia_sua').val();
+        var thanhtien_new = parseFloat(SL_new) * parseFloat(dongia_new);
+    
+        var MASP_old = $('#MASP_old').val(); 
+    
+        $.ajax({
+            url: '../AJAX_PHP/CTHD.ajax.php',
+            type: 'POST',
+            data: {
+                MAHD: MAHD,
+                MASP_new: MASP_new,
+                SL_new: SL_new,
+                dongia_new: dongia_new,
+                thanhtien_new: thanhtien_new,
+                
+                MASP_old: MASP_old
+            },
+            success: function(response) {
+                console.log(response);
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
 }
 
 function Delete(MAHD,MASP)
 {
-
-    $.ajax({
-        url: '../AJAX_PHP/CTHD.ajax.php',
-        type: 'POST',
-        data: {
-            MAHD_xoa: MAHD,
-            MASP_xoa: MASP,
-        },
-        success: function(response) {
-            console.log(response);
-            location.reload();
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-        }
-    });
+    if (confirm("Bạn có chắc chắn muốn xóa không?")) {
+        $.ajax({
+            url: '../AJAX_PHP/CTHD.ajax.php',
+            type: 'POST',
+            data: {
+                MAHD_xoa: MAHD,
+                MASP_xoa: MASP,
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
 }
 
    // -------------------------------------------formation-chức năng phụ------------------------------------------------ //

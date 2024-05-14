@@ -36,94 +36,97 @@ read();
 }
    //loadData
    function add() {
-    var currentDate = new Date();
-    var year = currentDate.getFullYear();
-    var month = currentDate.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
-    var day = currentDate.getDate();
+    if (confirm("Bạn có chắc chắn muốn thêm không?")) {
     
-    // Định dạng lại chuỗi theo định dạng "YYYY-MM-DD"
-    var formattedDateString = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
-    
-    var MA_TT = $("#opt_MANV_themPNK").val();
-    var MA_NCC = $("#opt_MANSX_themPNK").val();
-    var TRANG_THAI = 0;
-    var table_CTPN = document.querySelectorAll('#data_CTSP tr');
-    var check = true;
-    for (var i = 0; i < table_CTPN.length; i++) {
-        var THANHTIEN_CTPN = table_CTPN[i].querySelector('#THANHTIEN_CTPN input').value;
-        if(THANHTIEN_CTPN == '0'){
-            check = false; break;
-        }
-    }
-
-    if(check){
-        var data = {
-            NGAY_NHAP: formattedDateString,
-            MA_TT: MA_TT,
-            MA_NCC: MA_NCC,
-            TRANG_THAI: TRANG_THAI
-        };
-    
-        var jsonData = JSON.stringify(data);
-        console.log(data);
-        var operation = "Create";
-        var tableName = "phieu_nhap";
-        $.ajax({
-            url: '../AJAX_PHP/CRUD.php',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                jsonData: jsonData,
-                operation: operation,
-                tableName: tableName
-            },
-            success: function(response) {
-                //đọc ra phiếu nhập vừa thêm
-                var newMAPN = response[response.length - 1].MA_PN;
-                var table_CTPN = document.querySelectorAll('#data_CTSP tr');
-    
-                for (var i = 0; i < table_CTPN.length; i++) {
-                    var MASP_CTPN = table_CTPN[i].querySelector('#MASP_CTPN').innerText;
-                    var DONGIA_CTPN = table_CTPN[i].querySelector('#DONGIA_CTPN input').value;
-                    var SL_CTPN = table_CTPN[i].querySelector('#SL_CTPN input').value;
-                    var THANHTIEN_CTPN = table_CTPN[i].querySelector('#THANHTIEN_CTPN input').value;
-                    var data = {
-                        MA_PN: newMAPN,
-                        MA_SP: MASP_CTPN,
-                        DON_GIA: DONGIA_CTPN,
-                        SL: SL_CTPN,
-                        THANH_TIEN: THANHTIEN_CTPN
-                    };
-    
-                    var jsonData = JSON.stringify(data);
-    
-                    $.ajax({
-                        url: '../AJAX_PHP/CRUD.php',
-                        type: 'POST',
-                        dataType: 'json',
-                        data: {
-                            jsonData: jsonData,
-                            operation: "Create",
-                            tableName: 'chi_tiet_phieu_nhap'
-                        },
-                        success: function(response) {
-                            console.log(response);
-                        },
-                        error: function(xhr, status, error) {
-                            console.log(error);
-                        }
-                    });
-                }
-                   location.reload();
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
+        var currentDate = new Date();
+        var year = currentDate.getFullYear();
+        var month = currentDate.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
+        var day = currentDate.getDate();
+        
+        // Định dạng lại chuỗi theo định dạng "YYYY-MM-DD"
+        var formattedDateString = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+        
+        var MA_TT = $("#opt_MANV_themPNK").val();
+        var MA_NCC = $("#opt_MANSX_themPNK").val();
+        var TRANG_THAI = 0;
+        var table_CTPN = document.querySelectorAll('#data_CTSP tr');
+        var check = true;
+        for (var i = 0; i < table_CTPN.length; i++) {
+            var THANHTIEN_CTPN = table_CTPN[i].querySelector('#THANHTIEN_CTPN input').value;
+            if(THANHTIEN_CTPN == '0'){
+                check = false; break;
             }
-        });
-    }
-
-    else{
-        alert("chi tiết phải có số lượng và đơn giá ít nhất 1 !!");
+        }
+    
+        if(check){
+            var data = {
+                NGAY_NHAP: formattedDateString,
+                MA_TT: MA_TT,
+                MA_NCC: MA_NCC,
+                TRANG_THAI: TRANG_THAI
+            };
+        
+            var jsonData = JSON.stringify(data);
+            console.log(data);
+            var operation = "Create";
+            var tableName = "phieu_nhap";
+            $.ajax({
+                url: '../AJAX_PHP/CRUD.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    jsonData: jsonData,
+                    operation: operation,
+                    tableName: tableName
+                },
+                success: function(response) {
+                    //đọc ra phiếu nhập vừa thêm
+                    var newMAPN = response[response.length - 1].MA_PN;
+                    var table_CTPN = document.querySelectorAll('#data_CTSP tr');
+        
+                    for (var i = 0; i < table_CTPN.length; i++) {
+                        var MASP_CTPN = table_CTPN[i].querySelector('#MASP_CTPN').innerText;
+                        var DONGIA_CTPN = table_CTPN[i].querySelector('#DONGIA_CTPN input').value;
+                        var SL_CTPN = table_CTPN[i].querySelector('#SL_CTPN input').value;
+                        var THANHTIEN_CTPN = table_CTPN[i].querySelector('#THANHTIEN_CTPN input').value;
+                        var data = {
+                            MA_PN: newMAPN,
+                            MA_SP: MASP_CTPN,
+                            DON_GIA: DONGIA_CTPN,
+                            SL: SL_CTPN,
+                            THANH_TIEN: THANHTIEN_CTPN
+                        };
+        
+                        var jsonData = JSON.stringify(data);
+        
+                        $.ajax({
+                            url: '../AJAX_PHP/CRUD.php',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                jsonData: jsonData,
+                                operation: "Create",
+                                tableName: 'chi_tiet_phieu_nhap'
+                            },
+                            success: function(response) {
+                                console.log(response);
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(error);
+                            }
+                        });
+                    }
+                       location.reload();
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+    
+        else{
+            alert("chi tiết phải có số lượng và đơn giá ít nhất 1 !!");
+        }
     }
     
 }
@@ -131,39 +134,42 @@ read();
 
 
 function Delete(MAPN) {
-    var operation = "Delete";
-    var idName = "MA_PN";
-    var idValue = MAPN;
-
-    // Hàm xóa từng bảng
-    function deleteFromTable(tableName, idName, idValue) {
-        $.ajax({
-            url: '../AJAX_PHP/CRUD.php',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                operation: operation,
-                tableName: tableName,
-                idName: idName,
-                idValue: idValue
-            },
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-            }
-        });
-
+    if (confirm("Bạn có chắc chắn muốn xóa không?")) {
+    
+        var operation = "Delete";
+        var idName = "MA_PN";
+        var idValue = MAPN;
+    
+        // Hàm xóa từng bảng
+        function deleteFromTable(tableName, idName, idValue) {
+            $.ajax({
+                url: '../AJAX_PHP/CRUD.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    operation: operation,
+                    tableName: tableName,
+                    idName: idName,
+                    idValue: idValue
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+    
+        }
+    
+        // Xóa chi tiết phiếu nhập
+        deleteFromTable("chi_tiet_phieu_nhap", idName, idValue);
+    
+       
+        // Xóa sản phẩm
+        deleteFromTable("phieu_nhap", idName, idValue);
+        location.reload();
     }
-
-    // Xóa chi tiết phiếu nhập
-    deleteFromTable("chi_tiet_phieu_nhap", idName, idValue);
-
-   
-    // Xóa sản phẩm
-    deleteFromTable("phieu_nhap", idName, idValue);
-    location.reload();
 
 }
 
@@ -171,6 +177,7 @@ function Delete(MAPN) {
 // update số lượng sản phẩm khi xác nhận nhập phiếu
 
 function update(MASP, SL, callback) {
+    
     var operation = "Read";
     var tableName = "kho";
     var condition = "MA_SP=" + MASP;
